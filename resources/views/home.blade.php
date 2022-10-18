@@ -41,5 +41,5 @@ $.getJSON("https://canvasjs.com/data/gallery/php/bitcoin-price.json", addData);
 </script>
 <div id="chartContainer" style="height: 370px; width: 100%;"></div>
 <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
-
+<h2>Add logout,fix,wrapper navbar,get data and print it,add profile setings aand that sort </h2>
 @endsection
