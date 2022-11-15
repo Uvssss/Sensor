@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DataController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LogoutController;
 /*
@@ -16,9 +17,9 @@ use App\Http\Controllers\LogoutController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::view('/home', 'home')->middleware(['auth', 'verified']);
+Route::get('/home',[DataController::class,"index"])->middleware(['auth', 'verified']);
 // Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
-
-
-
+Route::get("/profile",function(){
+    return view("profile.settings");
+});

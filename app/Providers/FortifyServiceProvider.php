@@ -12,9 +12,7 @@ use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
-use Illuminate\Auth\Events\Logout;
 use Laravel\Fortify\Fortify;
-use Laravel\Fortify\Contracts\LogoutResponse;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -25,12 +23,6 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->instance(LogoutResponse::class, new class implements LogoutResponse {
-            public function toResponse($request)
-            {
-                return redirect('/');
-            }
-        });
     }
     /**
      * Bootstrap any application services.
@@ -70,5 +62,6 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::requestPasswordResetLinkView(function ($request) {
             return view('auth.forgot-password', ['request' => $request]);
         });
+
     }
 }

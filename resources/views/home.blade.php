@@ -1,7 +1,8 @@
 @extends('wrapper')
 @section('content')
     <div class=" container pt-7 pt-md-8" >
-        <h2>get data via api connection with python  and print it,add profile setings aand that sort </h2>
+        <h2>GET data via ajax take sensor name and sensor location to get id for it. when button pressed show table data  and print it,add profile setings aand that sort
+        </h2>
         <div id="chartContainer" style="height: 370px; width: 100%;"></div>
     </div>
     <?php

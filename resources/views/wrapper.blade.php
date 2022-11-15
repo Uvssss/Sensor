@@ -15,7 +15,7 @@
         <!-- Bootstrap CSS / Color Scheme -->
         <link rel="stylesheet" href="{{ asset('css/default.css') }}" id="theme-color">
     </head>
-    <body>
+    <body style="background-color: #ececec">
 
         <!--navigation-->
         <nav class="navbar navbar-expand-md navbar-light bg-white fixed-top sticky-navigation">
