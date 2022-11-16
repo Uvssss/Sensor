@@ -3,6 +3,9 @@
 use App\Http\Controllers\DataController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\SensorsControllers;
+use App\Http\Controllers\UserController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,6 +23,10 @@ Route::get('/', function () {
 Route::get('/home',[DataController::class,"index"])->middleware(['auth', 'verified']);
 // Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
-Route::get("/profile",function(){
-    return view("profile.settings");
-});
+Route::get('/profile',[UserController::class,"index"])->middleware(['auth', 'verified']);
+Route::get("/sensors",[SensorsControllers::class,'index']);
+
+
+
+
+// add pieprasijuma routes for sensors and get and insert data blades

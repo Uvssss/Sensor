@@ -3,15 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Currently;
-use App\Models\Hourly;
-use App\Models\Daily;
-use App\Models\Weekly;
-use App\Models\Sensors;
-use App\Models\Monthly;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Carbon;
-class DataController extends Controller
+
+class SensorsControllers extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,8 +13,8 @@ class DataController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   // do this later
-        return view("home");
+    {
+        return view('data.sensor');
     }
 
     /**
@@ -30,7 +24,6 @@ class DataController extends Controller
      */
     public function create()
     {
-
     }
 
     /**
@@ -39,14 +32,9 @@ class DataController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($id,$humid,$temp)
+    public function store($name,$location)
     {
-        //$result= DB::table('sensor')->where('sensor', $name)
-        //->where('location',$location)
-       // ->get();                              somehow make it work when choosing sensors
-       // $id=$result->id;
-        $date = Carbon::now()->toDateTimeString();
-        DB::insert('insert into currently (time,humid,temp,sensor_id) values (?,?,?, ?)', [$date,$humid,$temp,$id]);
+        DB::insert('insert into sensor (sensor,location) values (?, ?)', [$name,$location]);
         return "OK";
     }
 
@@ -56,10 +44,9 @@ class DataController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
-    public function show($id,$table)
+    public function show($id)
     {
-        $results = DB::table($table)->where('sensor_id',$id)->get();
+        $results = DB::table('sensor')->where('id', $id)->get();
         return $results;
     }
 
@@ -69,9 +56,13 @@ class DataController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit_name($sensor,$id)
     {
-        //
+        DB::update('update sensor set sensor = :sensor where id = :id',['sensor'=> $sensor,'id'=>$id]);
+    }
+    public function edit_location($location,$id)
+    {
+        DB::update('update sensor set location = :location where id = :id',['location'=>$location,'id'=>$id]);
     }
 
     /**
@@ -81,9 +72,9 @@ class DataController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($sensor, $id)
     {
-        //
+
     }
 
     /**
@@ -94,6 +85,6 @@ class DataController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::delete('delete from sensor where $id = :id',['id'=>$id]);
     }
 }
