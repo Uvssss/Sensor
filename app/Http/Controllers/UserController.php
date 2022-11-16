@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+
+
+    // to show and to forward it to fortify
+
+
     /**
      * Display a listing of the resource.
      *
