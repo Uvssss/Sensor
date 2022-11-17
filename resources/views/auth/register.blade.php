@@ -62,7 +62,7 @@
 
                         <div class="mb-0 form-group row">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" onclick="CheckPassword();" class="btn btn-primary">
                                     {{ __('Register') }}
                                 </button>
                             </div>

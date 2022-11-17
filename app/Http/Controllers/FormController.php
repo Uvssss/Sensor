@@ -2,13 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Sensors;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-use function GuzzleHttp\Promise\all;
-
-class SensorsControllers extends Controller
+class FormController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +13,7 @@ class SensorsControllers extends Controller
      */
     public function index()
     {
-        $results=Sensors::all();
-        return view('data.sensor',["sensor"=>$results]);
+        return view("data.get_data");
     }
 
     /**
@@ -28,6 +23,7 @@ class SensorsControllers extends Controller
      */
     public function create()
     {
+        //
     }
 
     /**
@@ -36,10 +32,9 @@ class SensorsControllers extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($name,$location)
+    public function store(Request $request)
     {
-        DB::insert('insert into sensor (sensor,location) values (?, ?)', [$name,$location]);
-        return "OK";
+        //
     }
 
     /**
@@ -50,8 +45,7 @@ class SensorsControllers extends Controller
      */
     public function show($id)
     {
-        $results = DB::table('sensor')->where('id', $id)->get();
-        return $results;
+        //
     }
 
     /**
@@ -60,13 +54,9 @@ class SensorsControllers extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit_name($sensor,$id)
+    public function edit($id)
     {
-        DB::update('update sensor set sensor = :sensor where id = :id',['sensor'=> $sensor,'id'=>$id]);
-    }
-    public function edit_location($location,$id)
-    {
-        DB::update('update sensor set location = :location where id = :id',['location'=>$location,'id'=>$id]);
+        //
     }
 
     /**
@@ -76,9 +66,9 @@ class SensorsControllers extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($sensor, $id)
+    public function update(Request $request, $id)
     {
-
+        //
     }
 
     /**
@@ -89,6 +79,6 @@ class SensorsControllers extends Controller
      */
     public function destroy($id)
     {
-        DB::delete('delete from sensor where $id = :id',['id'=>$id]);
+        //
     }
 }

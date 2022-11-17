@@ -8,7 +8,7 @@ class UserController extends Controller
 {
 
 
-    // to show and to forward it to fortify
+    // to show and to forward it to fortify hopefully
 
 
     /**

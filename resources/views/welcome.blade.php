@@ -6,7 +6,6 @@
         <div class="row">
             <div class="col-md-8 mx-auto my-auto text-center">
                 <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus, recusandae.</h1>
-                <h1>emailtester2514@gmail.com admin123</h1>
                 <p class="lead mt-4 mb-5">
                     Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus, vero!
                 </p>
@@ -14,21 +13,10 @@
         </div>
     </div>
 </section>
-<!--call to action-->
-<section class="bg-hero py-8" style="background-image: url(img/parallex.jpg)">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-7 mx-auto text-center">
-                <h2 class="text-white">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Inventore, culpa.</h2>
-                <p class="lead text-white my-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel, illum.</p>
-            </div>
-        </div>
-    </div>
-</section>
 
 
 <!--contact section-->
-<section class="py-7" id="contact">
+<section class="py-4" id="contact">
     <div class="container">
         <div class="row">
             <div class="col-md-6 mx-auto text-center">
