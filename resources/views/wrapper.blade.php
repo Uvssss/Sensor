@@ -14,6 +14,8 @@
 
         <!-- Bootstrap CSS / Color Scheme -->
         <link rel="stylesheet" href="{{ asset('css/default.css') }}" id="theme-color">
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}" id="theme-color">
+        <script src="{{ asset("js/script.js")}}"></script>
     </head>
 
     <body style="background-color: #ececec">

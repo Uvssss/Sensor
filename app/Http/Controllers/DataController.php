@@ -22,6 +22,14 @@ class DataController extends Controller
     {   // do this later
         return view("home");
     }
+    public function getdata()
+    {
+        return view("data.get_data");
+    }
+    public function insertdata()
+    {
+        return view("data.insert_data");
+    }
 
     /**
      * Show the form for creating a new resource.
