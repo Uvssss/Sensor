@@ -10,7 +10,7 @@ class FormController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
-     */
+     */   // what did i want to add here i have absolutetly no clue
     public function index()
     {
         return view("data.get_data");

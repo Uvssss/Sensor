@@ -16,19 +16,26 @@ use App\Http\Controllers\UserController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+ // Guest view / Landing Page
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/home',[DataController::class,"index"])->middleware(['auth', 'verified']);
-// Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
+// Logout
 Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
 
-Route::get('/profile',[UserController::class,"index"])->middleware(['auth', 'verified']);
-Route::get("/sensors",[SensorsControllers::class,'index'])->middleware(['auth', 'verified']);
-Route::get("/sensors/{id}",[SensorsControllers::class,'show'])->middleware(['auth', 'verified']);
-// Graph data
-Route::get("/showdata/{id}/{table}",[DataController::class,"show"])->middleware(['auth', 'verified']);
-Route::get("/showdata",[DataController::class,"getdata"])->middleware(['auth', 'verified']);
-Route::get('/insertdata',[DataController::class,"insertdata"])->middleware(['auth', 'verified']);
 // add pieprasijuma routes for sensors and get and insert data blades
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/home',[DataController::class,"index"]);
+
+    // Dashboard routes
+    Route::get('/profile',[UserController::class,"index"]);
+    Route::get("/sensors",[SensorsControllers::class,'index']);
+    Route::get("/showdata",[DataController::class,"getdata"]);
+    Route::get('/insertdata',[DataController::class,"insertdata"]);
+
+    // Storing aka adding data to database
+    Route::post("/sensor",[SensorsControllers::class,'store']);  // fix this
+    // Graph data
+    Route::get("/showdata/{id}/{table}",[DataController::class,"show"]);
+});

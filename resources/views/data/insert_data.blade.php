@@ -5,7 +5,6 @@
     </h2>
     <h2>Add 2 selects for location and sensor name to get id
     </h2>
-    <h2>get time period from and to</h2>
-    <h2>after choosing sensor id , show graphs using the time period</h2>
+    <h2>make a form for data insert  using previous to h2 tags in mind for humidity and temp</h2>
 </div>
 @endsection

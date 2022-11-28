@@ -47,15 +47,20 @@ class DataController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($id,$humid,$temp)
+    public function store( Request $request)
     {
         //$result= DB::table('sensor')->where('sensor', $name)
         //->where('location',$location)
        // ->get();                              somehow make it work when choosing sensors
        // $id=$result->id;
         $date = Carbon::now()->toDateTimeString();
-        DB::insert('insert into currently (time,humid,temp,sensor_id) values (?,?,?, ?)', [$date,$humid,$temp,$id]);
-        return "OK";
+        $post = new Currently();
+        $post->time = $date;
+        $post->humid = $request->location;
+        $post->temp = $request->location;
+        $post->sensor_id = $request->sensor_id;
+        $post->save();
+        return redirect('/showdata');
     }
 
     /**

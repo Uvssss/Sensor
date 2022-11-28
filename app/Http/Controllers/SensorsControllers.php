@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Sensors;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 use function GuzzleHttp\Promise\all;
 
@@ -36,10 +37,13 @@ class SensorsControllers extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($name,$location)
+    public function store(Request $request)
     {
-        DB::insert('insert into sensor (sensor,location) values (?, ?)', [$name,$location]);
-        return "OK";
+        $post = new Sensors;
+        $post->sensor = $request->sensor;
+        $post->location = $request->location;
+        $post->save();
+        return redirect('/sensors');
     }
 
     /**

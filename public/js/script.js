@@ -16,6 +16,9 @@ function changeurl(element)
     {
         window.location="/profile"
     }
+    if(element=='showdata'){
+        window.location="/showdata"
+    }
 }
  // Before i forget add authentication scripts
  function CheckPassword()
@@ -32,12 +35,20 @@ function changeurl(element)
             return false;
         }
 }
-
-
-$(document).ready(function(){
-    $(".hoverDiv").hover(function(){
-        $(this).css("background", "#f5f5f5");
-    }, function(){
-        $(this).css("background", "#fff");
-    });
-});
+form=0;
+function showsensorform(){
+    if(form==0){
+        $("#sensorform").removeClass("d-none")
+        $("#sensortable").addClass("d-none")
+        form=1;
+        console.log($("#sensortable"))
+        console.log($("#sensorform"))
+    }
+    else{
+        $("#sensorform").addClass("d-none")
+        $("#sensortable").removeClass("d-none")
+        form=0;
+        console.log($("#sensortable"))
+        console.log($("#sensorform"))
+    }
+};

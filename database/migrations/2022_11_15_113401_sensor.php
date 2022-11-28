@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('sensor');
             $table->string('location');
+            $table->timestamp("updated_at");
+            $table->timestamp("created_at");
             $table->timestamps();
         });
     }
