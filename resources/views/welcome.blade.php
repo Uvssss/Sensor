@@ -1,4 +1,8 @@
 @extends('wrapper')
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.5.0/feather.min.js"></script>
 @section('content')
  <!--hero header-->
  <section class="pt-7 pt-md-8" id="home">
@@ -66,27 +70,5 @@
     </div>
 </section>
 
-<!--footer / contact-->
-<footer class="py-6 bg-light">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 mx-auto text-center">
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Beatae, fugiat.</p>
-
-            </div>
-        </div>
-    </div>
-</footer>
-
-<!--scroll to top-->
-<div class="scroll-top">
-    <i class="fa fa-angle-up" aria-hidden="true"></i>
-</div>
-
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.5.0/feather.min.js"></script>
 @endsection
 

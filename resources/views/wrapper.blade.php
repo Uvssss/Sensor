@@ -13,7 +13,7 @@
 <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
         <!--vendors styles-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+        <link href="https://fonts.googleapis.com/css?family=Arimo:400,400i,700,700i" rel="stylesheet">
         <!-- Bootstrap CSS / Color Scheme -->
         <link rel="stylesheet" href="{{ asset('css/default.css') }}" id="theme-color">
         <link rel="stylesheet" href="{{ asset('css/app.css') }}" id="theme-color">
