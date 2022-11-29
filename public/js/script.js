@@ -52,4 +52,3 @@ function showsensorform(){
         console.log($("#sensorform"))
     }
 };
-

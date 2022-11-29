@@ -21,7 +21,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="Email">Email</label>
-                                <input type="email"  class="form-control"  name="email"value="{{ Auth::user()->name }}">
+                                <input type="email"  class="form-control"  name="email"value="{{ Auth::user()->email }}">
                             </div>
                         </div>
                         <div class="col-md-6">
