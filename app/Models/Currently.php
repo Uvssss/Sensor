@@ -9,7 +9,7 @@ class Currently extends Model
 {
     use HasFactory;
     protected $table = 'currently';
-
+    public $timestamps = false;
     protected $primaryKey = 'time';
     public $incrementing = false;
 }

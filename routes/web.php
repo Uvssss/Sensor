@@ -36,6 +36,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Storing aka adding data to database
     Route::post("/sensor",[SensorsControllers::class,'store']);
+    Route::post('/insertdata',[DataController::class,"store"]);
     // Graph data
     Route::get("/showdata/{id}/{table}",[DataController::class,"show"]);
 });

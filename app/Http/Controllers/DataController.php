@@ -28,7 +28,8 @@ class DataController extends Controller
     }
     public function insertdata()
     {
-        return view("data.insert_data");
+        $result=Sensors::all();
+        return view("data.insert_data",["sensors"=>$result]);
     }
 
     /**
@@ -56,11 +57,11 @@ class DataController extends Controller
         $date = Carbon::now()->toDateTimeString();
         $post = new Currently();
         $post->time = $date;
-        $post->humid = $request->location;
-        $post->temp = $request->location;
+        $post->humid = $request->humid;
+        $post->temp = $request->temp;
         $post->sensor_id = $request->sensor_id;
         $post->save();
-        return redirect('/showdata');
+        return redirect('/insertdata');
     }
 
     /**

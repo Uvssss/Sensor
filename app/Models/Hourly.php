@@ -9,7 +9,7 @@ class Hourly extends Model
 {
     use HasFactory;
     protected $table = 'hourly';
-
+    public $timestamps = false;
     protected $primaryKey = 'hour';
     public $incrementing = false;
 }

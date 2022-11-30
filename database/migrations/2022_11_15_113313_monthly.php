@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('monthly', function (Blueprint $table) {
 
-            $table->timestamp('month');
+            $table->string('month');
             $table->float('max_temp');
             $table->float('min_temp');
             $table->float('average_temp');
@@ -27,7 +27,6 @@ return new class extends Migration
             references('id')
             ->on('sensor')
             ->onDelete('cascade');
-            $table->timestamps();
         });
     }
 

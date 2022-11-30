@@ -18,7 +18,7 @@ return new class extends Migration
             if new.humid not between 10 and 100 then
                 signal sqlstate "45000" set message_text = "not believeable";
             end if;
-            if new.temp not between -30 and 40 then
+            if new.temp not between -30 and 100 then
                 signal sqlstate "45000" set message_text = "not believeable data";
             end if;
         end');
