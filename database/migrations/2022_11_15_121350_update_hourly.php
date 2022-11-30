@@ -36,7 +36,7 @@ return new class extends Migration
 					min_humid=@minhumid,
 					max_humid=@maxhumid where `hour`=@times and sensor_id=@sensor2;
 			else
-            INSERT INTO `temp`.`hourly`
+            INSERT INTO `hourly`
 				(`hour`,`max_temp`,`min_temp`,`average_temp`,`average_humid`,`min_humid`,`max_humid`,`sensor_id`)
 			VALUES
 				(@times,@maxtemp, @mintemp, @averagetemp, @averagehumid, @minhumid,@maxhumid,@sensor1);

@@ -50,11 +50,7 @@ class DataController extends Controller
      */
     public function store( Request $request)
     {
-        //$result= DB::table('sensor')->where('sensor', $name)
-        //->where('location',$location)
-       // ->get();                              somehow make it work when choosing sensors
-       // $id=$result->id;
-        $date = Carbon::now()->toDateTimeString();
+        $date = Carbon::now()->toDateTimeString(); // also this is kinda broken 2 hours behind fix it later
         $post = new Currently();
         $post->time = $date;
         $post->humid = $request->humid;
