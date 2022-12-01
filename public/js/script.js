@@ -19,9 +19,9 @@ function changeurl(element)
     if(element=='showdata'){
         window.location="/showdata"
     }
-    if(element=='update_sensors'){
-        window.location="/showdata"
-    }
+}
+function SensorUpdateView(id){
+        window.location="/update-sensors/"+id;
 }
  // Before i forget add authentication scripts
  function CheckPassword()

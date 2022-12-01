@@ -21,8 +21,7 @@ class SensorsControllers extends Controller
         $results=Sensors::all();
         return view('data.sensor',["sensor"=>$results]);
     }
-    public function upt_index()
-    {
+    public function updateview(){
         return view('data.update_sensors');
     }
     /**
@@ -74,9 +73,8 @@ class SensorsControllers extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request,$id)
     {
-        $id=Sensors::find("do something idk");
         $post=Sensors::find($id);
         $post->sensor = $request->sensor;
         $post->location = $request->location;
