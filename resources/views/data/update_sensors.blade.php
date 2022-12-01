@@ -1,30 +1,10 @@
 @extends('wrapper')
 @section('content')
 <div class="container pt-7 pt-md-8">
-    <div style="text-align:center;">
-        <button class="btn btn-success" onclick="showsensorform()">Show/Hide Form</button>
-    </div>
-    <div id="sensortable" class="py-5">
-        <table class="table table-hover table-light">
-            <thead>
-                <tr>
-                    <th>Sensor Name</th>
-                    <th>Sensor Location</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($sensor as $sensor)
-                <tr onclick="changeurl('update_sensors')">
-                    <td>{{$sensor->sensor}}</td>
-                    <td>{{$sensor->location}}</td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
     <div id="sensorform" class="d-none py-5">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+    <div class="col-md-8">
+        {{-- Add OLD sensor name and loc, or do something that prevents from overwriting previous location and name to find id of that sensor --}}
                 <div class="card">
                     <div class="card-header">{{ __('Register new Sensor') }}</div>
 
@@ -73,4 +53,3 @@
     </div>
 </div>
 @endsection
-{{-- Add ajax later for table data --}}

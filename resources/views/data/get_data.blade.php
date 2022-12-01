@@ -16,7 +16,7 @@
 </div>
 <?php
 
-$dataPoints1 = array(
+$dataPoints1 = array(   // temp array
     array("label"=> "2010", "y"=> 36.12),
     array("label"=> "2011", "y"=> 34.87),
     array("label"=> "2012", "y"=> 40.30),
@@ -25,7 +25,7 @@ $dataPoints1 = array(
     array("label"=> "2015", "y"=> 50.82),
     array("label"=> "2016", "y"=> 74.70)
 );
-$dataPoints2 = array(
+$dataPoints2 = array(  // humidty array
     array("label"=> "2010", "y"=> 64.61),
     array("label"=> "2011", "y"=> 70.55),
     array("label"=> "2012", "y"=> 72.50),
@@ -56,16 +56,16 @@ $dataPoints2 = array(
         },
         data: [{
             type: "column",
-            name: "Real Trees",
+            name: "Temperature °C",
             indexLabel: "{y}",
-            yValueFormatString: "$#0.##",
+            yValueFormatString: "#0.##",
             showInLegend: true,
             dataPoints: <?php echo json_encode($dataPoints1, JSON_NUMERIC_CHECK); ?>
         },{
             type: "column",
-            name: "Artificial Trees",
+            name: "Humidity %",
             indexLabel: "{y}",
-            yValueFormatString: "$#0.##",
+            yValueFormatString: "#0.##",
             showInLegend: true,
             dataPoints: <?php echo json_encode($dataPoints2, JSON_NUMERIC_CHECK); ?>
         }]

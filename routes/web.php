@@ -33,10 +33,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get("/sensors",[SensorsControllers::class,'index']);
     Route::get("/showdata",[DataController::class,"getdata"]);
     Route::get('/insertdata',[DataController::class,"insertdata"]);
-
+    Route::get('/update-sensors',[DataController::class,"upt_index"]);
     // Storing aka adding data to database
     Route::post("/sensor",[SensorsControllers::class,'store']);
     Route::post('/insertdata',[DataController::class,"store"]);
+    Route::post('/profile',[UserController::class,"update"]);
     // Graph data
     Route::get("/showdata/{id}/{table}",[DataController::class,"show"]);
 });

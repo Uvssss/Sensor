@@ -21,7 +21,10 @@ class SensorsControllers extends Controller
         $results=Sensors::all();
         return view('data.sensor',["sensor"=>$results]);
     }
-
+    public function upt_index()
+    {
+        return view('data.update_sensors');
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -64,15 +67,6 @@ class SensorsControllers extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit_name($sensor,$id)
-    {
-        DB::update('update sensor set sensor = :sensor where id = :id',['sensor'=> $sensor,'id'=>$id]);
-    }
-    public function edit_location($location,$id)
-    {
-        DB::update('update sensor set location = :location where id = :id',['location'=>$location,'id'=>$id]);
-    }
-
     /**
      * Update the specified resource in storage.
      *
@@ -80,9 +74,14 @@ class SensorsControllers extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($sensor, $id)
+    public function update(Request $request)
     {
-
+        $id=Sensors::find("do something idk");
+        $post=Sensors::find($id);
+        $post->sensor = $request->sensor;
+        $post->location = $request->location;
+        $post->save();
+        return redirect("/sensors");
     }
 
     /**

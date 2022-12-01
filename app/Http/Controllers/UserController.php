@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -39,7 +42,6 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
     }
 
     /**
@@ -71,9 +73,16 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,)
     {
-        //
+
+        $id=Auth::user()->id;
+        $post=User::find($id);
+        $post->name = $request->name;
+        $post->email = $request->email;
+        $post->password =Hash::make($request->password);
+        $post->save();
+        return redirect("/logout");
     }
 
     /**

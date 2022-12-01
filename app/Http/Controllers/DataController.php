@@ -50,7 +50,7 @@ class DataController extends Controller
      */
     public function store( Request $request)
     {
-        $date = Carbon::now()->toDateTimeString(); // also this is kinda broken 2 hours behind fix it later
+        $date = Carbon::now()->toDateTimeString();
         $post = new Currently();
         $post->time = $date;
         $post->humid = $request->humid;

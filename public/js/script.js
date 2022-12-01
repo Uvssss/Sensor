@@ -19,6 +19,9 @@ function changeurl(element)
     if(element=='showdata'){
         window.location="/showdata"
     }
+    if(element=='update_sensors'){
+        window.location="/showdata"
+    }
 }
  // Before i forget add authentication scripts
  function CheckPassword()

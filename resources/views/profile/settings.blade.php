@@ -1,7 +1,7 @@
 @extends('wrapper')
 @section('content')
 <!--contact section-->
-<section class="py-4" id="contact">
+<section class="pt-7" id="contact">
     <div class="container">
         <div class="row">
             <div class="col-md-6 mx-auto text-center">
@@ -10,7 +10,8 @@
         </div>
         <div class="row mt-5">
             <div class="col-md-8 mx-auto">
-                <form>
+                <form action="/profile" method="POST">
+                    @csrf
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
