@@ -7,9 +7,8 @@
         {{-- Add OLD sensor name and loc, or do something that prevents from overwriting previous location and name to find id of that sensor --}}
                 <div class="card">
                     <div class="card-header">{{ __('Update Sensor') }}</div>
-
                     <div class="card-body">
-                        <form method="POST" action="/updatesensors">
+                        <form method="POST" action="/updatesensors/{{($id)}}">
                             @csrf
                             <div class="form-group row">
                                 <label for="sensor" class="col-md-4 col-form-label text-md-right">New Sensor Name</label>

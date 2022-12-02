@@ -21,8 +21,9 @@ class SensorsControllers extends Controller
         $results=Sensors::all();
         return view('data.sensor',["sensor"=>$results]);
     }
-    public function updateview(){
-        return view('data.update_sensors');
+    public function updateview(Request $request){
+        $id=$request->route('id');
+        return view('data.update_sensors',["id"=>$id]);
     }
     /**
      * Show the form for creating a new resource.
@@ -73,8 +74,10 @@ class SensorsControllers extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
+    public function update(Request $request)
     {
+        $id=$request->route('id');
+
         $post=Sensors::find($id);
         $post->sensor = $request->sensor;
         $post->location = $request->location;

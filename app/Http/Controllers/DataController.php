@@ -51,12 +51,14 @@ class DataController extends Controller
     public function store( Request $request)
     {
         $date = Carbon::now()->toDateTimeString();
-        $post = new Currently();
+        $post = new Currently;
         $post->time = $date;
-        $post->humid = $request->humid;
+        $post->humid = $request->humid; // WHY DID THIS DIE???
         $post->temp = $request->temp;
         $post->sensor_id = $request->sensor_id;
         $post->save();
+
+
         return redirect('/insertdata');
     }
 

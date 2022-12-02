@@ -5,6 +5,7 @@
         <button class="btn btn-success" onclick="showsensorform()">Show/Hide Form</button>
     </div>
     <div id="sensortable" class="py-5">
+        <h2 style="text-align: center">Select Sensor to update</h2>
         <table class="table table-hover table-light">
             <thead>
                 <tr>
