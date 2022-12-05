@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-
 class UserController extends Controller
 {
 
@@ -84,7 +83,39 @@ class UserController extends Controller
         $post->save();
         return redirect("/logout");
     }
+      /**
+     * Summary of existsusername
+     *
+     * Check if username is already claimed
+     * and return boolean
+     */
+    public function existsUsername($username){
+        $UsernameExists =(User::where('name',$username)->get()); // use model where
+        if(count($UsernameExists)==0){
+            $UsernameExists=false;
+        }
+        else{
+            $UsernameExists=true;
+        }
+        return json_encode($UsernameExists);
+    }
 
+    /**
+     * Summary of existsEmail
+     *
+     * Check if email is already claimed
+     * and return boolean
+     */
+    public function existsEmail($email){
+        $EmailExists =(User::where('email',$email)->get());// user mmmodel where
+        if(count($EmailExists)==0){
+            $EmailExists=false;
+        }
+        else{
+            $EmailExists=true;
+        }
+        return json_encode($EmailExists);
+    }
     /**
      * Remove the specified resource from storage.
      *
