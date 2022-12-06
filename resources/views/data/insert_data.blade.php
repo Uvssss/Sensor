@@ -7,6 +7,7 @@
                 <div class="card-header">{{ __('Add new parameters') }}</div>
 
                 <div class="card-body">
+
                     <form method="POST" action="/insertdata">
                         @csrf
                         <div class="form-group row">
@@ -52,11 +53,18 @@
                         <div class="mb-0 form-group row">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" onclick="" class="btn btn-primary">
-                                    {{ __('Add new data row') }}
+                                    {{ __('Add data manually') }}
                                 </button>
                             </div>
                         </div>
                     </form>
+                    <div class="mb-0 pt-2 form-group row">
+                        <div style="text-align: center;" class="">
+                            <button type="" onclick="" class="btn btn-warning">
+                                {{ __('Add data from Sensor') }}
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

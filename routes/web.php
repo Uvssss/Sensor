@@ -23,24 +23,32 @@ Route::get('/', function () {
 // Logout
 Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
 
-// add pieprasijuma routes for sensors and get and insert data blades
-
 Route::middleware(['auth', 'verified'])->group(function () {
+
     Route::get('/home',[DataController::class,"index"]);
 
     // Dashboard routes
+
     Route::get('/profile',[UserController::class,"index"]);
     Route::get("/sensors",[SensorsControllers::class,'index']);
     Route::get("/showdata",[DataController::class,"getdata"]);
     Route::get('/insertdata',[DataController::class,"insertdata"]);
-    Route::get('/update-sensors/{id}',[SensorsControllers::class,"updateview"]);  // somehow get data to pass
-
+    Route::get('/update-sensors/{id}',[SensorsControllers::class,"updateview"]);
 
     // Posts
+
     Route::post("/sensors",[SensorsControllers::class,'store']);
     Route::post("/updatesensors/{id}",[SensorsControllers::class,'update']);
     Route::post('/insertdata',[DataController::class,"store"]);
     Route::post('/profile',[UserController::class,"update"]);
+
+    // Deletion
+
+    Route::POST("/deleteuser/{id}",[UserController::class,'destroy']);
+    Route::POST("/deletesensor/{id}",[SensorsControllers::class,'destroy']);
+
     // Graph data
-    Route::get("/showdata/{id}/{table}",[DataController::class,"show"]);
+
+    Route::get("/showdata/{id}/{table}/{from}/{to}",[DataController::class,"show"]);
+
 });

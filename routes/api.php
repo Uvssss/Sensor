@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DataController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,3 +22,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/exists/username/{username}', [UserController::class, 'existsUsername']);
 Route::get('/exists/email/{email}', [UserController::class, 'existsEmail']);
+Route::get('/exists/sensor/{sensor}', [DataController::class, 'existsSensorname']);

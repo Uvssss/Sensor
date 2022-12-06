@@ -9,7 +9,9 @@ class Currently extends Model
 {
     use HasFactory;
     protected $table = 'currently';
+     protected $fillable = ['time', 'humid', 'temp','sensor_id'];
     public $timestamps = false;
     protected $primaryKey = 'time';
+
     public $incrementing = false;
 }

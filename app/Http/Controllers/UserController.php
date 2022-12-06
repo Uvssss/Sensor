@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Carbon;
 class UserController extends Controller
 {
 
@@ -65,13 +67,6 @@ class UserController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request,)
     {
 
@@ -83,14 +78,8 @@ class UserController extends Controller
         $post->save();
         return redirect("/logout");
     }
-      /**
-     * Summary of existsusername
-     *
-     * Check if username is already claimed
-     * and return boolean
-     */
     public function existsUsername($username){
-        $UsernameExists =(User::where('name',$username)->get()); // use model where
+        $UsernameExists =(User::where('name',$username)->get());
         if(count($UsernameExists)==0){
             $UsernameExists=false;
         }
@@ -124,6 +113,22 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $date=Carbon::now()->toDateTimeString();
+        $post=User::find($id);
+        $post->deleted_at = $date;
+        $post->WhoDeleted =Auth::user()->id;
+        $post->save();
+
+        // WHYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
+
+
+        // $user = User::find($request->id);
+        // $user->delete();
+
+        // $date=$date = Carbon::now()->toDateTimeString();
+        // $user->deleted_at=$date;
+        // // $user->SoftDeletes();ph
+        // $user->WhoDeleted=Auth::user()->name;
+        // $user->save();
     }
 }

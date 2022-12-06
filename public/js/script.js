@@ -55,3 +55,4 @@ function showsensorform(){
         console.log($("#sensorform"))
     }
 };
+// use ExistsEmail/User for Register later

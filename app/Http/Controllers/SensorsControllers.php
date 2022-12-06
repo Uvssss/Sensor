@@ -6,7 +6,7 @@ use App\Models\Sensors;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
 use function GuzzleHttp\Promise\all;
 
 class SensorsControllers extends Controller
@@ -93,6 +93,8 @@ class SensorsControllers extends Controller
      */
     public function destroy($id)
     {
-        DB::delete('delete from sensor where $id = :id',['id'=>$id]); // most likely broken
+        $sensor = Sensors::find($id);
+        $sensor->delete();
+        return redirect("/sensors");
     }
 }

@@ -1,7 +1,7 @@
 @extends('wrapper')
 @section('content')
-<!--contact section-->
-<section class="pt-7" id="contact">
+
+<section class="pt-7" class="d-none" id="updateuser">
     <div class="container">
         <div class="row">
             <div class="col-md-6 mx-auto text-center">
@@ -40,6 +40,9 @@
                     </div>
                     <div class="text-center mt-3">
                         <button class="btn btn-primary">Update User</button>
+                    </div>
+                    <div class="text-center mt-3">
+                        <button href="/deleteuser/{{Auth::user()->id}}" class="btn btn-warning">Delete User</button>
                     </div>
                 </form>
             </div>

@@ -9,6 +9,16 @@ class Daily extends Model
 {
     protected $table = 'daily';
     public $timestamps = false;
+    protected $fillable = [
+        'day',
+        'max_temp',
+        'min_temp',
+        'average_temp',
+        'average_humid',
+        'min_humid',
+        'max_humid',
+        'sensor_id',
+    ];
     protected $primaryKey = 'day';
     public $incrementing = false;
     use HasFactory;
