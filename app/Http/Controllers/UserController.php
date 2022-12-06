@@ -117,7 +117,7 @@ class UserController extends Controller
         $post=User::find($id);
         $post->deleted_at = $date;
         $post->WhoDeleted =Auth::user()->id;
-        $post->save();
+        $post->save();;
 
         // WHYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
 
