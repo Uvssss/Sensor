@@ -106,6 +106,6 @@ class DataController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // make this
     }
 }

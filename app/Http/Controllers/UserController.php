@@ -107,7 +107,7 @@ class UserController extends Controller
      * and return boolean
      */
     public function existsEmail($email){
-        $EmailExists =(User::where('email',$email)->get());// user mmmodel where
+        $EmailExists =(User::where('email',$email)->get());
         if(count($EmailExists)==0){
             $EmailExists=false;
         }

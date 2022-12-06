@@ -13,7 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        DB::unprepared('create trigger update_weekly after insert on currently for each row
+        DB::unprepared
+        (
+            'create trigger update_weekly after insert on currently for each row
 		begin
 			set @sensor1=(select sensor_id from currently order by `time` DESC limit 1);
 			set @sensor2=(select sensor_id from weekly order by `week` desc limit 1);
@@ -39,7 +41,8 @@ return new class extends Migration
 				VALUES
 					(DATE_ADD(@days,interval 7 day), @maxtemp, @mintemp, @averagetemp, @averagehumid,@minhumid,@maxhumid,@sensor1);
 			end if;
-		end');
+		end'
+    );
     }
 
     /**

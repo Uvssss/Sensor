@@ -93,6 +93,6 @@ class SensorsControllers extends Controller
      */
     public function destroy($id)
     {
-        DB::delete('delete from sensor where $id = :id',['id'=>$id]);
+        DB::delete('delete from sensor where $id = :id',['id'=>$id]); // most likely broken
     }
 }
