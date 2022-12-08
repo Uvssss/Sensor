@@ -22,7 +22,6 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'WhoDeleted',
         'deleted_at'
     ];
     protected $softDelete = true;

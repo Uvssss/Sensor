@@ -42,7 +42,8 @@
                         <button class="btn btn-primary">Update User</button>
                     </div>
                     <div class="text-center mt-3">
-                        <button href="/deleteuser/{{Auth::user()->id}}" class="btn btn-warning">Delete User</button>
+                        <a class="btn btn-warning" href="/api/deleteuser/{{Auth::user()->id}}">Delete User</a>
+                        {{-- <button href="/api/deleteuser/{{Auth::user()->id}}" class="btn btn-warning">Delete User</button> --}}
                     </div>
                 </form>
             </div>

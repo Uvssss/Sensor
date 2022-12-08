@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
+use PhpParser\Node\Stmt\Return_;
+
 class UserController extends Controller
 {
 
@@ -113,22 +115,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $date=Carbon::now()->toDateTimeString();
-        $post=User::find($id);
-        $post->deleted_at = $date;
-        $post->WhoDeleted =Auth::user()->id;
-        $post->save();;
-
-        // WHYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
-
-
-        // $user = User::find($request->id);
-        // $user->delete();
-
-        // $date=$date = Carbon::now()->toDateTimeString();
-        // $user->deleted_at=$date;
-        // // $user->SoftDeletes();ph
-        // $user->WhoDeleted=Auth::user()->name;
-        // $user->save();
+        $user = User::find($id);
+        $user->delete();
+        return redirect("/register");
     }
 }

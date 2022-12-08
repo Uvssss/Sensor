@@ -23,3 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/exists/username/{username}', [UserController::class, 'existsUsername']);
 Route::get('/exists/email/{email}', [UserController::class, 'existsEmail']);
 Route::get('/exists/sensor/{sensor}', [DataController::class, 'existsSensorname']);
+
+
+Route::delete("/deleteuser/{id}",[UserController::class,'destroy']);
+Route::delete("/deletesensor/{id}",[SensorsControllers::class,'destroy']);

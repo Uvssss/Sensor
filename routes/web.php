@@ -42,11 +42,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/insertdata',[DataController::class,"store"]);
     Route::post('/profile',[UserController::class,"update"]);
 
-    // Deletion
-
-    Route::POST("/deleteuser/{id}",[UserController::class,'destroy']);
-    Route::POST("/deletesensor/{id}",[SensorsControllers::class,'destroy']);
-
     // Graph data
 
     Route::get("/showdata/{id}/{table}/{from}/{to}",[DataController::class,"show"]);
