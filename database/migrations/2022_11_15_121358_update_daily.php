@@ -15,16 +15,16 @@ return new class extends Migration
     {
         DB::unprepared('create trigger update_daily after insert on currently for each row
 		begin
-			set @sensor1=(select sensor_id from currently order by `time` DESC limit 1);
-			set @sensor2=(select sensor_id from daily  order by `day` desc limit 1);
-			set @times=(select left(`time`,10) from currently where @sensor1=sensor_id order by `time` DESC limit 1);
-			set @days=(select left(`day`,10) from daily where @sensor1=sensor_id order by `day` DESC limit 1);
-   			set @mintemp=(select min(temp) from currently where @times=left(`time`,10) and @sensor1=sensor_id);
-    		set @maxtemp=(select max(temp) from currently where @times=left(`time`,10) and @sensor1=sensor_id);
-			set @averagetemp=(select avg(temp) from currently where @times=left(`time`,10) and @sensor1=sensor_id);
-    		set @averagehumid=(select avg(humid) from currently where @times=left(`time`,10) and @sensor1=sensor_id);
-    		set @maxhumid=(select max(humid) from currently where @times=left(`time`,10) and @sensor1=sensor_id);
-    		set @minhumid=(select min(humid) from currently where @times=left(`time`,10) and @sensor1=sensor_id);
+			set @sensor1=(select sensor_id from currently order by `date` DESC limit 1);
+			set @sensor2=(select sensor_id from daily  order by `date` desc limit 1);
+			set @times=(select left(`date`,10) from currently where @sensor1=sensor_id order by `date` DESC limit 1);
+			set @days=(select left(`date`,10) from daily where @sensor1=sensor_id order by `date` DESC limit 1);
+   			set @mintemp=(select min(temp) from currently where @times=left(`date`,10) and @sensor1=sensor_id);
+    		set @maxtemp=(select max(temp) from currently where @times=left(`date`,10) and @sensor1=sensor_id);
+			set @averagetemp=(select avg(temp) from currently where @times=left(`date`,10) and @sensor1=sensor_id);
+    		set @averagehumid=(select avg(humid) from currently where @times=left(`date`,10) and @sensor1=sensor_id);
+    		set @maxhumid=(select max(humid) from currently where @times=left(`date`,10) and @sensor1=sensor_id);
+    		set @minhumid=(select min(humid) from currently where @times=left(`date`,10) and @sensor1=sensor_id);
     		if @times=@days and @sensor1=@sensor2 then
 				update daily
 				set
@@ -33,7 +33,7 @@ return new class extends Migration
 					average_temp=@averagetemp,
 					average_humid=@averagehumid,
 					min_humid=@minhumid,
-					max_humid=@maxhumid where `day`=@times and sensor_id=@sensor2;
+					max_humid=@maxhumid where `date`=@times and sensor_id=@sensor2;
 			else
 				INSERT INTO `daily`
 				VALUES

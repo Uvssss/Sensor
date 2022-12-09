@@ -14,13 +14,25 @@
 <div class=" container pt-7 pt-md-8" >
     <div class="row">
         <div class="col">
-
+            <label for="table">Select table</label>
+            <select class="custom-select" name="table" id="table">
+                <option value="currently">Currently</option>
+                <option value="hourly">Hourly</option>
+                <option value="daily">Daily</option>
+                <option value="weekly">Weekly</option>
+                <option value="monthly">Monthly</option>
+            </select>
         </div>
         <div class="col">
+            <select class="custom-select" name="sensor_id" id="sensor_id">
 
+            </select>
         </div>
         <div class="col">
-
+            <select class="custom-select" name="fromTime" id="fromTime"></select>
+        </div>
+        <div class="col">
+            <select class="custom-select" name="toTime" id="toTime"></select>
         </div>
     </div>
 

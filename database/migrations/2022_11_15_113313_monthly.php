@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('monthly', function (Blueprint $table) {
 
-            $table->string('month');
+            $table->string('date');
             $table->float('max_temp');
             $table->float('min_temp');
             $table->float('average_temp');

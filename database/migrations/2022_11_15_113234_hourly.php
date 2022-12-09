@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('hourly', function (Blueprint $table) {
 
-            $table->timestamp('hour');
+            $table->timestamp('date');
             $table->float('max_temp');
             $table->float('min_temp');
             $table->float('average_temp');
