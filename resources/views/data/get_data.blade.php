@@ -12,10 +12,70 @@
 <h5>something like this</h5>
 
 <div class=" container pt-7 pt-md-8" >
+    <div class="row">
+        <div class="col">
+
+        </div>
+        <div class="col">
+
+        </div>
+        <div class="col">
+
+        </div>
+    </div>
+
+
     <div id="chartContainer" style="height: 370px; width: 100%;"></div>
 </div>
-<?php
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<?php
 $dataPoints1 = array(   // temp array
     array("label"=> "2010", "y"=> 36.12),
     array("label"=> "2011", "y"=> 34.87),
@@ -85,4 +145,5 @@ $dataPoints2 = array(  // humidty array
     }
 </script>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script src="{{asset (js/ajax.js)}}"></script>
 @endsection

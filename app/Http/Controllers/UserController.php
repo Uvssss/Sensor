@@ -53,9 +53,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        // $users = User::all();
+        // return view("profile.settings",["users"=>$users]);
     }
 
     /**
@@ -118,5 +119,12 @@ class UserController extends Controller
         $user = User::find($id);
         $user->delete();
         return redirect("/register");
+    }
+    public function restore($id)
+    {
+        User::withTrashed()
+        ->where('id', $id)
+        ->restore();
+        return back();
     }
 }
