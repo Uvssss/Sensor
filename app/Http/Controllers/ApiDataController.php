@@ -31,12 +31,13 @@ class ApiDataController extends Controller
         // return dd($time);
         $time = DB::table($table)
             // ->select('*')
-            ->whereBetween('date', [$fromTime, $toTime]);
+            ->whereBetween('date', [$fromTime, $toTime])->get();
 
         // $time->get();
 
         // return dd($time);
-        return dd($time->get());
+        // return dd($time->get());
+        return response()->json(array('data' => $time));
     }
 
 
