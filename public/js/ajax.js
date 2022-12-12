@@ -44,7 +44,7 @@ $("#table").change(function(){
            })
        },
         error: function(jqXhr, textStatus, errorMessage){
-            console.log(errorMessage,textStatus,jqXhr)
+            console.log(errorMessage)
        }
    });
 })
@@ -67,7 +67,7 @@ $("#sensor_id").change(function(){
            })
        },
         error: function(jqXhr, textStatus, errorMessage){
-            console.log(errorMessage,textStatus,jqXhr)
+            console.log(errorMessage)
        }
    });
 })
