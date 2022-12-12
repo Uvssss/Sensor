@@ -31,8 +31,9 @@ Route::get("/deletesensor/{id}",[SensorsControllers::class,'destroy']);
 
 // Ajax data for later
 
-Route::get("/api/getdata/{sensor_id}/{table}/{fromTime}/{toTime}", [ApiDataController::class, "data"]);
+Route::get("/getdata/{sensor_id}/{table}/{fromTime}/{toTime}", [ApiDataController::class, "data"]);
 
-
+Route::get("/getsensors", [ApiDataController::class, 'getsensors']);
+Route::get("/gettime/{table}/{id}", [ApiDataController::class, "gettime"]);
 // User Restoration
 Route::get("/restoreuser/{id}",[UserController::class, 'restore']);

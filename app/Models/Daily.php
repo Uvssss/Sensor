@@ -10,7 +10,7 @@ class Daily extends Model
     protected $table = 'daily';
     public $timestamps = false;
     protected $fillable = [
-        'day',
+        'date',
         'max_temp',
         'min_temp',
         'average_temp',
@@ -19,7 +19,7 @@ class Daily extends Model
         'max_humid',
         'sensor_id',
     ];
-    protected $primaryKey = 'day';
+    protected $primaryKey = 'date';
     public $incrementing = false;
     use HasFactory;
 }

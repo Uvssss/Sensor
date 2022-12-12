@@ -1,5 +1,26 @@
 @extends('wrapper')
 @section('content')
+
+<?php
+$dataPoints1 = array(   // temp array
+    array("label"=> "2010", "y"=> 36.12),
+    array("label"=> "2011", "y"=> 34.87),
+    array("label"=> "2012", "y"=> 40.30),
+    array("label"=> "2013", "y"=> 35.30),
+    array("label"=> "2014", "y"=> 39.50),
+    array("label"=> "2015", "y"=> 50.82),
+    array("label"=> "2016", "y"=> 74.70)
+);
+$dataPoints2 = array(  // humidty array
+    array("label"=> "2010", "y"=> 64.61),
+    array("label"=> "2011", "y"=> 70.55),
+    array("label"=> "2012", "y"=> 72.50),
+    array("label"=> "2013", "y"=> 81.30),
+    array("label"=> "2014", "y"=> 63.60),
+    array("label"=> "2015", "y"=> 69.38),
+    array("label"=> "2016", "y"=> 98.70)
+);
+?>
 <div class="container-fluid pt-7 pt-md-8">
     <h2>GET data via ajax take sensor name and sensor location to get id for it. when button pressed show table data  and print it,add profile setings aand that sort
     </h2>
@@ -24,90 +45,26 @@
             </select>
         </div>
         <div class="col">
+            <label for="Sensor">Select Sensor</label>
             <select class="custom-select" name="sensor_id" id="sensor_id">
-
+                @foreach ($sensors as $sensor)
+                <option value="{{$sensor->id}}">{{$sensor->sensor}}</option>
+                @endforeach
             </select>
         </div>
         <div class="col">
+            <label for="From Time"> Select start time</label>
             <select class="custom-select" name="fromTime" id="fromTime"></select>
         </div>
         <div class="col">
+            <label for="toTime">Select end time</label>
             <select class="custom-select" name="toTime" id="toTime"></select>
         </div>
     </div>
 
 
-    <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+    <div id="chartContainer" class="py-5" style="height: 370px; width: 100%;"></div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<?php
-$dataPoints1 = array(   // temp array
-    array("label"=> "2010", "y"=> 36.12),
-    array("label"=> "2011", "y"=> 34.87),
-    array("label"=> "2012", "y"=> 40.30),
-    array("label"=> "2013", "y"=> 35.30),
-    array("label"=> "2014", "y"=> 39.50),
-    array("label"=> "2015", "y"=> 50.82),
-    array("label"=> "2016", "y"=> 74.70)
-);
-$dataPoints2 = array(  // humidty array
-    array("label"=> "2010", "y"=> 64.61),
-    array("label"=> "2011", "y"=> 70.55),
-    array("label"=> "2012", "y"=> 72.50),
-    array("label"=> "2013", "y"=> 81.30),
-    array("label"=> "2014", "y"=> 63.60),
-    array("label"=> "2015", "y"=> 69.38),
-    array("label"=> "2016", "y"=> 98.70)
-);
-
-?>
 <script>
     window.onload = function () {
 
@@ -157,5 +114,5 @@ $dataPoints2 = array(  // humidty array
     }
 </script>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-<script src="{{asset (js/ajax.js)}}"></script>
+<script src="{{asset ('js/ajax.js')}}"></script>
 @endsection

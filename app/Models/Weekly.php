@@ -9,9 +9,9 @@ class Weekly extends Model
 {
     protected $table = 'weekly';
     public $timestamps = false;
-    protected $primaryKey = 'week';
+    protected $primaryKey = 'date';
     protected $fillable = [
-        'week',
+        'date',
         'max_temp',
         'min_temp',
         'average_temp',

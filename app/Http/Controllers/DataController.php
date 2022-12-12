@@ -24,7 +24,8 @@ class DataController extends Controller
     }
     public function getdata()
     {
-        return view("data.get_data");
+        $result=Sensors::all();
+        return view("data.get_data",["sensors"=>$result]);
     }
     public function insertdata()
     {
@@ -52,7 +53,7 @@ class DataController extends Controller
     {
         $date = Carbon::now()->toDateTimeString();
         $post = new Currently;
-        $post->time = $date;
+        $post->date = $date;
         $post->humid = $request->humid; // WHY DID THIS DIE???
         $post->temp = $request->temp;
         $post->sensor_id = $request->sensor_id;

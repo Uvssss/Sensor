@@ -4,8 +4,8 @@ $("#button").on("click",function()
     {
         $.ajax({
             type: "GET",
-            url: "localhost:8000/api/getdata/{sensor_id}/{table}/{fromTime}/{toTime}",
-            async: false,
+            url: "/api/getdata/{sensor_id}/{table}/{fromTime}/{toTime}",
+            dataType:"json",
             success: function(response)
             {
                 // REEEEEE
@@ -13,8 +13,6 @@ $("#button").on("click",function()
         });
     });
 })
-// get time select cuz weeks and months are different
-// When choosing table, make sensor_id and from and to time appear
 
 
 $(document).ready(function(){
@@ -22,93 +20,54 @@ $(document).ready(function(){
 })
 
 $(document).ready(function(){
-    $("#sensor_id").trigger("change");
-})
-$(document).ready(function(){
     $("#fromTime").trigger("change");
 })
 $(document).ready(function(){
     $("#toTimes").trigger("change");
 })
 
-
 $("#table").change(function(){
     var table = $(this).find(":selected").val();
-    $("#sensor_id").empty();
-    $.ajax({
-        type: "GET",
-        url: null,
-        dataType: "json",   //expect html to be returned
-        success: function(data){
-           $.each(data, function(key){
-            $("#sensor_id").append("<option value=" + data[key]['sensor_id']+">"+data[key]['name']+ "</option>")
-           })
-       },
-        error: function(jqXhr, textStatus, errorMessage){
-            console.log("error")
-       }
-   });
-})
-
-
-$("#table").change(function(){
-    var table = $(this).find(":selected").val();
+    var sensor_id=$("#sensor_id").find(":selected").val();
+    console.log(table,sensor_id);
     $("#fromTime").empty();
-    $.ajax({
-        type: "GET",
-        url: null,
-        dataType: "json",   //expect html to be returned
-        success: function(data){
-           $.each(data, function(key){
-            $("#fromTime").append("<option value=" + data[key]['date']+">"+data[key]['date']+ "</option>")
-           })
-       },
-        error: function(jqXhr, textStatus, errorMessage){
-            console.log("error")
-       }
-   });
-})
-$("#table").change(function(){
-    var table = $(this).find(":selected").val();
     $("#toTime").empty();
     $.ajax({
         type: "GET",
-        url: null,
+        url: "/api/gettime/"+table+"/"+sensor_id,
         dataType: "json",   //expect html to be returned
         success: function(data){
-           $.each(data, function(key){
-            $("#toTime").append("<option value=" + data[key]['date']+">"+data[key]['date']+ "</option>")
+            console.log(data.date);
+           $.each(data.date, function(key){
+            $("#fromTime").append("<option value=" + data.date[key]+">"+data.date[key]+ "</option>")
+            $("#toTime").append("<option value=" + data.date[key]+">"+data.date[key]+ "</option>")
            })
        },
         error: function(jqXhr, textStatus, errorMessage){
-            console.log("error")
+            console.log(errorMessage,textStatus,jqXhr)
        }
    });
 })
 
-
-$(document).ready(function() {
-    // table get element valeu from table select
+$("#sensor_id").change(function(){
+    var table = $("#table").find(":selected").val();
+    var sensor_id=$("#sensor_id").find(":selected").val();
+    console.log(table,sensor_id);
+    $("#fromTime").empty();
+    $("#toTime").empty();
     $.ajax({
         type: "GET",
-        url: "localhost:8000/api/getsensors",
-        async: false,
-        data:table,
-        success: function(response) {
-
-      }
+        url: "/api/gettime/"+table+"/"+sensor_id,
+        dataType: "json",   //expect html to be returned
+        success: function(data){
+            console.log(data.date);
+           $.each(data.date, function(key){
+             $("#fromTime").append("<option value=" + data.date[key]+">"+data.date[key]+ "</option>")
+             $("#toTime").append("<option value=" + data.date[key]+">"+data.date[key]+ "</option>")
+           })
+       },
+        error: function(jqXhr, textStatus, errorMessage){
+            console.log(errorMessage,textStatus,jqXhr)
+       }
+   });
 })
-});
-
-$(document).ready(function() {
-    // table get element value
-    $.ajax({
-        type: "GET",
-        url: "localhost:8000/api/gettime",
-        async: false,
-        data:table,
-        success: function(response) {
-
-      }
-})
-});

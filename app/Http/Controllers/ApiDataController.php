@@ -9,6 +9,7 @@ use App\Models\Monthly;
 use App\Models\Sensors;
 use App\Models\Weekly;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ApiDataController extends Controller
 {
@@ -45,74 +46,22 @@ class ApiDataController extends Controller
             }
         }
         else{
-            $error = "From Time is larger than to Time";
-            return $error;
+            return "Failed";
         }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function getsensors()
     {
-        //
+        $sensors = Sensors::all();
+        return json_encode($sensors);
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    public function gettime($table,$sensor_id){
+        // $time = Currently::all();
+        // $time = Currently::select();
+        // $time=DB::select('select date from ?', [$table]);
+        // return response()->json(array('date'=> $time));
+        $time = DB::table($table)->where("sensor_id",$sensor_id)->pluck('date');
+        // return dd($time);
+        return response()->json(array('date' => $time));
     }
 }

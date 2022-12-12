@@ -11,7 +11,7 @@ class Hourly extends Model
     protected $table = 'hourly';
     public $timestamps = false;
     protected $fillable = [
-        'hour',
+        'date',
         'max_temp',
         'min_temp',
         'average_temp',
@@ -20,6 +20,6 @@ class Hourly extends Model
         'max_humid',
         'sensor_id',
     ];
-    protected $primaryKey = 'hour';
+    protected $primaryKey = 'date';
     public $incrementing = false;
 }

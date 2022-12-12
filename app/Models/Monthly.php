@@ -9,9 +9,9 @@ class Monthly extends Model
 {
     protected $table = 'monthly';
     public $timestamps = false;
-    protected $primaryKey = 'month';
+    protected $primaryKey = 'date';
     protected $fillable = [
-        'month',
+        'date',
         'max_temp',
         'min_temp',
         'average_temp',
