@@ -1,10 +1,13 @@
 @extends('wrapper')
 @section('content')
 <div class="container-fluid pt-7 pt-md-8">
+    <div class="container pb-5" style="text-align: center;">
+        <button id="sensorformbutton" class="btn btn-primary">Get data from Sensor</button>
+    </div>
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Add new parameters') }}</div>
+            <div id="manualinsert" class="card d-none">
+                <div class="card-header">{{ __('Add new data') }}</div>
 
                 <div class="card-body">
 
@@ -58,19 +61,41 @@
                             </div>
                         </div>
                     </form>
-                    <div class="mb-0 pt-2 form-group row">
-                        <div style="text-align: center;" class="">
-                            <button type="" onclick="" class="btn btn-warning">
-                                {{ __('Add data from Sensor') }}
-                            </button>
+                </div>
+            </div>
+
+            <div id="autoinsert" class="card">
+                <div class="card-header">{{ __('Get data and post from sensor') }}</div>
+
+                <div class="card-body">
+
+                    <form method="POST" action="/sensordata">
+                        @csrf
+                        <div class="form-group row">
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Sensor name') }}</label>
+
+                            <div class="col-md-6">
+                               <select class="custom-select" name="sensor_id" id="sensor">
+                                <option selected>Choose sensor for data insertion</option>
+                                @foreach ($sensors as $sensor)
+                                <option name="" value="{{$sensor->id}}">{{$sensor->sensor}}</option>
+                                @endforeach
+                               </select>
+                            </div>
                         </div>
-                    </div>
+                        <div class="mb-0 form-group row">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" onclick="" class="btn btn-primary">
+                                    {{ __('Add data from Sensor ') }}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 
 
 @endsection

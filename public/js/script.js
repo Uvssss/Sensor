@@ -51,8 +51,19 @@ function showsensorform(){
         $("#sensorform").addClass("d-none")
         $("#sensortable").removeClass("d-none")
         form=0;
-        console.log($("#sensortable"))
-        console.log($("#sensorform"))
     }
 };
 // use ExistsEmail/User for Register later
+datasensorform=0;
+$("#sensorformbutton").on("click",function(){
+    if(datasensorform==0){
+        $("#manualinsert").removeClass("d-none")
+        $("#autoinsert").addClass("d-none")
+        datasensorform=1;
+    }
+    else{
+        $("#manualinsert").addClass("d-none")
+        $("#autoinsert").removeClass("d-none")
+        datasensorform=0;
+    }
+});

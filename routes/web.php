@@ -38,12 +38,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Posts
 
     Route::post("/sensors",[SensorsControllers::class,'store']);
-    Route::post("/updatesensors/{id}",[SensorsControllers::class,'update']);
+    Route::post("/updatesensors",[SensorsControllers::class,'update']);
     Route::post('/insertdata',[DataController::class,"store"]);
     Route::post('/profile',[UserController::class,"update"]);
-
-    // Graph data
-
-    Route::get("/showdata/{id}/{table}/{from}/{to}",[DataController::class,"show"]);
+    Route::post("/sensordata", [DataController::class, "sensorstore"]);
 
 });

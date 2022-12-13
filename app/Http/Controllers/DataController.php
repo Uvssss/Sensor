@@ -58,9 +58,21 @@ class DataController extends Controller
         $post->temp = $request->temp;
         $post->sensor_id = $request->sensor_id;
         $post->save();
+        return "OK";
 
-
-        return redirect('/insertdata');
+        // return redirect('/insertdata');
+    }
+    public function sensorstore(Request $request){
+        $date = Carbon::now()->toDateTimeString();
+        $humid = random_int(10, 100);
+        $temp=random_int(-30,100);
+        $post = new Currently;
+        $post->date = $date;
+        $post->humid = $humid;
+        $post->temp = $temp;
+        $post->sensor_id = $request->sensor_id;
+        $post->save();
+        return "OK";
     }
 
     /**

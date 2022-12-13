@@ -78,4 +78,3 @@
     </div>
 </div>
 @endsection
-{{-- Add ajax later for table data --}}

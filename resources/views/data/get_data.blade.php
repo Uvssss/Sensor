@@ -1,27 +1,23 @@
 @extends('wrapper')
 @section('content')
 
+{{-- I can iterate this, plus this graph is good. --}}
 <?php
-$dataPoints1 = array(   // temp array
-    array("label"=> "2010", "y"=> 36.12),
-    array("label"=> "2011", "y"=> 34.87),
-    array("label"=> "2012", "y"=> 40.30),
-    array("label"=> "2013", "y"=> 35.30),
-    array("label"=> "2014", "y"=> 39.50),
-    array("label"=> "2015", "y"=> 50.82),
-    array("label"=> "2016", "y"=> 74.70)
+$dataPoints = array(
+    // foreach ($data as $key => $value) {
+    //     array("y" => 3373.64, "label" => "Germany" ),,
+    // }
+	array("y" => 3373.64, "label" => "Germany" ),
+	array("y" => 2435.94, "label" => "France" ),
+	array("y" => 1842.55, "label" => "China" ),
+	array("y" => 1828.55, "label" => "Russia" ),
+	array("y" => 1039.99, "label" => "Switzerland" ),
+	array("y" => 765.215, "label" => "Japan" ),
+	array("y" => 612.453, "label" => "Netherlands" ),
+    array("y" => 712.453, "label" => "test" )
 );
-$dataPoints2 = array(  // humidty array
-    array("label"=> "2010", "y"=> 64.61),
-    array("label"=> "2011", "y"=> 70.55),
-    array("label"=> "2012", "y"=> 72.50),
-    array("label"=> "2013", "y"=> 81.30),
-    array("label"=> "2014", "y"=> 63.60),
-    array("label"=> "2015", "y"=> 69.38),
-    array("label"=> "2016", "y"=> 98.70)
-);
+
 ?>
-<div class="container-fluid pt-7 pt-md-8">
 <div class=" container pt-7 pt-md-8" >
     <div class="row">
         <div class="col">
@@ -51,57 +47,35 @@ $dataPoints2 = array(  // humidty array
             <select class="custom-select" name="toTime" id="toTime"></select>
         </div>
     </div>
-
-
-    <div id="chartContainer" class="py-5" style="height: 370px; width: 100%;"></div>
+    <div class="py-2" style="text-align: center;">
+        <button id="button" class="btn btn-primary">Show Data</button>
+    </div>
+    <div id="chartContainer" style="height: 370px; width: 100%;"></div>
 </div>
 <script>
-    window.onload = function () {
-
-    var chart = new CanvasJS.Chart("chartContainer", {
+window.onload = function()
+{
+     var chart = new CanvasJS.Chart("chartContainer",
+     {
         animationEnabled: true,
         theme: "light2",
-        title:{
-            text: "Average Amount Spent on Real and Artificial X-Mas Trees in U.S."
+        title:
+        {
+            text: "Gold Reserves"
         },
-        axisY:{
-            includeZero: true
+        axisY:
+        {
+            title: "Gold Reserves (in tonnes)"
         },
-        legend:{
-            cursor: "pointer",
-            verticalAlign: "center",
-            horizontalAlign: "right",
-            itemclick: toggleDataSeries
-        },
-        data: [{
+        data:
+        [{
             type: "column",
-            name: "Temperature °C",
-            indexLabel: "{y}",
-            yValueFormatString: "#0.##",
-            showInLegend: true,
-            dataPoints: <?php echo json_encode($dataPoints1, JSON_NUMERIC_CHECK); ?>
-        },{
-            type: "column",
-            name: "Humidity %",
-            indexLabel: "{y}",
-            yValueFormatString: "#0.##",
-            showInLegend: true,
-            dataPoints: <?php echo json_encode($dataPoints2, JSON_NUMERIC_CHECK); ?>
+            yValueFormatString: "#,##0.## tonnes",
+            dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
         }]
-    });
-    chart.render();
-
-    function toggleDataSeries(e){
-        if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-            e.dataSeries.visible = false;
-        }
-        else{
-            e.dataSeries.visible = true;
-        }
-        chart.render();
-    }
-
-    }
+ });
+ chart.render();
+ }
 </script>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 <script src="{{asset ('js/ajax.js')}}"></script>
