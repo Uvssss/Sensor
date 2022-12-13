@@ -30,7 +30,8 @@ class ApiDataController extends Controller
         //     ->where('date', '');
         // return dd($time);
         $time = DB::table($table)
-            // ->select('*')
+            // ->select('*')\
+            ->where("sensor_id",$sensor)
             ->whereBetween('date', [$fromTime, $toTime]);
         // $time->get();
         // return dd($time);
