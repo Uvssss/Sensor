@@ -55,7 +55,7 @@ function showsensorform(){
 };
 // use ExistsEmail/User for Register later
 datasensorform=0;
-$("#sensorformbutton").on("click",function(){
+function sensordataform(){
     if(datasensorform==0){
         $("#manualinsert").removeClass("d-none")
         $("#autoinsert").addClass("d-none")
@@ -66,4 +66,4 @@ $("#sensorformbutton").on("click",function(){
         $("#autoinsert").removeClass("d-none")
         datasensorform=0;
     }
-});
+}

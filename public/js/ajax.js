@@ -4,6 +4,7 @@ $("#button").on("click",function()
     totime=$("#toTime").find(":selected").val();
     sensor_id=$("#sensor_id").find(":selected").val();
     table=$("#table").find(":selected").val();
+    window.location="/api/getdata/"+sensor_id+"/"+table+"/"+fromtime+"/"+totime;
     $.ajax({
         type: "GET",
         url: "/api/getdata/"+sensor_id+"/"+table+"/"+fromtime+"/"+totime,
@@ -71,8 +72,12 @@ $("#sensor_id").change(function(){
         dataType: "json",   //expect html to be returned
         success: function(data){
            $.each(data.date, function(key){
-             $("#fromTime").append("<option value=" + data.date[key]+">"+data.date[key]+ "</option>")
-             $("#toTime").append("<option value=" + data.date[key]+">"+data.date[key]+ "</option>")
+            $("#fromTime").append(`
+            <option value="${data.date[key]}">${data.date[key]}</option>
+        `)
+        $("#toTime").append(`
+        <option value="${data.date[key]}">${data.date[key]}</option>
+    `)
            })
        },
         error: function(jqXhr, textStatus, errorMessage){

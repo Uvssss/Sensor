@@ -72,7 +72,8 @@ class DataController extends Controller
         $post->temp = $temp;
         $post->sensor_id = $request->sensor_id;
         $post->save();
-        return "OK";
+        return redirect("/insertdata");
+        // return json_encode("OK");
     }
 
     /**

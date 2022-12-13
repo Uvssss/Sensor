@@ -2,7 +2,7 @@
 @section('content')
 <div class="container-fluid pt-7 pt-md-8">
     <div class="container pb-5" style="text-align: center;">
-        <button id="sensorformbutton" class="btn btn-primary">Get data from Sensor</button>
+        <button id="sensorformbutton" onclick="sensordataform()" class="btn btn-success">Get data from Sensor</button>
     </div>
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -45,7 +45,6 @@
 
                             <div class="col-md-6">
                                <select class="custom-select" name="sensor_id" id="sensor">
-                                <option selected>Choose sensor for data insertion</option>
                                 @foreach ($sensors as $sensor)
                                 <option name="" value="{{$sensor->id}}">{{$sensor->sensor}}</option>
                                 @endforeach
@@ -55,7 +54,7 @@
 
                         <div class="mb-0 form-group row">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" onclick="" class="btn btn-primary">
+                                <button onclick="" id="" class="btn btn-primary">
                                     {{ __('Add data manually') }}
                                 </button>
                             </div>
@@ -76,7 +75,6 @@
 
                             <div class="col-md-6">
                                <select class="custom-select" name="sensor_id" id="sensor">
-                                <option selected>Choose sensor for data insertion</option>
                                 @foreach ($sensors as $sensor)
                                 <option name="" value="{{$sensor->id}}">{{$sensor->sensor}}</option>
                                 @endforeach
@@ -85,7 +83,7 @@
                         </div>
                         <div class="mb-0 form-group row">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" onclick="" class="btn btn-primary">
+                                <button id="insertdatabutton" class="btn btn-primary">
                                     {{ __('Add data from Sensor ') }}
                                 </button>
                             </div>
