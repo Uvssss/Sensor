@@ -1,20 +1,26 @@
 @extends('wrapper')
 @section('content')
 
-{{-- I can iterate this, plus this graph is good. --}}
+
 <?php
 $dataPoints = array(
-    // foreach ($data as $key => $value) {
-    //     array("y" => 3373.64, "label" => "Germany" ),,
+    // if (count($data)>0) {
+    //     foreach ($data as $key => $value) {
+    //         array("y" => $value, "label" => $key )
+    //     }
     // }
-	array("y" => 3373.64, "label" => "Germany" ),
-	array("y" => 2435.94, "label" => "France" ),
-	array("y" => 1842.55, "label" => "China" ),
-	array("y" => 1828.55, "label" => "Russia" ),
-	array("y" => 1039.99, "label" => "Switzerland" ),
-	array("y" => 765.215, "label" => "Japan" ),
-	array("y" => 612.453, "label" => "Netherlands" ),
-    array("y" => 712.453, "label" => "test" )
+    // else
+    // // i hope this works
+    // {
+        array("y" => 3373.64, "label" => "Germany" ),
+	    array("y" => 2435.94, "label" => "France" ),
+	    array("y" => 1842.55, "label" => "China" ),
+	    array("y" => 1828.55, "label" => "Russia" ),
+	    array("y" => 1039.99, "label" => "Switzerland" ),
+	    array("y" => 765.215, "label" => "Japan" ),
+	    array("y" => 612.453, "label" => "Netherlands" ),
+        array("y" => 712.453, "label" => "test" )
+    // }
 );
 
 ?>
@@ -65,12 +71,12 @@ window.onload = function()
         },
         axisY:
         {
-            title: "Gold Reserves (in tonnes)"
+            title: "Gold Reserves"
         },
         data:
         [{
             type: "column",
-            yValueFormatString: "#,##0.## tonnes",
+            yValueFormatString: "#,##0.## ",
             dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
         }]
  });

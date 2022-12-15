@@ -27,9 +27,9 @@ class ApiDataController extends Controller
         $time = DB::table($table)
             ->whereBetween('date', [$fromTime, $toTime])
             ->where("sensor_id",$sensor);
-        return dd($time->get());
-
-        // return response()->json(array('data' => $time->get()));
+        // return dd($time->get());
+        // return json_encode($time);
+        return response()->json(array('data' => $time->get()));
     }
 
 

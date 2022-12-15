@@ -4,7 +4,7 @@ $("#button").on("click",function()
     totime=$("#toTime").find(":selected").val();
     sensor_id=$("#sensor_id").find(":selected").val();
     table=$("#table").find(":selected").val();
-    window.location="/api/getdata/"+sensor_id+"/"+table+"/"+fromtime+"/"+totime;
+    // window.location="/api/getdata/"+sensor_id+"/"+table+"/"+fromtime+"/"+totime;
     $.ajax({
         type: "GET",
         url: "/api/getdata/"+sensor_id+"/"+table+"/"+fromtime+"/"+totime,
@@ -13,7 +13,9 @@ $("#button").on("click",function()
         {
             // console.log(data);
             // temp = JSON.parse(data.text)
-            console.log(data)
+            console.log(data);
+            // dataPoints=$.parseJSON(data);
+            // console.log(dataPoints);
         }
     });
 })
