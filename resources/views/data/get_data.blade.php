@@ -1,29 +1,6 @@
 @extends('wrapper')
 @section('content')
 
-
-<?php
-$dataPoints = array(
-    // if (count($data)>0) {
-    //     foreach ($data as $key => $value) {
-    //         array("y" => $value, "label" => $key )
-    //     }
-    // }
-    // else
-    // // i hope this works
-    // {
-        array("y" => 3373.64, "label" => "Germany" ),
-	    array("y" => 2435.94, "label" => "France" ),
-	    array("y" => 1842.55, "label" => "China" ),
-	    array("y" => 1828.55, "label" => "Russia" ),
-	    array("y" => 1039.99, "label" => "Switzerland" ),
-	    array("y" => 765.215, "label" => "Japan" ),
-	    array("y" => 612.453, "label" => "Netherlands" ),
-        array("y" => 712.453, "label" => "test" )
-    // }
-);
-
-?>
 <div class=" container pt-7 pt-md-8" >
     <div class="row">
         <div class="col">
@@ -58,31 +35,6 @@ $dataPoints = array(
     </div>
     <div id="chartContainer" style="height: 370px; width: 100%;"></div>
 </div>
-<script>
-window.onload = function()
-{
-     var chart = new CanvasJS.Chart("chartContainer",
-     {
-        animationEnabled: true,
-        theme: "light2",
-        title:
-        {
-            text: "Gold Reserves"
-        },
-        axisY:
-        {
-            title: "Gold Reserves"
-        },
-        data:
-        [{
-            type: "column",
-            yValueFormatString: "#,##0.## ",
-            dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
-        }]
- });
- chart.render();
- }
-</script>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 <script src="{{asset ('js/ajax.js')}}"></script>
 @endsection
