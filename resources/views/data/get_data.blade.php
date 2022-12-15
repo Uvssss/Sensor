@@ -6,7 +6,6 @@
         <div class="col">
             <label for="table">Select table</label>
             <select class="custom-select" name="table" id="table">
-                <option value="currently">Currently</option>
                 <option value="hourly">Hourly</option>
                 <option value="daily">Daily</option>
                 <option value="weekly">Weekly</option>
@@ -33,7 +32,9 @@
     <div class="py-2" style="text-align: center;">
         <button id="button" class="btn btn-primary">Show Data</button>
     </div>
-    <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+</div>
+<div class="container-fluid">
+    <div id="chartContainer" style="height: 500px; width: 100%;"></div>
 </div>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 <script src="{{asset ('js/ajax.js')}}"></script>

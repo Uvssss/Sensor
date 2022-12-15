@@ -11,30 +11,29 @@ $("#button").on("click",function()
         dataType:"json",
         success: function(data)
         {
-            console.log(data.data)
-            // Graph(data.data);
-            Graph();
+            Graph(data.data);
         }
     });
 })
 
-function Graph()
+function Graph(data)
 {
+    console.log(data)
     var chart = new CanvasJS.Chart("chartContainer",
     {
         exportEnabled: true,
         animationEnabled: true,
         title:{
-            text: "Car Parts Sold in Different States"
+            text: "Temperature and Humidity results"
         },
         subtitles: [{
             text: "Click Legend to Hide or Unhide Data Series"
         }],
         axisX: {
-            title: "States"
+            title: "Dates"
         },
         axisY: {
-            title: "Oil Filter - Units",
+            title: "",
             titleFontColor: "#4F81BC",
             lineColor: "#4F81BC",
             labelFontColor: "#4F81BC",
@@ -42,7 +41,7 @@ function Graph()
             includeZero: true
         },
         axisY2: {
-            title: "Clutch - Units",
+            title: "",
             titleFontColor: "#C0504E",
             lineColor: "#C0504E",
             labelFontColor: "#C0504E",
@@ -56,11 +55,53 @@ function Graph()
             cursor: "pointer",
             itemclick: toggleDataSeries
         },
-        data: [{
+        data: [
+        {
             type: "column",
-            name: "Oil Filter",
+            name: "Max Temperature",
             showInLegend: true,
-            yValueFormatString: "#,##0.# Units",
+            yValueFormatString: "#,##0.# ",
+            dataPoints: [
+                { label: "New Jersey",  y: 19034.5 },
+                { label: "Texas", y: 20015 },
+                { label: "Oregon", y: 25342 },
+                { label: "Montana",  y: 20088 },
+                { label: "Massachusetts",  y: 28234 },
+            ]
+        },
+        {
+            type: "column",
+            name: " Min Temperature",
+            axisYType: "secondary",
+            showInLegend: true,
+            yValueFormatString: "#,##0.# ",
+            dataPoints: [
+                { label: "New Jersey", y: 210.5 },
+                { label: "Texas", y: 135 },
+                { label: "Oregon", y: 425 },
+                { label: "Montana", y: 130 },
+                { label: "Massachusetts", y: 528 }
+            ]
+        },
+        {
+            type: "column",
+            name: "Average Temperature",
+            axisYType: "secondary",
+            showInLegend: true,
+            yValueFormatString: "#,##0.# ",
+            dataPoints: [
+                { label: "New Jersey", y: 210.5 },
+                { label: "Texas", y: 135 },
+                { label: "Oregon", y: 425 },
+                { label: "Montana", y: 130 },
+                { label: "Massachusetts", y: 528 }
+            ]
+        },
+        {
+            type: "column",
+            name: "Max Humidity",
+            showInLegend: true,
+            yValueFormatString: "#,##0.# ",
             dataPoints: [
                 { label: "New Jersey",  y: 19034.5 },
                 { label: "Texas", y: 20015 },
@@ -71,10 +112,10 @@ function Graph()
         },
         {
             type: "column",
-            name: "Clutch",
+            name: "Min Humidity",
             axisYType: "secondary",
             showInLegend: true,
-            yValueFormatString: "#,##0.# Units",
+            yValueFormatString: "#,##0.# ",
             dataPoints: [
                 { label: "New Jersey", y: 210.5 },
                 { label: "Texas", y: 135 },
@@ -82,7 +123,22 @@ function Graph()
                 { label: "Montana", y: 130 },
                 { label: "Massachusetts", y: 528 }
             ]
-        }]
+        },
+        {
+            type: "column",
+            name: "Average Humidity",
+            axisYType: "secondary",
+            showInLegend: true,
+            yValueFormatString: "#,##0.# ",
+            dataPoints: [
+                { label: "New Jersey", y: 210.5 },
+                { label: "Texas", y: 135 },
+                { label: "Oregon", y: 425 },
+                { label: "Montana", y: 130 },
+                { label: "Massachusetts", y: 528 }
+            ]
+        }
+    ]
     });
     chart.render();
 
