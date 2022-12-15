@@ -18,7 +18,22 @@ $("#button").on("click",function()
 
 function Graph(data)
 {
+    avg_humid=[];
+    min_humid=[];
+    max_humid=[];
+    avg_temp=[];
+    min_temp=[];
+    max_temp=[];
     console.log(data)
+    for (let i = 0; i < data.length; i++){
+        // { label: "New Jersey",  y: 19034.5 }, this is the example i need to follow
+        max_humid[i]={ label: data[i].date, y: data[i].max_humid }
+        avg_humid[i]={ label: data[i].date, y: data[i].average_humid }
+        min_humid[i]={ label: data[i].date, y: data[i].min_humid }
+        avg_temp[i]={ label: data[i].date, y: data[i].average_temp }
+        max_temp[i]={ label: data[i].date, y: data[i].max_temp }
+        min_temp[i]={ label: data[i].date, y: data[i].min_temp }
+    }
     var chart = new CanvasJS.Chart("chartContainer",
     {
         exportEnabled: true,
@@ -33,7 +48,7 @@ function Graph(data)
             title: "Dates"
         },
         axisY: {
-            title: "",
+            // title: "test2",
             titleFontColor: "#4F81BC",
             lineColor: "#4F81BC",
             labelFontColor: "#4F81BC",
@@ -41,9 +56,9 @@ function Graph(data)
             includeZero: true
         },
         axisY2: {
-            title: "",
-            titleFontColor: "#C0504E",
-            lineColor: "#C0504E",
+            // title: "asddsa",
+            // titleFontColor: "#C0504E",
+            // lineColor: "#C0504E",
             labelFontColor: "#C0504E",
             tickColor: "#C0504E",
             includeZero: true
@@ -55,60 +70,36 @@ function Graph(data)
             cursor: "pointer",
             itemclick: toggleDataSeries
         },
-        data: [
+        data: [ //Make datapoints into a loop
         {
             type: "column",
             name: "Max Temperature",
             showInLegend: true,
-            yValueFormatString: "#,##0.# ",
-            dataPoints: [
-                { label: "New Jersey",  y: 19034.5 },
-                { label: "Texas", y: 20015 },
-                { label: "Oregon", y: 25342 },
-                { label: "Montana",  y: 20088 },
-                { label: "Massachusetts",  y: 28234 },
-            ]
+            yValueFormatString: "#,##0.# °C",
+            dataPoints: max_temp
         },
         {
             type: "column",
             name: " Min Temperature",
             axisYType: "secondary",
             showInLegend: true,
-            yValueFormatString: "#,##0.# ",
-            dataPoints: [
-                { label: "New Jersey", y: 210.5 },
-                { label: "Texas", y: 135 },
-                { label: "Oregon", y: 425 },
-                { label: "Montana", y: 130 },
-                { label: "Massachusetts", y: 528 }
-            ]
+            yValueFormatString: "#,##0.# °C",
+            dataPoints: min_temp
         },
         {
             type: "column",
             name: "Average Temperature",
             axisYType: "secondary",
             showInLegend: true,
-            yValueFormatString: "#,##0.# ",
-            dataPoints: [
-                { label: "New Jersey", y: 210.5 },
-                { label: "Texas", y: 135 },
-                { label: "Oregon", y: 425 },
-                { label: "Montana", y: 130 },
-                { label: "Massachusetts", y: 528 }
-            ]
+            yValueFormatString: "#,##0.# °C",
+            dataPoints: avg_temp
         },
         {
             type: "column",
             name: "Max Humidity",
             showInLegend: true,
             yValueFormatString: "#,##0.# ",
-            dataPoints: [
-                { label: "New Jersey",  y: 19034.5 },
-                { label: "Texas", y: 20015 },
-                { label: "Oregon", y: 25342 },
-                { label: "Montana",  y: 20088 },
-                { label: "Massachusetts",  y: 28234 }
-            ]
+            dataPoints: max_humid
         },
         {
             type: "column",
@@ -116,13 +107,7 @@ function Graph(data)
             axisYType: "secondary",
             showInLegend: true,
             yValueFormatString: "#,##0.# ",
-            dataPoints: [
-                { label: "New Jersey", y: 210.5 },
-                { label: "Texas", y: 135 },
-                { label: "Oregon", y: 425 },
-                { label: "Montana", y: 130 },
-                { label: "Massachusetts", y: 528 }
-            ]
+            dataPoints: min_humid
         },
         {
             type: "column",
@@ -130,13 +115,7 @@ function Graph(data)
             axisYType: "secondary",
             showInLegend: true,
             yValueFormatString: "#,##0.# ",
-            dataPoints: [
-                { label: "New Jersey", y: 210.5 },
-                { label: "Texas", y: 135 },
-                { label: "Oregon", y: 425 },
-                { label: "Montana", y: 130 },
-                { label: "Massachusetts", y: 528 }
-            ]
+            dataPoints:avg_humid
         }
     ]
     });
