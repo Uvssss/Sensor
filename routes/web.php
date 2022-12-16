@@ -33,6 +33,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get("/sensors",[SensorsControllers::class,'index']);
     Route::get("/showdata",[DataController::class,"getdata"]);
     Route::get('/insertdata',[DataController::class,"insertdata"]);
+    // Update routes
+
     Route::get('/update-sensors/{id}',[SensorsControllers::class,"updateview"]);
 
     // Posts

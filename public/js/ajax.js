@@ -24,112 +24,87 @@ function Graph(data)
     avg_temp=[];
     min_temp=[];
     max_temp=[];
-    console.log(data)
     for (let i = 0; i < data.length; i++){
         // { label: "New Jersey",  y: 19034.5 }, this is the example i need to follow
         max_humid[i]={ label: data[i].date, y: data[i].max_humid }
-        avg_humid[i]={ label: data[i].date, y: data[i].average_humid }
-        min_humid[i]={ label: data[i].date, y: data[i].min_humid }
+        avg_humid[i]={ label:data[i].date, y: data[i].average_humid }
+        min_humid[i]={ label:data[i].date, y: data[i].min_humid }
         avg_temp[i]={ label: data[i].date, y: data[i].average_temp }
         max_temp[i]={ label: data[i].date, y: data[i].max_temp }
-        min_temp[i]={ label: data[i].date, y: data[i].min_temp }
+        min_temp[i]={ label:data[i].date, y: data[i].min_temp }
     }
-    var chart = new CanvasJS.Chart("chartContainer",
-    {
-        exportEnabled: true,
+    var chart = new CanvasJS.Chart("chartContainer", {
+        theme:"light2",
         animationEnabled: true,
         title:{
-            text: "Temperature and Humidity results"
-        },
-        subtitles: [{
-            text: "Click Legend to Hide or Unhide Data Series"
-        }],
-        axisX: {
-            title: "Dates"
-        },
-        axisY: {
-            // title: "test2",
-            titleFontColor: "#4F81BC",
-            lineColor: "#4F81BC",
-            labelFontColor: "#4F81BC",
-            tickColor: "#4F81BC",
-            includeZero: true
-        },
-        axisY2: {
-            // title: "asddsa",
-            // titleFontColor: "#C0504E",
-            // lineColor: "#C0504E",
-            labelFontColor: "#C0504E",
-            tickColor: "#C0504E",
-            includeZero: true
+            text: "Temperature and humidity results"
         },
         toolTip: {
-            shared: true
+            shared: "true"
         },
-        legend: {
-            cursor: "pointer",
-            itemclick: toggleDataSeries
+        legend:{
+            cursor:"pointer",
+            itemclick : toggleDataSeries
         },
-        data: [ //Make datapoints into a loop
-        {
-            type: "column",
-            name: "Max Temperature",
+        data: [{
+            type: "spline",
+            visible: false,
             showInLegend: true,
-            yValueFormatString: "#,##0.# °C",
-            dataPoints: max_temp
-        },
-        {
-            type: "column",
-            name: " Min Temperature",
-            axisYType: "secondary",
-            showInLegend: true,
-            yValueFormatString: "#,##0.# °C",
-            dataPoints: min_temp
+            yValueFormatString: "##.00",
+            name: "Max humidity",
+            dataPoints:max_humid
         },
         {
-            type: "column",
-            name: "Average Temperature",
-            axisYType: "secondary",
+            type: "spline",
             showInLegend: true,
-            yValueFormatString: "#,##0.# °C",
-            dataPoints: avg_temp
-        },
-        {
-            type: "column",
-            name: "Max Humidity",
-            showInLegend: true,
-            yValueFormatString: "#,##0.# ",
-            dataPoints: max_humid
-        },
-        {
-            type: "column",
-            name: "Min Humidity",
-            axisYType: "secondary",
-            showInLegend: true,
-            yValueFormatString: "#,##0.# ",
-            dataPoints: min_humid
-        },
-        {
-            type: "column",
-            name: "Average Humidity",
-            axisYType: "secondary",
-            showInLegend: true,
-            yValueFormatString: "#,##0.# ",
+            visible: false,
+            yValueFormatString: "##.00",
+            name: "Average humidity",
             dataPoints:avg_humid
-        }
-    ]
+        },
+        {
+            type: "spline",
+            visible: false,
+            showInLegend: true,
+            yValueFormatString: "##.00",
+            name: "Min humidty",
+            dataPoints:min_humid
+        },
+        {
+            type: "spline",
+              visible: false,
+            showInLegend: true,
+            yValueFormatString: "##.00",
+            name: "Max temperature",
+            dataPoints:max_temp
+        },
+        {
+            type: "spline",
+            showInLegend: true,
+            yValueFormatString: "##.00",
+            name: "Average temperature",
+            dataPoints:avg_temp
+        },
+        {
+            type: "spline",
+            showInLegend: true,
+            yValueFormatString: "##.00",
+            name: "Min temperature",
+            dataPoints:min_temp
+        }]
     });
     chart.render();
 
     function toggleDataSeries(e) {
-        if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+        if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible ){
             e.dataSeries.visible = false;
         } else {
             e.dataSeries.visible = true;
         }
-        e.chart.render();
+        chart.render();
     }
 }
+
 
 
 
@@ -178,7 +153,6 @@ $("#table").change(function(){
 $("#sensor_id").change(function(){
     var table = $("#table").find(":selected").val();
     var sensor_id=$("#sensor_id").find(":selected").val();
-    console.log(table,sensor_id);
     $("#fromTime").empty();
     $("#toTime").empty();
     $.ajax({
