@@ -9,7 +9,7 @@ $("#name").mouseout(function(){
                 $("#name").addClass("border-danger")
             }
             else{
-
+                $("#name").removeClass("border-danger")
             }
        },
    });
@@ -27,7 +27,7 @@ $("#email").mouseout(function(){
                 $("#email").addClass("border-danger")
             }
             else{
-
+                $("#email").removeClass("border-danger")
             }
        },
    });

@@ -20,9 +20,6 @@ function changeurl(element)
         window.location="/showdata"
     }
 }
-function SensorUpdateView(id){
-        window.location="/update-sensors/"+id;
-}
  // Before i forget add authentication scripts
  function CheckPassword()
 {

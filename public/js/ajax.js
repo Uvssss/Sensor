@@ -57,7 +57,7 @@ function Graph(data)
         {
             type: "spline",
             showInLegend: true,
-            visible: false,
+            visible: true,
             yValueFormatString: "##.00",
             name: "Average humidity",
             dataPoints:avg_humid
@@ -87,6 +87,7 @@ function Graph(data)
         },
         {
             type: "spline",
+            visible: false,
             showInLegend: true,
             yValueFormatString: "##.00",
             name: "Min temperature",
@@ -126,16 +127,14 @@ $(document).ready(function(){
 $("#table").change(function(){
     var table = $(this).find(":selected").val();
     var sensor_id=$("#sensor_id").find(":selected").val();
-    $("#fromTime").empty();
-    $("#toTime").empty();
     $.ajax({
         type: "GET",
         url: "/api/gettime/"+table+"/"+sensor_id,
         dataType: "json",   //expect html to be returned
         success: function(data){
+            $("#fromTime").empty();
+            $("#toTime").empty();
            $.each(data.date, function(key){
-            // $("#fromTime").append("<option value=" + data.date[key]+">"+data.date[key]+ "</option>")
-            // $("#toTime").append("<option value=" + data.date[key]+">"+data.date[key]+ "</option>")
             $("#fromTime").append(`
                 <option value="${data.date[key]}">${data.date[key]}</option>
             `)
@@ -153,20 +152,20 @@ $("#table").change(function(){
 $("#sensor_id").change(function(){
     var table = $("#table").find(":selected").val();
     var sensor_id=$("#sensor_id").find(":selected").val();
-    $("#fromTime").empty();
-    $("#toTime").empty();
     $.ajax({
         type: "GET",
         url: "/api/gettime/"+table+"/"+sensor_id,
         dataType: "json",   //expect html to be returned
         success: function(data){
+            $("#fromTime").empty();
+            $("#toTime").empty();
            $.each(data.date, function(key){
             $("#fromTime").append(`
             <option value="${data.date[key]}">${data.date[key]}</option>
-        `)
-        $("#toTime").append(`
-        <option value="${data.date[key]}">${data.date[key]}</option>
-    `)
+            `)
+            $("#toTime").append(`
+            <option value="${data.date[key]}">${data.date[key]}</option>
+            `)
            })
        },
         error: function(jqXhr, textStatus, errorMessage){
