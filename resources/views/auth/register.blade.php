@@ -73,4 +73,6 @@
         </div>
     </div>
 </div>
+
+<script src="{{asset ('js/checkemail.js')}}"></script>
 @endsection

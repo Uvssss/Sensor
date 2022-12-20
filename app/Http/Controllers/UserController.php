@@ -89,7 +89,7 @@ class UserController extends Controller
         else{
             $UsernameExists=true;
         }
-        return json_encode($UsernameExists);
+        return response()->json($UsernameExists);
     }
 
     /**
@@ -106,7 +106,7 @@ class UserController extends Controller
         else{
             $EmailExists=true;
         }
-        return json_encode($EmailExists);
+        return response()->json($EmailExists);
     }
     /**
      * Remove the specified resource from storage.
