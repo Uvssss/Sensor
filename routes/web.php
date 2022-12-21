@@ -20,6 +20,7 @@ use App\Http\Controllers\UserController;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/about',[DataController::class,"about"]);
 // Logout
 Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
 

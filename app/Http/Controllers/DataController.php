@@ -20,7 +20,12 @@ class DataController extends Controller
      */
     public function index()
     {   // do this later
-        return view("home");
+        return view("guest.home");
+    }
+
+    public function about()
+    {   // do this later
+        return view("guest.about");
     }
     public function getdata()
     {
