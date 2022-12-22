@@ -59,7 +59,7 @@ class DataController extends Controller
         $date = Carbon::now()->toDateTimeString();
         $post = new Currently;
         $post->date = $date;
-        $post->humid = $request->humid; // WHY DID THIS DIE???
+        $post->humid = $request->humid; 
         $post->temp = $request->temp;
         $post->sensor_id = $request->sensor_id;
         $post->save();

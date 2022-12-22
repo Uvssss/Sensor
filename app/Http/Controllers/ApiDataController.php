@@ -36,6 +36,8 @@ class ApiDataController extends Controller
         $sensors = Sensors::all();
         return json_encode($sensors);
     }
+
+    
     public function gettime($table,$sensor_id){
         $time = DB::table($table)->where("sensor_id",$sensor_id)->pluck('date');
        return response()->json(array('date' => $time));
