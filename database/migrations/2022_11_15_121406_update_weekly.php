@@ -13,8 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        DB::unprepared
-        (
+        DB::unprepared(
             'create trigger update_weekly after insert on currently for each row
 		begin
 			set @sensor1=(select sensor_id from currently order by `date` DESC limit 1);

@@ -19,12 +19,12 @@ class DataController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   // do this later
+    {
         return view("guest.home");
     }
 
     public function about()
-    {   // do this later
+    {
         return view("guest.about");
     }
     public function getdata()
@@ -64,8 +64,6 @@ class DataController extends Controller
         $post->sensor_id = $request->sensor_id;
         $post->save();
         return "OK";
-
-        // return redirect('/insertdata');
     }
     public function sensorstore(Request $request){
         $date = Carbon::now()->toDateTimeString();
@@ -78,7 +76,6 @@ class DataController extends Controller
         $post->sensor_id = $request->sensor_id;
         $post->save();
         return redirect("/insertdata");
-        // return json_encode("OK");
     }
 
     /**
