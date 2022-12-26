@@ -32,3 +32,21 @@ $("#email").mouseout(function(){
        },
    });
 })
+
+
+$("#sensor").mouseout(function(){
+    var sensor=$("#senor").val();
+    $.ajax({
+        type: "GET",
+        url: "/api/exists/sensor/"+sensor,
+        dataType: "json",   //expect html to be returned
+        success: function(data){
+            if (data==true){
+                $("#sensor").addClass("border-danger")
+            }
+            else{
+                $("#sensor").removeClass("border-danger")
+            }
+       },
+   });
+})

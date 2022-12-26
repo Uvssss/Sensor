@@ -74,5 +74,5 @@
     </div>
 </div>
 
-<script src="{{asset ('js/checkemail.js')}}"></script>
+<script src="{{asset ('js/checks.js')}}"></script>
 @endsection
