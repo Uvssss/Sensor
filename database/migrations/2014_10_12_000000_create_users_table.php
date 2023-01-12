@@ -18,6 +18,10 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
+            $table->unsignedBigInteger("perms_id");
+            $table->foreign('perms_id')->
+                references('id')
+                ->on('permisions');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

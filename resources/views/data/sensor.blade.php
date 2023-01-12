@@ -82,4 +82,5 @@
         </div>
     </div>
 </div>
+<script src="{{asset ('js/checks.js')}}"></script>
 @endsection

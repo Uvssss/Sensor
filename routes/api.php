@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ApiDataController;
 use App\Http\Controllers\DataController;
+use App\Http\Controllers\OperatorController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -28,7 +29,8 @@ Route::get('/exists/sensor/{sensor}', [DataController::class, 'existsSensorname'
 // Deletion
 Route::get("/deleteuser/{id}",[UserController::class,'destroy']);
 Route::get("/deletesensor/{id}",[SensorsControllers::class,'destroy']);
-
+Route::get("/downgradeuser/{id}",[OperatorController::class,"downgrade"]);
+Route::get("/upgradeuser/{id}", [OperatorController::class, "upgrade"]);
 // Ajax data for later
 
 Route::get("/getdata/{sensor_id}/{table}/{fromTime}/{toTime}", [ApiDataController::class, "data"]);
