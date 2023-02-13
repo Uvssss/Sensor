@@ -31,7 +31,6 @@ class OperatorController extends Controller
     }
     public function upgrade($id){
         $post=User::find($id);
-        // return dd($post);
         $perms=$post->perms_id;
         $post->perms_id = $perms + 1;
         $post->save();

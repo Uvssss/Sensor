@@ -40,4 +40,4 @@ Route::get("/getsensors", [ApiDataController::class, 'getsensors']);
 Route::get("/gettime/{table}/{id}", [ApiDataController::class, "gettime"]);
 // User Restoration
 Route::get("/restoreuser/{id}",[UserController::class, 'restore']);
-Route::get("/form",[FormController::class,'form_input']);
+Route::post("/form",[FormController::class,'form_input']);

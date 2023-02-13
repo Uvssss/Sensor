@@ -26,17 +26,21 @@ Route::get('/about',[DataController::class,"about"]);
 Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth', 'verified'])->group(function () {
+
+    Route::group(['middleware' => ['mod']], function() {
+        Route::get("/sensors",[SensorsControllers::class,'index']);
+        Route::get('/insertdata',[DataController::class,"insertdata"]);
+        Route::get('/update-sensors/{id}',[SensorsControllers::class,"updateview"]);
+    });
+    Route::group(["middleware"=>['admin']],function(){
+        Route::get('/operator',[OperatorController::class,"ShowView"]);
+    });
     Route::get('/home',[DataController::class,"index"]);
-    Route::get('/operator',[OperatorController::class,"ShowView"]);
     // Dashboard routes
 
     Route::get('/profile',[UserController::class,"index"]);
-    Route::get("/sensors",[SensorsControllers::class,'index']);
     Route::get("/showdata",[DataController::class,"getdata"]);
-    Route::get('/insertdata',[DataController::class,"insertdata"]);
     // Update routes
-
-    Route::get('/update-sensors/{id}',[SensorsControllers::class,"updateview"]);
 
     // Posts
 
@@ -47,3 +51,4 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post("/sensordata", [DataController::class, "sensorstore"]);
 
 });
+

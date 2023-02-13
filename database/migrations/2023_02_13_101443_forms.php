@@ -14,13 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('forms', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('phone_number')->nullable();
-            $table->string('website')->nullable();
-            $table->string('email')->unique();
-            $table->string('text');
-            $table->timestamps();
+        $table->id();
+        $table->string('name');
+        $table->string('phone_number')->nullable();
+        $table->string('website')->nullable();
+        $table->string('email');
+        $table->string('text');
+        $table->timestamps();
         });
     }
 
