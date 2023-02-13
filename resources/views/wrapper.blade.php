@@ -48,6 +48,9 @@
                             <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                         </li>
                     @endif
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">{{ __('About us') }}</a>
+                    </li>
                     @else
                     <li class="nav-item">
                         <a id="navbarDropdown" class="nav-link" href="/profile" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -56,6 +59,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/home">{{ __('Home') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">{{ __('About us') }}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/logout">{{ __('Logout') }}</a>

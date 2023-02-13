@@ -29,31 +29,31 @@
         </div>
         <div class="row mt-5">
             <div class="col-md-8 mx-auto">
-                <form>
+                <form action="/api/form" method="POST">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Your name">
+                                <input type="name" name="name" class="form-control" placeholder="Your name">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input type="email"  class="form-control" placeholder="Your email address">
+                                <input type="email" name="email" class="form-control" placeholder="Your email address">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input type="tel"  class="form-control" placeholder="Phone number">
+                                <input type="tel" name="tel"  class="form-control" placeholder="Phone number">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input type="url"  class="form-control" placeholder="Your website">
+                                <input type="url" name="url"  class="form-control" placeholder="Your website">
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-group">
-                                <textarea rows="5"  class="form-control" placeholder="What are you looking for?"></textarea>
+                                <textarea rows="5" name="text"  class="form-control" placeholder="What are you looking for?"></textarea>
                             </div>
                         </div>
                     </div>

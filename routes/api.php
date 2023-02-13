@@ -4,6 +4,7 @@ use App\Http\Controllers\ApiDataController;
 use App\Http\Controllers\DataController;
 use App\Http\Controllers\OperatorController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\FormController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -39,3 +40,4 @@ Route::get("/getsensors", [ApiDataController::class, 'getsensors']);
 Route::get("/gettime/{table}/{id}", [ApiDataController::class, "gettime"]);
 // User Restoration
 Route::get("/restoreuser/{id}",[UserController::class, 'restore']);
+Route::get("/form",[FormController::class,'form_input']);

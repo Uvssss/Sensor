@@ -26,7 +26,6 @@ Route::get('/about',[DataController::class,"about"]);
 Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth', 'verified'])->group(function () {
-
     Route::get('/home',[DataController::class,"index"]);
     Route::get('/operator',[OperatorController::class,"ShowView"]);
     // Dashboard routes
