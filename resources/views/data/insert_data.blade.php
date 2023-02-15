@@ -11,7 +11,7 @@
 
                 <div class="card-body">
 
-                    <form method="POST" action="/insertdata">
+                    <form method="POST" action="/api/insertdata">
                         @csrf
                         <div class="form-group row">
                             <label for="temp" class="col-md-4 col-form-label text-md-right">{{ __('Temperature') }}</label>
@@ -68,7 +68,7 @@
 
                 <div class="card-body">
 
-                    <form method="POST" action="/sensordata">
+                    <form method="POST" action="/api/sensordata">
                         @csrf
                         <div class="form-group row">
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Sensor name') }}</label>

@@ -5,6 +5,7 @@ use App\Http\Controllers\DataController;
 use App\Http\Controllers\OperatorController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FormController;
+use App\Http\Controllers\SensorsControllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,7 +26,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // Check if exists
 Route::get('/exists/username/{username}', [UserController::class, 'existsUsername']);
 Route::get('/exists/email/{email}', [UserController::class, 'existsEmail']);
-Route::get('/exists/sensor/{sensor}', [DataController::class, 'existsSensorname']);
+Route::get('/exists/sensor/{sensor}', [ApiDataController::class, 'existsSensorname']);
 
 // Deletion
 Route::get("/deleteuser/{id}",[UserController::class,'destroy']);
@@ -35,9 +36,20 @@ Route::get("/upgradeuser/{id}", [OperatorController::class, "upgrade"]);
 // Ajax data for later
 
 Route::get("/getdata/{sensor_id}/{table}/{fromTime}/{toTime}", [ApiDataController::class, "data"]);
+Route::get("/getdata/{from_Sensor}/{to_sensor}/{table}/{fromTime}/{toTime}", [ApiDataController::class, "GetDataBetween"]);
+
+
 
 Route::get("/getsensors", [ApiDataController::class, 'getsensors']);
 Route::get("/gettime/{table}/{id}", [ApiDataController::class, "gettime"]);
+
 // User Restoration
 Route::get("/restoreuser/{id}",[UserController::class, 'restore']);
 Route::post("/form",[FormController::class,'form_input']);
+
+
+Route::post("/sensors",[SensorsControllers::class,'store']);
+Route::post("/updatesensors",[SensorsControllers::class,'update']);
+Route::post('/insertdata',[DataController::class,"store"]);
+Route::post('/profile',[UserController::class,"update"]);
+Route::post("/sensordata", [DataController::class, "sensorstore"]);

@@ -10,7 +10,7 @@ use App\Models\Weekly;
 use App\Models\Sensors;
 use App\Models\Monthly;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Carbon;
+use Carbon\Carbon;
 class DataController extends Controller
 {
     /**
@@ -59,7 +59,7 @@ class DataController extends Controller
         $date = Carbon::now()->toDateTimeString();
         $post = new Currently;
         $post->date = $date;
-        $post->humid = $request->humid; 
+        $post->humid = $request->humid;
         $post->temp = $request->temp;
         $post->sensor_id = $request->sensor_id;
         $post->save();

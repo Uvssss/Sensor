@@ -4,6 +4,7 @@ use App\Http\Controllers\DataController;
 use App\Http\Controllers\OperatorController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\SensorsControllers;
 use App\Http\Controllers\UserController;
 
@@ -21,6 +22,8 @@ use App\Http\Controllers\UserController;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/schedule',[ScheduleController::class,"create_data"]);
+
 Route::get('/about',[DataController::class,"about"]);
 // Logout
 Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
@@ -40,15 +43,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/profile',[UserController::class,"index"]);
     Route::get("/showdata",[DataController::class,"getdata"]);
+    Route::get("/showdatamultiple",[DataController::class,"getmultipledata"]);
     // Update routes
-
-    // Posts
-
-    Route::post("/sensors",[SensorsControllers::class,'store']);
-    Route::post("/updatesensors",[SensorsControllers::class,'update']);
-    Route::post('/insertdata',[DataController::class,"store"]);
-    Route::post('/profile',[UserController::class,"update"]);
-    Route::post("/sensordata", [DataController::class, "sensorstore"]);
 
 });
 

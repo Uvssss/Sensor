@@ -33,14 +33,14 @@ $("#email").mouseout(function(){
    });
 })
 
-
 $("#sensor").mouseout(function(){
-    var sensor=$("#senor").val();
+    var sensor=$("#sensor").val();
     $.ajax({
         type: "GET",
         url: "/api/exists/sensor/"+sensor,
         dataType: "json",   //expect html to be returned
         success: function(data){
+            console.log(data)
             if (data==true){
                 $("#sensor").addClass("border-danger")
             }

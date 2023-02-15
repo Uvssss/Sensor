@@ -173,3 +173,22 @@ $("#sensor_id").change(function(){
        }
    });
 })
+
+
+$("#multiple_button").on("click",function()
+{
+    fromtime=$("#fromTime").find(":selected").val();
+    totime=$("#toTime").find(":selected").val();
+    sensor_id=$("#sensor_id").find(":selected").val();
+    table=$("#table").find(":selected").val();
+    // window.location="/api/getdata/"+sensor_id+"/"+table+"/"+fromtime+"/"+totime;
+    $.ajax({
+        type: "GET",
+        url: "/api/getdata/"+from_sensor_id+"/"+to_sensor+"/"+table+"/"+fromtime+"/"+totime,
+        dataType:"json",
+        success: function(data)
+        {
+            Graph(data.data);
+        }
+    });
+})

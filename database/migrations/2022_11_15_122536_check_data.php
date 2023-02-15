@@ -15,10 +15,10 @@ return new class extends Migration
     {
         DB::unprepared('create trigger check_data before insert on currently for each row
         begin
-            if new.humid not between 10 and 100 then
+            if new.humid not between 0 and 100 then
                 signal sqlstate "45000" set message_text = "not believeable";
             end if;
-            if new.temp not between -30 and 40 then
+            if new.temp not between -30 and 100 then
                 signal sqlstate "45000" set message_text = "not believeable";
             end if;
         end');

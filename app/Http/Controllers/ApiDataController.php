@@ -29,15 +29,34 @@ class ApiDataController extends Controller
             ->where("sensor_id",$sensor);
         return response()->json(array('data' => $time->get()));
     }
-
-
+    public function GetDataBetween(Request $request){
+        $from_sensor=$request->from_sensor;
+        $to_Sensor=$request->to_sensor;
+        $fromTime=$request->fromTime;
+        $toTime=$request->toTime;
+        $table=$request->table;
+        $time = DB::table($table)
+            ->whereBetween('date', [$fromTime, $toTime])
+            ->whereBetween("sensor_id",[$from_sensor,$to_Sensor]);
+        return response()->json(array('data' => $time->get()));
+    }
+    public function existsSensorname($sensor){
+        $Exists =(Sensors::where('sensor',$sensor)->get());
+        if(count($Exists)==0){
+            $Exists=false;
+        }
+        else{
+            $Exists=true;
+        }
+        return response()->json($Exists);
+    }
     public function getsensors()
     {
         $sensors = Sensors::all();
         return json_encode($sensors);
     }
 
-    
+
     public function gettime($table,$sensor_id){
         $time = DB::table($table)->where("sensor_id",$sensor_id)->pluck('date');
        return response()->json(array('date' => $time));
