@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('weekly', function (Blueprint $table) {
 
-            $table->timestamp('date');
+            $table->timestamp('start_date');
+            $table->timestamp('end_date');
             $table->float('max_temp');
             $table->float('min_temp');
             $table->float('average_temp');

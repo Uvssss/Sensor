@@ -2,9 +2,9 @@
 
 namespace App\Console;
 
+use App\Http\Controllers\ScheduleController;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-
 class Kernel extends ConsoleKernel
 {
     /**
@@ -15,7 +15,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->call('App\Http\Controllers\ScheduleController@create_data')->hourly();
+        $schedule->command("run:sensor")->hourly();
+
 
     }
 
