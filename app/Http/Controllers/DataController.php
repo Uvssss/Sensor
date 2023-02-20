@@ -63,7 +63,12 @@ class DataController extends Controller
         $post->temp = $request->temp;
         $post->sensor_id = $request->sensor_id;
         $post->save();
-        return "OK";
+        $controller = new ScheduleController();
+        $controller->hourly($request->sensor_id,$date);
+        $controller->daily($request->sensor_id,$date);
+        $controller->weekly($request->sensor_id,$date);
+        $controller->monthly($request->sensor_id,$date);
+        return redirect("/insertdata");
     }
     public function sensorstore(Request $request){
         $date = Carbon::now()->toDateTimeString();
@@ -75,8 +80,13 @@ class DataController extends Controller
         $post->temp = $temp;
         $post->sensor_id = $request->sensor_id;
         $post->save();
+        $controller = new ScheduleController();
+        $controller->hourly($request->sensor_id,$date);
+        $controller->daily($request->sensor_id,$date);
+        $controller->weekly($request->sensor_id,$date);
+        $controller->monthly($request->sensor_id,$date);
         return redirect("/insertdata");
-    }
+       }
 
     /**
      * Display the specified resource.
