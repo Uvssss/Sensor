@@ -168,11 +168,11 @@ class ScheduleController extends Controller
             ->where('sensor_id', $id)
             ->whereRaw('left(date,10) between ? and ?',[$startOfWeek, $endOfWeek])
             ->min('humid');
-        $date=Weekly::whereRaw('? between start_date and end_date', [$week])->where("sensor_id",$id)->first();
+        $date=Weekly::whereRaw('? between date and end_date', [$week])->where("sensor_id",$id)->first();
         // return dd($date);
         if (empty($date)){
             $post = new Weekly;
-            $post->start_date = $startOfWeek;
+            $post->date = $startOfWeek;
             $post->end_date = $endOfWeek;
             $post->max_temp = $max_temp;
             $post->min_temp=$min_temp;
@@ -192,7 +192,7 @@ class ScheduleController extends Controller
                 'min_humid' =>$min_humid,
                 'max_humid' =>$max_humid,
             ];
-            DB::table("weekly")->where("sensor_id",$id)->whereRaw('? between start_date and end_date', [$week])->update($update);
+            DB::table("weekly")->where("sensor_id",$id)->whereRaw('? between date and end_date', [$week])->update($update);
         }
     }
     public function monthly($id,$date){

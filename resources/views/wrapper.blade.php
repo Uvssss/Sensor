@@ -31,7 +31,8 @@
             </a>
 
             <button class="navbar-toggler img navbar-toggler-right border-0" type="button" data-toggle="collapse"
-                    data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"><img width="35px" height="35px" src="https://cdn.iconscout.com/icon/premium/png-256-thumb/mobile-menu-7-825750.png" alt="">
+                    data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <img width="35px" height="35px" src="https://cdn.iconscout.com/icon/premium/png-256-thumb/mobile-menu-7-825750.png" alt="">
                 <span data-feather="grid"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -75,3 +76,4 @@
 </div>
     </body>
     </html>
+    data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"><img width="35px" height="35px" src="https://cdn.iconscout.com/icon/premium/png-256-thumb/mobile-menu-7-825750.png" alt="">

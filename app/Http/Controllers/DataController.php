@@ -37,15 +37,9 @@ class DataController extends Controller
         $result=Sensors::all();
         return view("data.insert_data",["sensors"=>$result]);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-
+    public function getmultipledata(){
+        $result=Sensors::all();
+        return view("data.get_multiple_data",["sensors"=>$result]);
     }
 
     /**
@@ -99,39 +93,5 @@ class DataController extends Controller
     {
         $results = DB::table($table)->where('sensor_id',$id)->get();
         return $results;
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit()
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

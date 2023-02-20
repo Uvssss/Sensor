@@ -15,7 +15,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command("run:sensor")->hourly();
+        $schedule->command("run:sensors")->hourly();
 
 
     }

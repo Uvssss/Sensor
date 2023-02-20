@@ -36,7 +36,7 @@ Route::get("/upgradeuser/{id}", [OperatorController::class, "upgrade"]);
 // Ajax data for later
 
 Route::get("/getdata/{sensor_id}/{table}/{fromTime}/{toTime}", [ApiDataController::class, "data"]);
-Route::get("/getdata/{from_Sensor}/{to_sensor}/{table}/{fromTime}/{toTime}", [ApiDataController::class, "GetDataBetween"]);
+Route::get("/multiplegetdata/{from_Sensor}/{to_sensor}/{table}/{fromTime}/{toTime}", [ApiDataController::class, "GetDataBetween"]);
 
 
 
