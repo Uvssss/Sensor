@@ -18,55 +18,66 @@ $("#multiple_button").on("click",function()
     column=$("#column").find(":selected").val();
     $.ajax({
         type: "GET",
-        url: "/api/multiplegetdata/"+from_sensor_id+"/"+to_sensor_id+"/"+table+"/"+fromtime+"/"+totime,
+        url: "/api/multiplegetdata/"+from_sensor_id+"/"+to_sensor_id+"/"+table+"/"+fromtime+"/"+totime+"/"+column,
         dataType:"json",
         success: function(data)
         {
-            console.log(data)
-            NewGraph(data.data)
+            // console.log(data.data)
+            GraphSetup(data.data)
+            // NewGraph(data.data)
         }
     });
 })
-function NewGraph(data){
-    max_humid=[];
-    for (let i = 0; i < data.length; i++){
-        // { label: "New Jersey",  y: 19034.5 }, this is the example i need to follow
-        max_humid[i]={ label: data[i].date, y: data[i].max_humid }
+function GraphSetup(data){
+    for(i=0;i<=data[data.length-1].id){
+        end
+        for(x=0; x<data[])
     }
+}
+function NewGraph(data)
+{
     var chart = new CanvasJS.Chart("chartContainer", {
-        theme:"light2",
         animationEnabled: true,
+        theme: "light2",
         title:{
-            text: "Temperature and humidity results"
+            text: "Site Traffic"
         },
-        toolTip: {
-            shared: "true"
+        axisX:{
+            crosshair: {
+                enabled: true,
+                snapToDataPoint: true
+            }
+        },
+        axisY: {
+            title: "",
+            includeZero: true,
+            crosshair: {
+                enabled: true
+            }
+        },
+        toolTip:{
+            shared:true
         },
         legend:{
             cursor:"pointer",
-            itemclick : toggleDataSeries
+            verticalAlign: "bottom",
+            horizontalAlign: "left",
+            dockInsidePlotArea: true,
+            itemclick: toogleDataSeries
         },
-        data: [{
-            type: "spline",
-            visible: true,
-            showInLegend: true,
-            yValueFormatString: "##.00",
-            name:"sda",
-            dataPoints:max_humid
-        },]
+        data:data
     });
     chart.render();
 
-    function toggleDataSeries(e) {
-        if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible ){
-            e.dataSeries.visible = false;
-        } else {
-            e.dataSeries.visible = true;
-        }
-        chart.render();
+    function toogleDataSeries(e){
+	    if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+		    e.dataSeries.visible = false;
+	    } else{
+		e.dataSeries.visible = true;
+	    }
+	    chart.render();
     }
-        }
-
+}
 
 $("#table").change(function(){
     var table = $(this).find(":selected").val();

@@ -10,6 +10,8 @@ use App\Models\Sensors;
 use App\Models\Weekly;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Termwind\Components\Raw;
+
 class ApiDataController extends Controller
 {
     /**
@@ -35,11 +37,11 @@ class ApiDataController extends Controller
         $fromTime=$request->fromTime;
         $toTime=$request->toTime;
         $table=$request->table;
-        $time = DB::table($table)
+        $column=$request->column;
+        $time = DB::table($table)->selectRaw('date,sensor,sensor_id,'.$column)
             ->whereBetween('date', [$fromTime, $toTime])
-            ->whereBetween("sensor_id",[$from_sensor,$to_Sensor])->join('sensor', 'sensor.id', '=', $table.'.sensor_id');
-
-            // return dd($time);
+            ->whereBetween("sensor_id",[$from_sensor,$to_Sensor])->join('sensor', 'sensor.id', '=', $table.'.sensor_id')->orderBy('id', 'ASC');
+            // return dd($time->get());
         return response()->json(array('data' => $time->get()));
     }
     public function existsSensorname($sensor){

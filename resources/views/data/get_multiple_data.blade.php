@@ -22,8 +22,8 @@
                             <label class="col-form-label" for="column">Select column</label>
                             <div>
                                 <select class="custom-select " name="column" id="column">
-                                    <option value="Average_temp">Average temperature</option>
-                                    <option value="Average_humid">Average humidity</option>
+                                    <option value="average_temp">Average temperature</option>
+                                    <option value="average_humid">Average humidity</option>
                                     <option value="min_humid">Lowest humidity</option>
                                     <option value="min_temp">Lowest temperature</option>
                                     <option value="max_temp">Highest temperature</option>
