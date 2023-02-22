@@ -40,7 +40,7 @@ class ApiDataController extends Controller
         $column=$request->column;
         $time = DB::table($table)->selectRaw('date,sensor,sensor_id,'.$column)
             ->whereBetween('date', [$fromTime, $toTime])
-            ->whereBetween("sensor_id",[$from_sensor,$to_Sensor])->join('sensor', 'sensor.id', '=', $table.'.sensor_id')->orderBy('id', 'ASC');
+            ->whereBetween("sensor_id",[$from_sensor,$to_Sensor])->join('sensor', 'sensor.id', '=', $table.'.sensor_id')->orderBy('id', 'DESC');
             // return dd($time->get());
         return response()->json(array('data' => $time->get()));
     }

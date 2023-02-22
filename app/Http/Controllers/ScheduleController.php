@@ -22,8 +22,6 @@ class ScheduleController extends Controller
             $sensor_id=$sensor->id;
             $this->sensor_insert($sensor_id);
         }
-        $output=new OutputConsoleOutput();
-        $output->writeln("plz work");
         // return dd($sensors);
     }
     public function sensor_insert($id){

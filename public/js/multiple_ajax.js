@@ -22,17 +22,58 @@ $("#multiple_button").on("click",function()
         dataType:"json",
         success: function(data)
         {
-            // console.log(data.data)
             GraphSetup(data.data)
-            // NewGraph(data.data)
         }
     });
 })
 function GraphSetup(data){
-    for(i=0;i<=data[data.length-1].id){
-        end
-        for(x=0; x<data[])
+    maindata=[]
+    dataPoints=[]
+    enddata=[]
+    // Data grouped into several sub arrays grouped by sensor id
+    for( i=1; i<data.length; i++){
+        if(i==1){
+            dataPoints.push({x:new Date (data[i-1].date),y:data[i-1].max_humid ,sensor:data[i-1].sensor})
+        }
+        if (data[i-1].sensor_id==data[i].sensor_id){
+            dataPoints.push({x:new Date (data[i].date),y:data[i].max_humid,sensor:data[i].sensor})
+        }
+        if(data[i-1].sensor_id!=data[i].sensor_id){
+            enddata.push(dataPoints)
+            dataPoints=[]
+            dataPoints.push({x:new Date (data[i].date),y:data[i].max_humid ,sensor:data[i].sensor})
+        }
+        if(i==(data.length-1)){
+            enddata.push(dataPoints)
+        }
     }
+
+    // The group array is sorted by date ASC order
+    enddata.sort(function(a,b){
+        return b.date - a.date;
+    });
+    for(i=0;i<enddata.length;i++){
+        temparr={type: "line",
+        showInLegend: true,
+        name: enddata[i][0].sensor,
+        markerType: "square",
+        xValueFormatString: "DD MMM, YYYY",
+        dataPoints: enddata[i]}
+        maindata.push(temparr)
+    }
+    console.log(maindata)
+    for(i=0;i<maindata.length;i++){
+        datpoint=maindata[i];
+        console.log("pzl");
+        for(x=0;x<datpoint.length;x++){
+            let array=datpoint[x].dataPoints;
+            for(l=0;l<array.length;l++){
+                delete array[l].sensor;
+            }
+        }
+    }
+    console.log(maindata)
+    NewGraph(enddata)
 }
 function NewGraph(data)
 {
@@ -49,7 +90,7 @@ function NewGraph(data)
             }
         },
         axisY: {
-            title: "",
+            title: "PLZZZ",
             includeZero: true,
             crosshair: {
                 enabled: true
