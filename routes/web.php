@@ -22,7 +22,6 @@ use App\Http\Controllers\UserController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/schedule',[ScheduleController::class,"create_data"]);
 
 Route::get('/about',[DataController::class,"about"]);
 // Logout
@@ -30,6 +29,7 @@ Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
+    Route::get("/showsensors",[SensorsControllers::class,'showsensors']);
     Route::group(['middleware' => ['mod']], function() {
         Route::get("/sensors",[SensorsControllers::class,'index']);
         Route::get('/insertdata',[DataController::class,"insertdata"]);

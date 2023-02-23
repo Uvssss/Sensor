@@ -9,18 +9,23 @@ use App\Models\Daily;
 use App\Models\Weekly;
 use App\Models\Sensors;
 use App\Models\Monthly;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
+
 class DataController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Displaying Views.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return view("guest.home");
+        $perms_id=Auth::user()->perms_id;
+        return view("guest.home",["perms_id"=>$perms_id]);
+
     }
 
     public function about()

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Pagination\Paginator;
+
 use function GuzzleHttp\Promise\all;
 
 class SensorsControllers extends Controller
@@ -16,6 +18,11 @@ class SensorsControllers extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function showsensors(){
+        $results=DB::table("sensor")->simplePaginate(8);
+        return view('data.showsensors',["sensors"=>$results]);
+    }
     public function index()
     {
         $results=Sensors::all();

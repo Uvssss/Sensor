@@ -10,7 +10,7 @@
         </h5>
     </div>
     <div class="container  text-center">
-        <h4>Who we are?</h4>
+        <h4>Who are we?</h4>
         <p><b>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, voluptatibus!</b></p>
     </div>
 </div>

@@ -1,6 +1,6 @@
 @extends('wrapper')
 @section('content')
-<div class="container-fluid pt-7 pt-md-6" >
+<div class="container-fluid pt-6 pt-md-6" >
     <section>
         <div class="container">
             <div class="card">
@@ -75,8 +75,10 @@
             </div>
         </div>
     </section>
-    <div id="chartContainer" style="height: 370px; width: 100%;"></div>
 </div>
+
+
+<div id="chartContainer" style="height:100%; width: 100%;"></div>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
 <script src="{{asset ('js/multiple_ajax.js')}}"></script>

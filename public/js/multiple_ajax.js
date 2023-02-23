@@ -22,58 +22,147 @@ $("#multiple_button").on("click",function()
         dataType:"json",
         success: function(data)
         {
-            GraphSetup(data.data)
+            GraphSetup(data.data,column)
         }
     });
 })
-function GraphSetup(data){
+function GraphSetup(data,column){
     maindata=[]
     dataPoints=[]
     enddata=[]
     // Data grouped into several sub arrays grouped by sensor id
-    for( i=1; i<data.length; i++){
-        if(i==1){
-            dataPoints.push({x:new Date (data[i-1].date),y:data[i-1].max_humid ,sensor:data[i-1].sensor})
-        }
-        if (data[i-1].sensor_id==data[i].sensor_id){
-            dataPoints.push({x:new Date (data[i].date),y:data[i].max_humid,sensor:data[i].sensor})
-        }
-        if(data[i-1].sensor_id!=data[i].sensor_id){
-            enddata.push(dataPoints)
-            dataPoints=[]
-            dataPoints.push({x:new Date (data[i].date),y:data[i].max_humid ,sensor:data[i].sensor})
-        }
-        if(i==(data.length-1)){
-            enddata.push(dataPoints)
+    if(column=="max_humid"){
+        for( i=1; i<data.length; i++){
+            if(i==1){
+                dataPoints.push({x:new Date (data[i-1].date),y:data[i-1].max_humid ,sensor:data[i-1].sensor})
+            }
+            if (data[i-1].sensor_id==data[i].sensor_id){
+                dataPoints.push({x:new Date (data[i].date),y:data[i].max_humid,sensor:data[i].sensor})
+            }
+            if(data[i-1].sensor_id!=data[i].sensor_id){
+                enddata.push(dataPoints)
+                dataPoints=[]
+                dataPoints.push({x:new Date (data[i].date),y:data[i].max_humid ,sensor:data[i].sensor})
+            }
+            if(i==(data.length-1)){
+                enddata.push(dataPoints)
+            }
         }
     }
-
+    if(column=="min_humid"){
+        for( i=1; i<data.length; i++){
+            if(i==1){
+                dataPoints.push({x:new Date (data[i-1].date),y:data[i-1].min_humid ,sensor:data[i-1].sensor})
+            }
+            if (data[i-1].sensor_id==data[i].sensor_id){
+                dataPoints.push({x:new Date (data[i].date),y:data[i].min_humid,sensor:data[i].sensor})
+            }
+            if(data[i-1].sensor_id!=data[i].sensor_id){
+                enddata.push(dataPoints)
+                dataPoints=[]
+                dataPoints.push({x:new Date (data[i].date),y:data[i].min_humid ,sensor:data[i].sensor})
+            }
+            if(i==(data.length-1)){
+                enddata.push(dataPoints)
+            }
+        }
+    }
+    if(column=="average_humid"){
+        for( i=1; i<data.length; i++){
+            if(i==1){
+                dataPoints.push({x:new Date (data[i-1].date),y:data[i-1].average_humid ,sensor:data[i-1].sensor})
+            }
+            if (data[i-1].sensor_id==data[i].sensor_id){
+                dataPoints.push({x:new Date (data[i].date),y:data[i].average_humid,sensor:data[i].sensor})
+            }
+            if(data[i-1].sensor_id!=data[i].sensor_id){
+                enddata.push(dataPoints)
+                dataPoints=[]
+                dataPoints.push({x:new Date (data[i].date),y:data[i].average_humid ,sensor:data[i].sensor})
+            }
+            if(i==(data.length-1)){
+                enddata.push(dataPoints)
+            }
+        }
+    }
+    if(column=='max_temp'){
+        for( i=1; i<data.length; i++){
+            if(i==1){
+                dataPoints.push({x:new Date (data[i-1].date),y:data[i-1].max_temp ,sensor:data[i-1].sensor})
+            }
+            if (data[i-1].sensor_id==data[i].sensor_id){
+                dataPoints.push({x:new Date (data[i].date),y:data[i].max_temp,sensor:data[i].sensor})
+            }
+            if(data[i-1].sensor_id!=data[i].sensor_id){
+                enddata.push(dataPoints)
+                dataPoints=[]
+                dataPoints.push({x:new Date (data[i].date),y:data[i].max_temp ,sensor:data[i].sensor})
+            }
+            if(i==(data.length-1)){
+                enddata.push(dataPoints)
+            }
+        }
+    }
+    if(column=='min_temp'){
+        for( i=1; i<data.length; i++){
+            if(i==1){
+                dataPoints.push({x:new Date (data[i-1].date),y:data[i-1].min_temp ,sensor:data[i-1].sensor})
+            }
+            if (data[i-1].sensor_id==data[i].sensor_id){
+                dataPoints.push({x:new Date (data[i].date),y:data[i].min_temp,sensor:data[i].sensor})
+            }
+            if(data[i-1].sensor_id!=data[i].sensor_id){
+                enddata.push(dataPoints)
+                dataPoints=[]
+                dataPoints.push({x:new Date (data[i].date),y:data[i].min_temp ,sensor:data[i].sensor})
+            }
+            if(i==(data.length-1)){
+                enddata.push(dataPoints)
+            }
+        }
+    }
+    if(column=="average_temp"){
+        for( i=1; i<data.length; i++){
+            if(i==1){
+                dataPoints.push({x:new Date (data[i-1].date),y:data[i-1].average_temp ,sensor:data[i-1].sensor})
+            }
+            if (data[i-1].sensor_id==data[i].sensor_id){
+                dataPoints.push({x:new Date (data[i].date),y:data[i].average_temp,sensor:data[i].sensor})
+            }
+            if(data[i-1].sensor_id!=data[i].sensor_id){
+                enddata.push(dataPoints)
+                dataPoints=[]
+                dataPoints.push({x:new Date (data[i].date),y:data[i].average_temp ,sensor:data[i].sensor})
+            }
+            if(i==(data.length-1)){
+                enddata.push(dataPoints)
+            }
+        }
+    }
     // The group array is sorted by date ASC order
     enddata.sort(function(a,b){
         return b.date - a.date;
     });
     for(i=0;i<enddata.length;i++){
-        temparr={type: "line",
-        showInLegend: true,
-        name: enddata[i][0].sensor,
-        markerType: "square",
-        xValueFormatString: "DD MMM, YYYY",
-        dataPoints: enddata[i]}
+        temparr=
+        {type: "line",
+            showInLegend: true,
+            name: enddata[i][0].sensor,
+            markerType: "square",
+            xValueFormatString: "YYYY-MM-DD HH:MM:ss",
+            dataPoints:enddata[i]
+        }
         maindata.push(temparr)
     }
-    console.log(maindata)
+    // deleting sensor from datapoints
     for(i=0;i<maindata.length;i++){
-        datpoint=maindata[i];
-        console.log("pzl");
+        datpoint=maindata[i].dataPoints;
         for(x=0;x<datpoint.length;x++){
-            let array=datpoint[x].dataPoints;
-            for(l=0;l<array.length;l++){
-                delete array[l].sensor;
-            }
+            delete datpoint[x].sensor;
         }
     }
-    console.log(maindata)
-    NewGraph(enddata)
+    // Running graph creation
+    NewGraph(maindata)
 }
 function NewGraph(data)
 {
@@ -81,16 +170,17 @@ function NewGraph(data)
         animationEnabled: true,
         theme: "light2",
         title:{
-            text: "Site Traffic"
+            text: "Results"
         },
         axisX:{
+            valueFormatString: "YYYY-MM-DD",
             crosshair: {
                 enabled: true,
                 snapToDataPoint: true
             }
         },
         axisY: {
-            title: "PLZZZ",
+            title: "Number of Visits",
             includeZero: true,
             crosshair: {
                 enabled: true
@@ -106,19 +196,20 @@ function NewGraph(data)
             dockInsidePlotArea: true,
             itemclick: toogleDataSeries
         },
-        data:data
+        data: data
     });
     chart.render();
 
     function toogleDataSeries(e){
-	    if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-		    e.dataSeries.visible = false;
-	    } else{
-		e.dataSeries.visible = true;
-	    }
-	    chart.render();
+        if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+            e.dataSeries.visible = false;
+        } else{
+            e.dataSeries.visible = true;
+        }
+        chart.render();
     }
-}
+
+    }
 
 $("#table").change(function(){
     var table = $(this).find(":selected").val();

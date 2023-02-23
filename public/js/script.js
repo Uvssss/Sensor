@@ -25,10 +25,10 @@ function changeurl(element)
 {
     password=document.getElementById("password");
     confirm_password=document.getElementById("password-confirm")
-    var psw=  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+    var psw=  /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
     if(password.value.match(psw) && password==confirm_password)
         {
-            return true;
+            $("#reg_submit").submit();
         }
     else
         {
