@@ -30,7 +30,8 @@ Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
 Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get("/showsensors",[SensorsControllers::class,'showsensors']);
-    Route::post("/showsensor/{name}",[SensorsControllers::class,'showsensors']);
+    Route::get("/showsensor/{searchby}/{value}",[SensorsControllers::class,'showsensors']);
+    Route::get("/showsensor/{searchby}/",[SensorsControllers::class,'showsensors']);
     Route::group(['middleware' => ['mod']], function() {
         Route::get("/sensors",[SensorsControllers::class,'index']);
         Route::get('/insertdata',[DataController::class,"insertdata"]);
@@ -40,12 +41,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/operator',[OperatorController::class,"ShowView"]);
     });
     Route::get('/home',[DataController::class,"index"]);
-    // Dashboard routes
-
     Route::get('/profile',[UserController::class,"index"]);
     Route::get("/showdata",[DataController::class,"getdata"]);
     Route::get("/showdatamultiple",[DataController::class,"getmultipledata"]);
-    // Update routes
-
 });
 

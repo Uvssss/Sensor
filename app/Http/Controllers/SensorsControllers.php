@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Pagination\Paginator;
 
 use function GuzzleHttp\Promise\all;
+use function PHPUnit\Framework\isEmpty;
 
 class SensorsControllers extends Controller
 {
@@ -19,10 +20,9 @@ class SensorsControllers extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function showsensors($name = null){
-
-        if(!empty($id)){
-            $results=Sensors::where('sensor', 'Like', '%' . $name . '%')->simplePaginate(8);
+    public function showsensors($searchby,$name = null){
+        if(!empty($name)){
+            $results=Sensors::where($searchby, 'Like', '%' . $name . '%')->simplePaginate(8);
         }
         else{
             $results=DB::table("sensor")->simplePaginate(8);
