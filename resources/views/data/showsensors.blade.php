@@ -1,7 +1,11 @@
 @extends('wrapper')
 @section('content')
 <div class="container-fluid pt-7 pt-md-6">
-    <div>Search aria div</div>
+    <div>
+        <form action="/showsensors" method="get">
+            <input type="text" id="search" placeholder="Search">
+            <button type="submit">Submit</button>
+        </form></div>
     <div class="row">
         @foreach ($sensors as $sensor)
             <div class="col-md-6 col-md-4 pt-2">

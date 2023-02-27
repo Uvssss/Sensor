@@ -30,6 +30,7 @@ Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
 Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get("/showsensors",[SensorsControllers::class,'showsensors']);
+    Route::post("/showsensor/{name}",[SensorsControllers::class,'showsensors']);
     Route::group(['middleware' => ['mod']], function() {
         Route::get("/sensors",[SensorsControllers::class,'index']);
         Route::get('/insertdata',[DataController::class,"insertdata"]);

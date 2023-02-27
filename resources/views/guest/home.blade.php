@@ -145,7 +145,7 @@
             </div>
         </div>
         <div class="col">
-            <h2>I Dont know to put here, HELP ME PLZZ</h2>
+            <h2>I Dont know to put here</h2>
         </div>
     </div>
 </div>

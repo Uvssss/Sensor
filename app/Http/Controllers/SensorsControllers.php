@@ -19,8 +19,14 @@ class SensorsControllers extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function showsensors(){
-        $results=DB::table("sensor")->simplePaginate(8);
+    public function showsensors($name = null){
+
+        if(!empty($id)){
+            $results=Sensors::where('sensor', 'Like', '%' . $name . '%')->simplePaginate(8);
+        }
+        else{
+            $results=DB::table("sensor")->simplePaginate(8);
+        }
         return view('data.showsensors',["sensors"=>$results]);
     }
     public function index()
@@ -32,14 +38,7 @@ class SensorsControllers extends Controller
         $id=$request->route('id');
         return view('data.update_sensors',["id"=>$id]);
     }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-    }
+
 
     /**
      * Store a newly created resource in storage.
