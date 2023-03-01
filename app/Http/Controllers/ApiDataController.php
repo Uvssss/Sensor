@@ -60,9 +60,29 @@ class ApiDataController extends Controller
         return json_encode($sensors);
     }
 
-
     public function gettime($table,$sensor_id){
         $time = DB::table($table)->where("sensor_id",$sensor_id)->pluck('date');
        return response()->json(array('date' => $time));
+    }
+    public function graph(){
+        $amount=0;
+        $endarray=[];
+        $created_at = DB::table("sensor")->selectRaw("left(created_at,13) as created_at,count(id) as amount")->groupByRaw("left(created_at,13)")->get();
+        foreach($created_at as $created ){
+            $amount=$amount+$created->amount;
+            $endarray[]=[$amount,$created->created_at];
+        }
+
+        return response()->json(array('data' => $endarray));
+    }
+    public function chart(){
+        $endarray=[];
+        $total=DB::table("sensor")->count();
+        $locations= DB::table("sensor")->selectRaw("count(location) as loc_count,location")->groupBy("location")->get();
+        foreach ($locations as $location){
+            $percentage=$location->loc_count / $total * 100;
+            $endarray[]=[$percentage,$location->location];
+        }
+        return response()->json(array('data' => $endarray));
     }
 }

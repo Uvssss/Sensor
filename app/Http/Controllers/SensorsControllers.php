@@ -9,8 +9,6 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Pagination\Paginator;
 
-use function GuzzleHttp\Promise\all;
-use function PHPUnit\Framework\isEmpty;
 
 class SensorsControllers extends Controller
 {
@@ -31,8 +29,9 @@ class SensorsControllers extends Controller
     }
     public function index()
     {
-        $results=Sensors::all();
-        return view('data.sensor',["sensor"=>$results]);
+        $results=DB::table("sensor")->simplePaginate(8);
+        // return dd($results);
+        return view('data.sensor',["sensors"=>$results]);
     }
     public function updateview(Request $request){
         $id=$request->route('id');

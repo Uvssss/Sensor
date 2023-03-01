@@ -15,7 +15,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($sensor as $sensor)
+                @foreach ($sensors as $sensor)
                 <tr>
                     <td>{{$sensor->sensor}}</td>
                     <td>{{$sensor->location}}</td>
@@ -31,6 +31,9 @@
                 @endforeach
             </tbody>
         </table>
+        <div class="text-center">
+            {{ $sensors->links() }}
+        </div>
     </div>
     <div id="sensorform" class="d-none py-5">
         <div class="row justify-content-center">

@@ -58,9 +58,6 @@
                         <a class="nav-link" href="/home">{{ __('Home') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/about">{{ __('About us') }}</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="/logout">{{ __('Logout') }}</a>
                     </li>
                 @endguest
