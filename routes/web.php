@@ -19,10 +19,8 @@ use App\Http\Controllers\UserController;
 |
 */
  // Guest view / Landing Page
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/',[DataController::class,"welcome"]);
+Route::get('/schedule',[ScheduleController::class,"create_data"]);
 Route::get('/about',[DataController::class,"about"]);
 // Logout
 Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');

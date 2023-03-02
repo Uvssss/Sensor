@@ -107,10 +107,6 @@ function Graph(data)
     }
 }
 
-
-
-
-
 $(document).ready(function(){
     $("#table").trigger("change");
 })

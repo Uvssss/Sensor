@@ -30,23 +30,31 @@ class DataController extends Controller
 
     public function about()
     {
-        return view("guest.about");
+        $perms_id=Auth::user()->perms_id;
+        return view("guest.about",["perms_id"=>$perms_id]);
     }
     public function getdata()
     {
         $result=Sensors::all();
-        return view("data.get_data",["sensors"=>$result]);
+        $perms_id=Auth::user()->perms_id;
+        return view("data.get_data",["sensors"=>$result,"perms_id"=>$perms_id]);
     }
     public function insertdata()
     {
         $result=Sensors::all();
-        return view("data.insert_data",["sensors"=>$result]);
+        $perms_id=Auth::user()->perms_id;
+        return view("data.insert_data",["sensors"=>$result,"perms_id"=>$perms_id]);
     }
     public function getmultipledata(){
         $result=Sensors::all();
-        return view("data.get_multiple_data",["sensors"=>$result]);
+        $perms_id=Auth::user()->perms_id;
+        return view("data.get_multiple_data",["sensors"=>$result,"perms_id"=>$perms_id]);
     }
 
+    public function welcome(){
+        $perms_id=Auth::user()->perms_id;
+        return view("welcome",["perms_id"=>$perms_id]);
+    }
     /**
      * Store a newly created resource in storage.
      *

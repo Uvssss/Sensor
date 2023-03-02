@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Pagination\Paginator;
-
+use Illuminate\Support\Facades\Auth;
 
 class SensorsControllers extends Controller
 {
@@ -17,25 +17,27 @@ class SensorsControllers extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
     public function showsensors($searchby,$name = null){
+        $perms_id=Auth::user()->perms_id;
         if(!empty($name)){
             $results=Sensors::where($searchby, 'Like', '%' . $name . '%')->simplePaginate(8);
         }
         else{
             $results=DB::table("sensor")->simplePaginate(8);
         }
-        return view('data.showsensors',["sensors"=>$results]);
+        return view('data.showsensors',["sensors"=>$results,"perms_id"=>$perms_id]);
     }
     public function index()
     {
+        $perms_id=Auth::user()->perms_id;
         $results=DB::table("sensor")->simplePaginate(8);
         // return dd($results);
-        return view('data.sensor',["sensors"=>$results]);
+        return view('data.sensor',["sensors"=>$results,"perms_id"=>$perms_id]);
     }
     public function updateview(Request $request){
+        $perms_id=Auth::user()->perms_id;
         $id=$request->route('id');
-        return view('data.update_sensors',["id"=>$id]);
+        return view('data.update_sensors',["id"=>$id,"perms_id"=>$perms_id]);
     }
 
 

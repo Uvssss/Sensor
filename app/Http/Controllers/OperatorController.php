@@ -11,10 +11,11 @@ use PHPUnit\Framework\Constraint\Operator;
 class OperatorController extends Controller
 {
     public function ShowView(){
+        $perms_id1=Auth::user()->perms_id;
         $id=Auth::user()->id;
         $perms_id=DB::table('users')->where('id', $id)->pluck("perms_id");
         $results = DB::table("users")->select('users.id',"users.id as users_id","permisions.id","permisions.id as permision_id","permisions.Status","users.name")->join('permisions', 'permisions.id', '=', 'users.perms_id')->where('perms_id', '<', $perms_id)->where("deleted_at","=",null)->get();
-        return view("operator.all_users", ["results" => $results]);
+        return view("operator.all_users", ["results" => $results,"perms_id"=>$perms_id1]);
         // return dd($results);
     }
     public function downgrade($id){

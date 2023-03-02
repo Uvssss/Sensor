@@ -10,7 +10,6 @@ use App\Models\Weekly;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use Symfony\Component\Console\Output\ConsoleOutput as OutputConsoleOutput;
 
 use function PHPUnit\Framework\isEmpty;
 
@@ -22,7 +21,6 @@ class ScheduleController extends Controller
             $sensor_id=$sensor->id;
             $this->sensor_insert($sensor_id);
         }
-        // return dd($sensors);
     }
     public function sensor_insert($id){
         $date = Carbon::now()->toDateTimeString();
@@ -65,7 +63,15 @@ class ScheduleController extends Controller
             ->where('sensor_id', $id)
             ->whereRaw('left(date,13) = ?', [$hour])
             ->min('humid');
-        $date=Hourly::where('date',$hour)->where("sensor_id",$id)->first();
+        $date=Hourly::where('date',$hour)->where("sensor_id",$id);
+        $update=[
+            'max_temp' =>$max_temp,
+            'min_temp' =>$min_temp,
+            'average_temp' =>$avg_temp,
+            'average_humid' =>$avg_humid,
+            'min_humid' =>$min_humid,
+            'max_humid' =>$max_humid,
+        ];
         if (empty($date)){
             $post = new Hourly;
             $post->date = $hour;
@@ -79,13 +85,7 @@ class ScheduleController extends Controller
             $post->save();
         }
         else{
-            $date->max_temp = $max_temp;
-            $date->min_temp=$min_temp;
-            $date->average_temp = $avg_temp;
-            $date->average_humid = $avg_humid;
-            $date->min_humid = $min_humid;
-            $date->max_humid = $max_humid;
-            $date->save();
+            DB::table("hourly")->where("sensor_id",$id)->whereRaw('left(date,13) = ?', [$hour])->update($update);
         }
 
     }
@@ -115,7 +115,15 @@ class ScheduleController extends Controller
             ->where('sensor_id', $id)
             ->whereRaw('left(date,10) = ?', [$daily])
             ->min('humid');
-            $date=Daily::where('date',$daily)->where("sensor_id",$id)->first();
+            $date=Daily::where('date',$daily)->where("sensor_id",$id);
+            $update=[
+                'max_temp' =>$max_temp,
+                'min_temp' =>$min_temp,
+                'average_temp' =>$avg_temp,
+                'average_humid' =>$avg_humid,
+                'min_humid' =>$min_humid,
+                'max_humid' =>$max_humid,
+            ];
             if (empty($date)){
                 $post = new Daily;
                 $post->date = $daily;
@@ -129,13 +137,7 @@ class ScheduleController extends Controller
                 $post->save();
             }
             else{
-                $date->max_temp = $max_temp;
-                $date->min_temp=$min_temp;
-                $date->average_temp = $avg_temp;
-                $date->average_humid = $avg_humid;
-                $date->min_humid = $min_humid;
-                $date->max_humid = $max_humid;
-                $date->save();
+                DB::table("daily")->where("sensor_id",$id)->whereRaw('date = ?', [$daily])->update($update);
             }
     }
     public function weekly($id,$date){
@@ -166,8 +168,15 @@ class ScheduleController extends Controller
             ->where('sensor_id', $id)
             ->whereRaw('left(date,10) between ? and ?',[$startOfWeek, $endOfWeek])
             ->min('humid');
-        $date=Weekly::whereRaw('? between date and end_date', [$week])->where("sensor_id",$id)->first();
-        // return dd($date);
+        $date=Weekly::whereRaw('? between date and end_date', [$week])->where("sensor_id",$id);
+        $update=[
+            'max_temp' =>$max_temp,
+            'min_temp' =>$min_temp,
+            'average_temp' =>$avg_temp,
+            'average_humid' =>$avg_humid,
+            'min_humid' =>$min_humid,
+            'max_humid' =>$max_humid,
+        ];
         if (empty($date)){
             $post = new Weekly;
             $post->date = $startOfWeek;
@@ -182,15 +191,7 @@ class ScheduleController extends Controller
             $post->save();
         }
         else{
-            $update=[
-                'max_temp' =>$max_temp,
-                'min_temp' =>$min_temp,
-                'average_temp' =>$avg_temp,
-                'average_humid' =>$avg_humid,
-                'min_humid' =>$min_humid,
-                'max_humid' =>$max_humid,
-            ];
-            DB::table("weekly")->where("sensor_id",$id)->whereRaw('? between date and end_date', [$week])->update($update);
+            DB::table("weekly")->where("sensor_id",$id)->whereRaw('? between date and end_date ', [$week])->update($update);
         }
     }
     public function monthly($id,$date){
@@ -219,7 +220,15 @@ class ScheduleController extends Controller
             ->where('sensor_id', $id)
             ->whereRaw('left(date,7) = ?', [$month])
             ->min('humid');
-            $date=Monthly::where('date',$month)->where("sensor_id",$id)->first();
+            $date=Monthly::where('date',$month)->where("sensor_id",$id);
+            $update=[
+                'max_temp' =>$max_temp,
+                'min_temp' =>$min_temp,
+                'average_temp' =>$avg_temp,
+                'average_humid' =>$avg_humid,
+                'min_humid' =>$min_humid,
+                'max_humid' =>$max_humid,
+            ];
             if (empty($date)){
                 $post = new Monthly;
                 $post->date = $month;
@@ -232,15 +241,7 @@ class ScheduleController extends Controller
                 $post->sensor_id = $id;
                 $post->save();
             }
-            else{
-                $date->max_temp = $max_temp;
-                $date->min_temp=$min_temp;
-                $date->average_temp = $avg_temp;
-                $date->average_humid = $avg_humid;
-                $date->min_humid = $min_humid;
-                $date->max_humid = $max_humid;
-                $date->save();
-            }
+            DB::table("monthly")->where("sensor_id",$id)->whereRaw('date = ? ', [$month])->update($update);
     }
 
 }

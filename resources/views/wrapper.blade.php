@@ -45,21 +45,40 @@
                     @if (Route::has('register'))
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            <a class="dropdown-item" href="#">About</a>
                         </li>
                     @endif
-                    <li class="nav-item">
-                        <a class="nav-link" href="/about">{{ __('About us') }}</a>
-                    </li>
                     @else
                     <li class="nav-item">
-                        <a class="nav-link" href="/profile">{{ Auth::user()->name }}</a>
+                        <div class="dropdown">
+                            <button class=" btn nav-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Navigate
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="/home">Home</a>
+                                <a class="dropdown-item" href="/profile">Profile</a>
+                                <a class="dropdown-item" href="/about">About</a>
+                                <hr>
+                                <a class="dropdown-item" href="/showdata">Show Data</a>
+                                <a class="dropdown-item" href="/showdatamultiple">Show Data Multiple</a>
+                                <a class="dropdown-item" href="/showsensors">Show Sensors</a>
+                                <hr>
+                            @if ($perms_id == 2)
+                                <a class="dropdown-item" href="/insertdata">Insert Data</a>
+                                <a class="dropdown-item" href="/sensors">Sensors</a>
+                            @endif
+                            @if($perms_id>2)
+                                <a class="dropdown-item" href="/insertdata">Insert Data</a>
+                                <a class="dropdown-item" href="/sensors">Sensors</a>
+                                <a class="dropdown-item" href="/operator">Operator</a>
+                            @endif
+                            </div>
+                          </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/home">{{ __('Home') }}</a>
-                    </li>
-                    <li class="nav-item">
+                    <li class="nav-item" style="display:flex;align-items:center;">
                         <a class="nav-link" href="/logout">{{ __('Logout') }}</a>
                     </li>
+
                 @endguest
                 </ul>
             </div>

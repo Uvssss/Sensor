@@ -24,7 +24,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view("profile.settings");
+        $perms_id=Auth::user()->perms_id;
+        return view("profile.settings",["perms_id"=>$perms_id]);
     }
 
     /**
