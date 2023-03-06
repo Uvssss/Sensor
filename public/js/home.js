@@ -6,7 +6,7 @@ $(document).ready(function(){
 function graphAjax(){
     $.ajax({
         type: "GET",
-        url: "/api/home/circle-chart",
+        url: "/home/circle-chart",
         dataType:"json",
         success: function(data)
         {

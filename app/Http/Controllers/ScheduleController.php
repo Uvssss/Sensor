@@ -63,7 +63,7 @@ class ScheduleController extends Controller
             ->where('sensor_id', $id)
             ->whereRaw('left(date,13) = ?', [$hour])
             ->min('humid');
-        $date=Hourly::where('date',$hour)->where("sensor_id",$id);
+        $date=Hourly::where('date',$hour)->where("sensor_id",$id)->first();
         $update=[
             'max_temp' =>$max_temp,
             'min_temp' =>$min_temp,
@@ -115,7 +115,7 @@ class ScheduleController extends Controller
             ->where('sensor_id', $id)
             ->whereRaw('left(date,10) = ?', [$daily])
             ->min('humid');
-            $date=Daily::where('date',$daily)->where("sensor_id",$id);
+            $date=Daily::where('date',$daily)->where("sensor_id",$id)->first();
             $update=[
                 'max_temp' =>$max_temp,
                 'min_temp' =>$min_temp,
@@ -168,7 +168,7 @@ class ScheduleController extends Controller
             ->where('sensor_id', $id)
             ->whereRaw('left(date,10) between ? and ?',[$startOfWeek, $endOfWeek])
             ->min('humid');
-        $date=Weekly::whereRaw('? between date and end_date', [$week])->where("sensor_id",$id);
+        $date=Weekly::whereRaw('? between date and end_date', [$week])->where("sensor_id",$id)->first();
         $update=[
             'max_temp' =>$max_temp,
             'min_temp' =>$min_temp,
@@ -220,7 +220,7 @@ class ScheduleController extends Controller
             ->where('sensor_id', $id)
             ->whereRaw('left(date,7) = ?', [$month])
             ->min('humid');
-            $date=Monthly::where('date',$month)->where("sensor_id",$id);
+            $date=Monthly::where('date',$month)->where("sensor_id",$id)->first();
             $update=[
                 'max_temp' =>$max_temp,
                 'min_temp' =>$min_temp,

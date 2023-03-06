@@ -8,7 +8,7 @@
                 <div class="card">
                     <div class="card-header">{{ __('Update Sensor') }}</div>
                     <div class="card-body">
-                        <form method="POST" action="/api/updatesensors/{{($id)}}">
+                        <form method="POST" action="/updatesensors/{{($id)}}">
                             @csrf
                             <div class="form-group row">
                                 <label for="sensor" class="col-md-4 col-form-label text-md-right">New Sensor Name</label>

@@ -45,14 +45,16 @@
                     @if (Route::has('register'))
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                            <a class="dropdown-item" href="#">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link dropdown-item" href="/about">About</a>
                         </li>
                     @endif
                     @else
                     <li class="nav-item">
                         <div class="dropdown">
                             <button class=" btn nav-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              Navigate
+                              {{Auth::user()->name}}
                             </button>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" href="/home">Home</a>
@@ -62,21 +64,23 @@
                                 <a class="dropdown-item" href="/showdata">Show Data</a>
                                 <a class="dropdown-item" href="/showdatamultiple">Show Data Multiple</a>
                                 <a class="dropdown-item" href="/showsensors">Show Sensors</a>
-                                <hr>
                             @if ($perms_id == 2)
+                                <hr>
                                 <a class="dropdown-item" href="/insertdata">Insert Data</a>
                                 <a class="dropdown-item" href="/sensors">Sensors</a>
                             @endif
                             @if($perms_id>2)
                                 <a class="dropdown-item" href="/insertdata">Insert Data</a>
                                 <a class="dropdown-item" href="/sensors">Sensors</a>
+                                <hr>
                                 <a class="dropdown-item" href="/operator">Operator</a>
+                                <a class="dropdown-item" href="/restore">Restore Users</a>
                             @endif
                             </div>
                           </div>
                     </li>
                     <li class="nav-item" style="display:flex;align-items:center;">
-                        <a class="nav-link" href="/logout">{{ __('Logout') }}</a>
+                        <a class="nav-link" href="{{route("logout")}}">{{ __('Logout') }}</a>
                     </li>
 
                 @endguest

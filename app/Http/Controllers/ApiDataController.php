@@ -9,6 +9,7 @@ use App\Models\Monthly;
 use App\Models\Sensors;
 use App\Models\Weekly;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Termwind\Components\Raw;
 
@@ -29,7 +30,7 @@ class ApiDataController extends Controller
         $time = DB::table($table)
             ->whereBetween('date', [$fromTime, $toTime])
             ->where("sensor_id",$sensor);
-        return response()->json(array('data' => $time->get()));
+        return response()->json(array('data' => $time->get(), 'usr' => Auth::user()));
     }
     public function GetDataBetween(Request $request){
         $from_sensor=$request->from_Sensor;

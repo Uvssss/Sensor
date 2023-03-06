@@ -18,7 +18,7 @@ $("#multiple_button").on("click",function()
     column=$("#column").find(":selected").val();
     $.ajax({
         type: "GET",
-        url: "/api/multiplegetdata/"+from_sensor_id+"/"+to_sensor_id+"/"+table+"/"+fromtime+"/"+totime+"/"+column,
+        url: "/multiplegetdata/"+from_sensor_id+"/"+to_sensor_id+"/"+table+"/"+fromtime+"/"+totime+"/"+column,
         dataType:"json",
         success: function(data)
         {
@@ -216,7 +216,7 @@ $("#table").change(function(){
     var sensor_id=$("#from_sensor_id").find(":selected").val();
     $.ajax({
         type: "GET",
-        url: "/api/gettime/"+table+"/"+sensor_id,
+        url: "/gettime/"+table+"/"+sensor_id,
         dataType: "json",   //expect html to be returned
         success: function(data){
             $("#fromTime").empty();
@@ -239,7 +239,7 @@ $("#from_sensor_id").change(function(){
     var sensor_id=$("#from_sensor_id").find(":selected").val();
     $.ajax({
         type: "GET",
-        url: "/api/gettime/"+table+"/"+sensor_id,
+        url: "/gettime/"+table+"/"+sensor_id,
         dataType: "json",   //expect html to be returned
         success: function(data){
             $("#fromTime").empty();
@@ -262,7 +262,7 @@ $("#to_sensor_id").change(function(){
     var sensor_id=$("#to_sensor_id").find(":selected").val();
     $.ajax({
         type: "GET",
-        url: "/api/gettime/"+table+"/"+sensor_id,
+        url: "/gettime/"+table+"/"+sensor_id,
         dataType: "json",   //expect html to be returned
         success: function(data){
             $("#fromTime").empty();

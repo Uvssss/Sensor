@@ -6,15 +6,24 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use League\CommonMark\Extension\Table\Table;
-use PHPUnit\Framework\Constraint\Operator;
 class OperatorController extends Controller
 {
-    public function ShowView(){
+    public function ShowView($column=null,$value = null){
         $perms_id1=Auth::user()->perms_id;
-        $id=Auth::user()->id;
-        $perms_id=DB::table('users')->where('id', $id)->pluck("perms_id");
-        $results = DB::table("users")->select('users.id',"users.id as users_id","permisions.id","permisions.id as permision_id","permisions.Status","users.name")->join('permisions', 'permisions.id', '=', 'users.perms_id')->where('perms_id', '<', $perms_id)->where("deleted_at","=",null)->get();
+        if(!empty($value)){
+            $results = DB::table("users")
+        ->select('users.id',"users.id as users_id","permisions.id","permisions.id as permision_id","permisions.Status","users.name","users.email")
+        ->join('permisions', 'permisions.id', '=', 'users.perms_id')
+        ->where('perms_id', '<', $perms_id1)
+        ->where("deleted_at","=",null)->where($column, 'Like', '%' . $value . '%')->orderBy("permision_id","DESC")->simplePaginate(8);
+        }
+        else{
+            $results = DB::table("users")
+        ->select('users.id',"users.id as users_id","permisions.id","permisions.id as permision_id","permisions.Status","users.name","users.email")
+        ->join('permisions', 'permisions.id', '=', 'users.perms_id')
+        ->where('perms_id', '<', $perms_id1)
+        ->where("deleted_at","=",null)->orderBy("permision_id","DESC")->simplePaginate(8);
+        }
         return view("operator.all_users", ["results" => $results,"perms_id"=>$perms_id1]);
         // return dd($results);
     }
@@ -37,6 +46,10 @@ class OperatorController extends Controller
         $post->save();
         return redirect("/operator");
     }
-
+    public function restore(){
+        $perms_id=Auth::user()->perms_id;
+        $users= DB::table("users")->whereRaw("deleted_at is not null")->simplePaginate(8);
+        return view("operator.restore", ["results" => $users,"perms_id"=>$perms_id]);
+    }
 
 }

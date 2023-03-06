@@ -7,6 +7,8 @@ use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\SensorsControllers;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ApiDataController;
+use App\Http\Controllers\FormController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,29 +20,62 @@ use App\Http\Controllers\UserController;
 | contains the "web" middleware group. Now create something great!
 |
 */
- // Guest view / Landing Page
-Route::get('/',[DataController::class,"welcome"]);
-Route::get('/schedule',[ScheduleController::class,"create_data"]);
-Route::get('/about',[DataController::class,"about"]);
+// Guest view / Landing Page
+Route::get('/', [DataController::class, "welcome"]);
+Route::get('/schedule', [ScheduleController::class, "create_data"]); // testing purposes delete later
+Route::get('/about', [DataController::class, "about"]);
 // Logout
-Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
+Route::get('/logout', [LogoutController::class, 'logout']);
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
-    Route::get("/showsensors",[SensorsControllers::class,'showsensors']);
-    Route::get("/showsensor/{searchby}/{value}",[SensorsControllers::class,'showsensors']);
-    Route::get("/showsensor/{searchby}/",[SensorsControllers::class,'showsensors']);
-    Route::group(['middleware' => ['mod']], function() {
-        Route::get("/sensors",[SensorsControllers::class,'index']);
-        Route::get('/insertdata',[DataController::class,"insertdata"]);
-        Route::get('/update-sensors/{id}',[SensorsControllers::class,"updateview"]);
-    });
-    Route::group(["middleware"=>['admin']],function(){
-        Route::get('/operator',[OperatorController::class,"ShowView"]);
-    });
-    Route::get('/home',[DataController::class,"index"]);
-    Route::get('/profile',[UserController::class,"index"]);
-    Route::get("/showdata",[DataController::class,"getdata"]);
-    Route::get("/showdatamultiple",[DataController::class,"getmultipledata"]);
-});
+    Route::get("/showsensors", [SensorsControllers::class, 'showsensors']);
+    Route::get("/showsensor/{searchby}/{value}", [SensorsControllers::class, 'showsensors']);
+    Route::get("/showsensor/{searchby}/", [SensorsControllers::class, 'showsensors']);
+    Route::group(['middleware' => ['mod']], function () {
 
+        Route::get("/sensors", [SensorsControllers::class, 'index']);
+        Route::get('/insertdata', [DataController::class, "insertdata"]);
+        Route::get('/update-sensors/{id}', [SensorsControllers::class, "updateview"]);
+        Route::post("/sensordata", [DataController::class, "sensorstore"]);
+        Route::post("/sensors", [SensorsControllers::class, 'store']);
+        Route::post("/updatesensors", [SensorsControllers::class, 'update']);
+        Route::post('/insertdata', [DataController::class, "store"]);
+    });
+    Route::group(["middleware" => ['admin']], function () {
+        Route::get('/operator', [OperatorController::class, "ShowView"]);
+        Route::get('/operator/{column}/{value}', [OperatorController::class, "ShowView"]);
+        Route::get("/restore", [OperatorController::class, "restore"]);
+    });
+    Route::get('/home', [DataController::class, "index"]);
+    Route::get('/profile', [UserController::class, "index"]);
+    Route::get("/showdata", [DataController::class, "getdata"]);
+    Route::get("/showdatamultiple", [DataController::class, "getmultipledata"]);
+
+
+    Route::get('/exists/username/{username}', [UserController::class, 'existsUsername']);
+    Route::get('/exists/email/{email}', [UserController::class, 'existsEmail']);
+    Route::get('/exists/sensor/{sensor}', [ApiDataController::class, 'existsSensorname']);
+
+    // User restoration and deletion
+    Route::get("/deleteuser/{id}", [UserController::class, 'destroy']);
+    Route::get("/restoreuser/{id}", [UserController::class, 'restore']);
+
+
+    Route::get("/downgradeuser/{id}", [OperatorController::class, "downgrade"]);
+    Route::get("/upgradeuser/{id}", [OperatorController::class, "upgrade"]);
+    Route::get("/deletesensor/{id}", [SensorsControllers::class, 'destroy']);
+
+    //  Ajax routes
+    Route::get("/home/circle-chart", [ApiDataController::class, "chart"]);
+    Route::get("/home/line-chart", [ApiDataController::class, "graph"]);
+    Route::get("/getdata/{sensor_id}/{table}/{fromTime}/{toTime}", [ApiDataController::class, "data"]);
+    Route::get("/multiplegetdata/{from_Sensor}/{to_sensor}/{table}/{fromTime}/{toTime}/{column}", [ApiDataController::class, "GetDataBetween"]);
+    Route::get("/getsensors", [ApiDataController::class, 'getsensors']);
+    Route::get("/gettime/{table}/{id}", [ApiDataController::class, "gettime"]);
+    //  Posts
+
+    Route::post("/form", [FormController::class, 'form_input']);
+    Route::post('/profile', [UserController::class, "update"]);
+
+});

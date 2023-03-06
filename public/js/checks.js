@@ -2,7 +2,7 @@ $("#name").mouseout(function(){
     var username = $("#name").val();
     $.ajax({
         type: "GET",
-        url: "api/exists/username/"+username,
+        url: "/exists/username/"+username,
         dataType: "json",   //expect html to be returned
         success: function(data){
             if (data==true){
@@ -20,7 +20,7 @@ $("#email").mouseout(function(){
     var email=$("#email").val();
     $.ajax({
         type: "GET",
-        url: "/api/exists/email/"+email,
+        url: "/exists/email/"+email,
         dataType: "json",   //expect html to be returned
         success: function(data){
             if (data==true){
@@ -37,7 +37,7 @@ $("#sensor").mouseout(function(){
     var sensor=$("#sensor").val();
     $.ajax({
         type: "GET",
-        url: "/api/exists/sensor/"+sensor,
+        url: "/exists/sensor/"+sensor,
         dataType: "json",   //expect html to be returned
         success: function(data){
             console.log(data)

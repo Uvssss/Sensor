@@ -30,8 +30,14 @@ class DataController extends Controller
 
     public function about()
     {
-        $perms_id=Auth::user()->perms_id;
-        return view("guest.about",["perms_id"=>$perms_id]);
+
+        if (Auth::check()){
+            $perms_id=Auth::user()->perms_id;
+            return view("guest.about",["perms_id"=>$perms_id]);
+        }
+        else{
+            return view("guest.about");
+        }
     }
     public function getdata()
     {
@@ -52,8 +58,13 @@ class DataController extends Controller
     }
 
     public function welcome(){
-        $perms_id=Auth::user()->perms_id;
-        return view("welcome",["perms_id"=>$perms_id]);
+        if (Auth::check()){
+            $perms_id=Auth::user()->perms_id;
+            return view("welcome",["perms_id"=>$perms_id]);
+        }
+        else{
+            return view("welcome");
+        }
     }
     /**
      * Store a newly created resource in storage.

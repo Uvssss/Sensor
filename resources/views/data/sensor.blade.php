@@ -42,7 +42,7 @@
                     <div class="card-header">{{ __('Register new Sensor') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="/api/sensors">
+                        <form method="POST" action="/sensors">
                             @csrf
                             <div class="form-group row">
                                 <label for="sensor" class="col-md-4 col-form-label text-md-right">Sensor Name</label>

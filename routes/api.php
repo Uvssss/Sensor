@@ -23,32 +23,4 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-// Check if exists
-Route::get('/exists/username/{username}', [UserController::class, 'existsUsername']);
-Route::get('/exists/email/{email}', [UserController::class, 'existsEmail']);
-Route::get('/exists/sensor/{sensor}', [ApiDataController::class, 'existsSensorname']);
-
-// User restoration and deletion
-Route::get("/deleteuser/{id}",[UserController::class,'destroy']);
-Route::get("/restoreuser/{id}",[UserController::class, 'restore']);
-
-
-Route::get("/downgradeuser/{id}",[OperatorController::class,"downgrade"]);
-Route::get("/upgradeuser/{id}", [OperatorController::class, "upgrade"]);
-Route::post("/sensordata", [DataController::class, "sensorstore"]);
-Route::post("/sensors",[SensorsControllers::class,'store']);
-Route::post("/updatesensors",[SensorsControllers::class,'update']);
-Route::post('/insertdata',[DataController::class,"store"]);
-Route::get("/deletesensor/{id}",[SensorsControllers::class,'destroy']);
-
-//  Ajax routes
-
-Route::get("/home/circle-chart",[ApiDataController::class,"chart"]);
-Route::get("/home/line-chart",[ApiDataController::class,"graph"]);
-Route::get("/getdata/{sensor_id}/{table}/{fromTime}/{toTime}", [ApiDataController::class, "data"]);
-Route::get("/multiplegetdata/{from_Sensor}/{to_sensor}/{table}/{fromTime}/{toTime}/{column}", [ApiDataController::class, "GetDataBetween"]);
-Route::get("/getsensors", [ApiDataController::class, 'getsensors']);
-Route::get("/gettime/{table}/{id}", [ApiDataController::class, "gettime"]);
-Route::post("/form",[FormController::class,'form_input']);
-Route::post('/profile',[UserController::class,"update"]);
 

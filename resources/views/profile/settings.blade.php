@@ -6,7 +6,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-8 mx-auto">
-                    <form action="/api/profile" method="POST">
+                    <form action="/profile" method="POST">
                         @csrf
                         <div class="row">
                             <div class="col-md-6">

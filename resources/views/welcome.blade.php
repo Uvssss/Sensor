@@ -29,7 +29,8 @@
         </div>
         <div class="row mt-5">
             <div class="col-md-8 mx-auto">
-                <form action="/api/form" method="POST">
+                <form action="/form" method="POST">
+                    @csrf
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
