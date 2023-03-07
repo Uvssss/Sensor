@@ -8,7 +8,15 @@
                     <div id="graphContainer" class="" style="height:370px; width: 100%;"></div>
                 </div>
                 <div class="col">
-
+                    <div id="areaContainer" class="" style="height:370px; width: 100%;"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div id="lineContainer" class="" style="height:370px; width: 100%;"></div>
+                </div>
+                <div class="col">
+                    <div id="columnContainer" class="" style="height:370px; width: 100%;"></div>
                 </div>
             </div>
         </div>

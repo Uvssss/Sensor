@@ -63,18 +63,7 @@ class ApiDataController extends Controller
 
     public function gettime($table,$sensor_id){
         $time = DB::table($table)->where("sensor_id",$sensor_id)->pluck('date');
-       return response()->json(array('date' => $time));
-    }
-    public function graph(){
-        $amount=0;
-        $endarray=[];
-        $created_at = DB::table("sensor")->selectRaw("left(created_at,13) as created_at,count(id) as amount")->groupByRaw("left(created_at,13)")->get();
-        foreach($created_at as $created ){
-            $amount=$amount+$created->amount;
-            $endarray[]=[$amount,$created->created_at];
-        }
-
-        return response()->json(array('data' => $endarray));
+        return response()->json(array('date' => $time));
     }
     public function chart(){
         $endarray=[];
@@ -85,5 +74,14 @@ class ApiDataController extends Controller
             $endarray[]=[$percentage,$location->location];
         }
         return response()->json(array('data' => $endarray));
+    }
+    public function line_chart(){
+        return response()->json(array('data' =>["i","exists"]));
+    }
+    public function area_chart(){
+        return response()->json(array('data' => ["i","exists"]));
+    }
+    public function column_chart(){
+        return response()->json(array('data' => ["i","exists"]));
     }
 }

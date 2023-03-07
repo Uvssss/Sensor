@@ -68,11 +68,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //  Ajax routes
     Route::get("/home/circle-chart", [ApiDataController::class, "chart"]);
-    Route::get("/home/line-chart", [ApiDataController::class, "graph"]);
     Route::get("/getdata/{sensor_id}/{table}/{fromTime}/{toTime}", [ApiDataController::class, "data"]);
     Route::get("/multiplegetdata/{from_Sensor}/{to_sensor}/{table}/{fromTime}/{toTime}/{column}", [ApiDataController::class, "GetDataBetween"]);
     Route::get("/getsensors", [ApiDataController::class, 'getsensors']);
     Route::get("/gettime/{table}/{id}", [ApiDataController::class, "gettime"]);
+    Route::get("/home/line-chart",[ApiDataController::class,"line_chart"]);
+    Route::get("/home/column-chart",[ApiDataController::class,"column_chart"]);
+    Route::get("/home/area-chart",[ApiDataController::class,"area_chart"]);
+
     //  Posts
 
     Route::post('/profile', [UserController::class, "update"]);

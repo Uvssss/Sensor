@@ -1,6 +1,9 @@
 
 $(document).ready(function(){
     graphAjax()
+    areaAjax()
+    lineAjax()
+    ColumnAjax()
 })
 
 function graphAjax(){
@@ -22,7 +25,7 @@ function areaAjax(){
         dataType:"json",
         success: function(data)
         {
-            // GraphSetup(data.data)
+            area_setup(data.data)
         }
     });
 }
@@ -33,7 +36,7 @@ function lineAjax(){
         dataType:"json",
         success: function(data)
         {
-            // GraphSetup(data.data)
+            line_setup(data.data)
         }
     });
 }
@@ -44,14 +47,27 @@ function ColumnAjax(){
         dataType:"json",
         success: function(data)
         {
-            // GraphSetup(data.data)
+            column_setup(data.data)
         }
     });
 }
 
 
-function GraphSetup(data){
+function column_setup(data){
     console.log(data)
+}
+function area_setup(data){
+    console.log(data)
+}
+function line_setup(data){
+    console.log(data)
+}
+
+
+
+
+
+function GraphSetup(data){
     endarray=[]
     for(i=0;i<data.length;i++){
         endarray.push({ y:  parseFloat(data[i][0]).toFixed(2), label: data[i][1] })
@@ -63,6 +79,9 @@ function GraphSetup(data){
 function GraphBuilder(data){
     var chart = new CanvasJS.Chart("graphContainer", {
         theme: "light2", // "light1", "light2", "dark1", "dark2"
+        title: {
+            text: "Sensor location percentage"
+        },
         exportEnabled: true,
         animationEnabled: true,
         data: [{
