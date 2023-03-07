@@ -26,6 +26,11 @@ Route::get('/schedule', [ScheduleController::class, "create_data"]); // testing 
 Route::get('/about', [DataController::class, "about"]);
 // Logout
 Route::get('/logout', [LogoutController::class, 'logout']);
+Route::post("/form", [FormController::class, 'form_input']);
+
+Route::get('/exists/username/{username}', [UserController::class, 'existsUsername']);
+Route::get('/exists/email/{email}', [UserController::class, 'existsEmail']);
+Route::get('/exists/sensor/{sensor}', [ApiDataController::class, 'existsSensorname']);
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
@@ -41,30 +46,24 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post("/sensors", [SensorsControllers::class, 'store']);
         Route::post("/updatesensors", [SensorsControllers::class, 'update']);
         Route::post('/insertdata', [DataController::class, "store"]);
+        Route::get("/deletesensor/{id}", [SensorsControllers::class, 'destroy']);
     });
     Route::group(["middleware" => ['admin']], function () {
         Route::get('/operator', [OperatorController::class, "ShowView"]);
         Route::get('/operator/{column}/{value}', [OperatorController::class, "ShowView"]);
         Route::get("/restore", [OperatorController::class, "restore"]);
+        Route::get("/downgradeuser/{id}", [OperatorController::class, "downgrade"]);
+        Route::get("/upgradeuser/{id}", [OperatorController::class, "upgrade"]);
+        Route::get("/restoreuser/{id}", [UserController::class, 'restore']);
     });
+
     Route::get('/home', [DataController::class, "index"]);
     Route::get('/profile', [UserController::class, "index"]);
     Route::get("/showdata", [DataController::class, "getdata"]);
     Route::get("/showdatamultiple", [DataController::class, "getmultipledata"]);
 
-
-    Route::get('/exists/username/{username}', [UserController::class, 'existsUsername']);
-    Route::get('/exists/email/{email}', [UserController::class, 'existsEmail']);
-    Route::get('/exists/sensor/{sensor}', [ApiDataController::class, 'existsSensorname']);
-
     // User restoration and deletion
     Route::get("/deleteuser/{id}", [UserController::class, 'destroy']);
-    Route::get("/restoreuser/{id}", [UserController::class, 'restore']);
-
-
-    Route::get("/downgradeuser/{id}", [OperatorController::class, "downgrade"]);
-    Route::get("/upgradeuser/{id}", [OperatorController::class, "upgrade"]);
-    Route::get("/deletesensor/{id}", [SensorsControllers::class, 'destroy']);
 
     //  Ajax routes
     Route::get("/home/circle-chart", [ApiDataController::class, "chart"]);
@@ -75,7 +74,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get("/gettime/{table}/{id}", [ApiDataController::class, "gettime"]);
     //  Posts
 
-    Route::post("/form", [FormController::class, 'form_input']);
     Route::post('/profile', [UserController::class, "update"]);
 
 });
