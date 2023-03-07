@@ -30,7 +30,7 @@ class ApiDataController extends Controller
         $time = DB::table($table)
             ->whereBetween('date', [$fromTime, $toTime])
             ->where("sensor_id",$sensor);
-        return response()->json(array('data' => $time->get(), 'usr' => Auth::user()));
+        return response()->json(array('data' => $time->get()));
     }
     public function GetDataBetween(Request $request){
         $from_sensor=$request->from_Sensor;

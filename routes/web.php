@@ -30,7 +30,6 @@ Route::post("/form", [FormController::class, 'form_input']);
 
 Route::get('/exists/username/{username}', [UserController::class, 'existsUsername']);
 Route::get('/exists/email/{email}', [UserController::class, 'existsEmail']);
-Route::get('/exists/sensor/{sensor}', [ApiDataController::class, 'existsSensorname']);
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
@@ -39,6 +38,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get("/showsensor/{searchby}/", [SensorsControllers::class, 'showsensors']);
     Route::group(['middleware' => ['mod']], function () {
 
+        Route::get('/exists/sensor/{sensor}', [ApiDataController::class, 'existsSensorname']);
         Route::get("/sensors", [SensorsControllers::class, 'index']);
         Route::get('/insertdata', [DataController::class, "insertdata"]);
         Route::get('/update-sensors/{id}', [SensorsControllers::class, "updateview"]);
@@ -51,6 +51,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::group(["middleware" => ['admin']], function () {
         Route::get('/operator', [OperatorController::class, "ShowView"]);
         Route::get('/operator/{column}/{value}', [OperatorController::class, "ShowView"]);
+        Route::get('/operator/{column}/', [OperatorController::class, "ShowView"]);
         Route::get("/restore", [OperatorController::class, "restore"]);
         Route::get("/downgradeuser/{id}", [OperatorController::class, "downgrade"]);
         Route::get("/upgradeuser/{id}", [OperatorController::class, "upgrade"]);

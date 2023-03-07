@@ -27,7 +27,7 @@ function GraphSetup(data){
 
 function GraphBuilder(data){
     var chart = new CanvasJS.Chart("graphContainer", {
-        theme: "light1", // "light1", "light2", "dark1", "dark2"
+        theme: "light2", // "light1", "light2", "dark1", "dark2"
         exportEnabled: true,
         animationEnabled: true,
         data: [{
