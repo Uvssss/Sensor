@@ -1,82 +1,250 @@
 
-$(document).ready(function(){
+$(document).ready(function () {
     graphAjax()
-    areaAjax()
-    lineAjax()
+    humid_areaAjax()
+    temp_areaAjax()
+    avg_humid_lineAjax()
+    avg_temp_lineAjax()
     ColumnAjax()
 })
-
-function graphAjax(){
+function graphAjax() {
     $.ajax({
         type: "GET",
         url: "/home/circle-chart",
-        dataType:"json",
-        success: function(data)
-        {
+        dataType: "json",
+        success: function (data) {
             GraphSetup(data.data)
         }
     });
 }
 
-function areaAjax(){
+function humid_areaAjax() {
     $.ajax({
         type: "GET",
-        url: "/home/area-chart",
-        dataType:"json",
-        success: function(data)
-        {
-            area_setup(data.data)
+        url: "/home/humid-area-chart",
+        dataType: "json",
+        success: function (data) {
+            humid_area_setup(data.data)
         }
     });
 }
-function lineAjax(){
+function temp_areaAjax() {
     $.ajax({
         type: "GET",
-        url: "/home/line-chart",
-        dataType:"json",
-        success: function(data)
-        {
-            line_setup(data.data)
+        url: "/home/temp-area-chart",
+        dataType: "json",
+        success: function (data) {
+            temp_area_setup(data.data)
         }
     });
 }
-function ColumnAjax(){
+
+function avg_humid_lineAjax() {
+    $.ajax({
+        type: "GET",
+        url: "/home/humid-line-chart",
+        dataType: "json",
+        success: function (data) {
+            avg_humid_line_setup(data.data)
+        }
+    });
+}
+function avg_temp_lineAjax() {
+    $.ajax({
+        type: "GET",
+        url: "/home/temp-line-chart",
+        dataType: "json",
+        success: function (data) {
+            avg_temp_line_setup(data.data)
+        }
+    });
+}
+function ColumnAjax() {
     $.ajax({
         type: "GET",
         url: "/home/column-chart",
-        dataType:"json",
-        success: function(data)
-        {
+        dataType: "json",
+        success: function (data) {
             column_setup(data.data)
         }
     });
 }
 
 
-function column_setup(data){
-    console.log(data)
+function column_setup(data) {
+    dataPoints = []
+    for (i = 0; i < data.length; i++) {
+        temparr = { y: data[i].loc_count, label: data[i].location }
+        dataPoints.push(temparr)
+    }
+    columnBuilder(dataPoints)
 }
-function area_setup(data){
+function temp_area_setup(data) {
     console.log(data)
+    maindata = []
+    enddata = []
+    dataPoints = []
+    for (i = 1; i < data.length; i++) {
+        if (i == 1) {
+            dataPoints.push({ x: new Date(data[i - 1].date), y: [data[i - 1].min_temp,], sensor: data[i - 1].sensor })
+        }
+        if (data[i - 1].sensor_id == data[i].sensor_id) {
+            dataPoints.push({ x: new Date(data[i].date), y: data[i].average_temp, sensor: data[i].sensor })
+        }
+        if (data[i - 1].sensor_id != data[i].sensor_id) {
+            enddata.push(dataPoints)
+            dataPoints = []
+            dataPoints.push({ x: new Date(data[i].date), y: data[i].average_temp, sensor: data[i].sensor })
+        }
+        if (i == (data.length - 1)) {
+            enddata.push(dataPoints)
+        }
+    }
+    // {
+    // 	type: "rangeArea",
+    // 	showInLegend: true,
+    // 	name: "Chandigarh",
+    // 	markerSize: 0,
+    // 	yValueFormatString: "#0.## °C",
+    // 	dataPoints: [
+    // 		{ x: new Date(2017, 03, 01), y: [15, 31] },
+
+    // 	]
+    // }
 }
-function line_setup(data){
+function humid_area_setup(data) {
     console.log(data)
+    maindata = []
+    enddata = []
+    dataPoints = []
+    for (i = 1; i < data.length; i++) {
+        if (i == 1) {
+            dataPoints.push({ x: new Date(data[i - 1].date), y: [data[i - 1].min_temp,], sensor: data[i - 1].sensor })
+        }
+        if (data[i - 1].sensor_id == data[i].sensor_id) {
+            dataPoints.push({ x: new Date(data[i].date), y: data[i].average_temp, sensor: data[i].sensor })
+        }
+        if (data[i - 1].sensor_id != data[i].sensor_id) {
+            enddata.push(dataPoints)
+            dataPoints = []
+            dataPoints.push({ x: new Date(data[i].date), y: data[i].average_temp, sensor: data[i].sensor })
+        }
+        if (i == (data.length - 1)) {
+            enddata.push(dataPoints)
+        }
+    }
+    // {
+    // 	type: "rangeArea",
+    // 	showInLegend: true,
+    // 	name: "Chandigarh",
+    // 	markerSize: 0,
+    // 	yValueFormatString: "#0.## °C",
+    // 	dataPoints: [
+    // 		{ x: new Date(2017, 03, 01), y: [15, 31] },
+
+    // 	]
+    // }
+}
+function avg_humid_line_setup(data) {
+    dataPoints = []
+    maindata = []
+    enddata = []
+    for (i = 1; i < data.length; i++) {
+        if (i == 1) {
+            dataPoints.push({ x: new Date(data[i - 1].date), y: data[i - 1].average_humid, sensor: data[i - 1].sensor })
+        }
+        if (data[i - 1].sensor_id == data[i].sensor_id) {
+            dataPoints.push({ x: new Date(data[i].date), y: data[i].average_humid, sensor: data[i].sensor })
+        }
+        if (data[i - 1].sensor_id != data[i].sensor_id) {
+            enddata.push(dataPoints)
+            dataPoints = []
+            dataPoints.push({ x: new Date(data[i].date), y: data[i].average_humid, sensor: data[i].sensor })
+        }
+        if (i == (data.length - 1)) {
+            enddata.push(dataPoints)
+        }
+    }
+    enddata.sort(function (a, b) {
+        return b.date - a.date;
+    });
+    for (i = 0; i < enddata.length; i++) {
+        temparr =
+        {
+            name: enddata[i][0].sensor,
+            type: "spline",
+            yValueFormatString: "#0.## %rh",
+            showInLegend: true,
+            dataPoints: enddata[i]
+        }
+        maindata.push(temparr)
+    }
+    // deleting sensor from datapoints
+    for (i = 0; i < maindata.length; i++) {
+        datpoint = maindata[i].dataPoints;
+        for (x = 0; x < datpoint.length; x++) {
+            delete datpoint[x].sensor;
+        }
+    }
+    avg_humid_lineBuilder(maindata)
+}
+function avg_temp_line_setup(data) {
+    dataPoints = []
+    maindata = []
+    enddata = []
+    for (i = 1; i < data.length; i++) {
+        if (i == 1) {
+            dataPoints.push({ x: new Date(data[i - 1].date), y: data[i - 1].average_temp, sensor: data[i - 1].sensor })
+        }
+        if (data[i - 1].sensor_id == data[i].sensor_id) {
+            dataPoints.push({ x: new Date(data[i].date), y: data[i].average_temp, sensor: data[i].sensor })
+        }
+        if (data[i - 1].sensor_id != data[i].sensor_id) {
+            enddata.push(dataPoints)
+            dataPoints = []
+            dataPoints.push({ x: new Date(data[i].date), y: data[i].average_temp, sensor: data[i].sensor })
+        }
+        if (i == (data.length - 1)) {
+            enddata.push(dataPoints)
+        }
+    }
+    enddata.sort(function (a, b) {
+        return b.date - a.date;
+    });
+    for (i = 0; i < enddata.length; i++) {
+        temparr =
+        {
+            name: enddata[i][0].sensor,
+            type: "spline",
+            yValueFormatString: "#0.## °C",
+            showInLegend: true,
+            dataPoints: enddata[i]
+        }
+        maindata.push(temparr)
+    }
+    // deleting sensor from datapoints
+    for (i = 0; i < maindata.length; i++) {
+        datpoint = maindata[i].dataPoints;
+        for (x = 0; x < datpoint.length; x++) {
+            delete datpoint[x].sensor;
+        }
+    }
+    avg_temp_lineBuilder(maindata)
 }
 
 
 
 
-
-function GraphSetup(data){
-    endarray=[]
-    for(i=0;i<data.length;i++){
-        endarray.push({ y:  parseFloat(data[i][0]).toFixed(2), label: data[i][1] })
+function GraphSetup(data) {
+    endarray = []
+    for (i = 0; i < data.length; i++) {
+        endarray.push({ y: parseFloat(data[i][0]).toFixed(2), label: data[i][1] })
     }
     // console.log(endarray)
     GraphBuilder(endarray)
 }
 
-function GraphBuilder(data){
+function GraphBuilder(data) {
     var chart = new CanvasJS.Chart("graphContainer", {
         theme: "light2", // "light1", "light2", "dark1", "dark2"
         title: {
@@ -92,70 +260,43 @@ function GraphBuilder(data){
             legendText: "{label}",
             indexLabelFontSize: 16,
             indexLabel: "{label} - {y}%",
-            dataPoints:data
+            dataPoints: data
         }]
     });
     chart.render();
 }
 
-function lineBuilder(data){
+function avg_humid_lineBuilder(data) {
 
-    var chart = new CanvasJS.Chart("lineContainer", {
+    var chart = new CanvasJS.Chart("humidlineContainer", {
         animationEnabled: true,
-        title:{
-            text: "Daily High Temperature at Different Beaches"
+        title: {
+            text: "Hourly Average Humidity for different sensors"
         },
         axisX: {
-            valueFormatString: "DD MMM,YY"
+            valueFormatString: "DD MMM HH:00"
         },
         axisY: {
-            title: "Temperature (in °C)",
-            suffix: " °C"
+            title: "Humidity (in %RH)",
+            suffix: " %rh"
         },
-        legend:{
+        legend: {
             cursor: "pointer",
             fontSize: 16,
             itemclick: toggleDataSeries
         },
-        toolTip:{
+        toolTip: {
             shared: true
         },
-        data: [{
-            name: "Myrtle Beach",
-            type: "spline",
-            yValueFormatString: "#0.## °C",
-            showInLegend: true,
-            dataPoints: [
-                { x: new Date(2017,6,24), y: 31 },
-            ]
-        },
-        {
-            name: "Martha Vineyard",
-            type: "spline",
-            yValueFormatString: "#0.## °C",
-            showInLegend: true,
-            dataPoints: [
-                { x: new Date(2017,6,24), y: 20 },
-
-            ]
-        },
-        {
-            name: "Nantucket",
-            type: "spline",
-            yValueFormatString: "#0.## °C",
-            showInLegend: true,
-            dataPoints: [
-                { x: new Date(2017,6,24), y: 22 },
-            ]
-        }]
+        data: data
     });
     chart.render();
 
-    function toggleDataSeries(e){
-        if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+    function toggleDataSeries(e) {
+        if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
             e.dataSeries.visible = false;
         }
-        else{
+        else {
             e.dataSeries.visible = true;
         }
         chart.render();
@@ -163,97 +304,131 @@ function lineBuilder(data){
 
 }
 
-function columnBuilder(data){
+function avg_temp_lineBuilder(data) {
+
+    var chart = new CanvasJS.Chart("templineContainer", {
+        animationEnabled: true,
+        title: {
+            text: "Hourly Average Temperature for different sensors"
+        },
+        axisX: {
+            valueFormatString: "DD MMM HH:00"
+        },
+        axisY: {
+            title: "Temperature (in °C)",
+            suffix: "°C"
+        },
+        legend: {
+            cursor: "pointer",
+            fontSize: 16,
+            itemclick: toggleDataSeries
+        },
+        toolTip: {
+            shared: true
+        },
+        data: data
+    });
+    chart.render();
+
+    function toggleDataSeries(e) {
+        if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+            e.dataSeries.visible = false;
+        }
+        else {
+            e.dataSeries.visible = true;
+        }
+        chart.render();
+    }
+
+}
+
+function columnBuilder(data) {
     var chart = new CanvasJS.Chart("columnContainer", {
         animationEnabled: true,
-        exportEnabled: true,
-        theme: "light1", // "light1", "light2", "dark1", "dark2"
-        title:{
-            text: "Simple Column Chart with Index Labels"
-        },
-          axisY: {
-          includeZero: true
+        theme: "light2", // "light1", "light2", "dark1", "dark2"
+        title: {
+            text: "Sensor amount in Location"
         },
         data: [{
-            type: "column", //change type to bar, line, area, pie, etc
-            //indexLabel: "{y}", //Shows y value on all Data Points
-            indexLabelFontColor: "#5A5757",
-              indexLabelFontSize: 16,
-            indexLabelPlacement: "outside",
-            dataPoints: [
-                { x: 10, y: 71 },
-                { x: 20, y: 55 },
-                { x: 30, y: 50 },
-                { x: 40, y: 65 },
-                { x: 50, y: 92, indexLabel: "\u2605 Highest" },
-                { x: 60, y: 68 },
-                { x: 70, y: 38 },
-                { x: 80, y: 71 },
-                { x: 90, y: 54 },
-                { x: 100, y: 60 },
-                { x: 110, y: 36 },
-                { x: 120, y: 49 },
-                { x: 130, y: 21, indexLabel: "\u2691 Lowest" }
-            ]
+            type: "column",
+            dataPoints: data
         }]
     });
     chart.render();
+
 }
 
-function AreaBuilder(data){
-var chart = new CanvasJS.Chart("areaContainer", {
-	exportEnabled: true,
-	animationEnabled: true,
-	theme: "light2",
-	title:{
-		text: "Temperature Variation - Ladakh vs Chandigarh"
-	},
-	axisX: {
-		title: "April 2017",
-		valueFormatString: "DD MMM"
-	},
-	axisY: {
-		suffix: " °C"
-	},
-	toolTip: {
-		shared: true
-	},
-	legend: {
-		cursor: "pointer",
-		horizontalAlign: "right",
-		itemclick: toggleDataSeries
-	},
-	data: [{
-		type: "rangeArea",
-		showInLegend: true,
-		name: "Ladakh",
-		markerSize: 0,
-		yValueFormatString: "#0.## °C",
-		dataPoints: [
-			{ x: new Date(2017, 03, 01), y: [05, 21] },
-		]
-	},
-	{
-		type: "rangeArea",
-		showInLegend: true,
-		name: "Chandigarh",
-		markerSize: 0,
-		yValueFormatString: "#0.## °C",
-		dataPoints: [
-			{ x: new Date(2017, 03, 01), y: [15, 31] },
+function Temp_AreaBuilder(data) {
+    var chart = new CanvasJS.Chart("areaContainer", {
+        exportEnabled: true,
+        animationEnabled: true,
+        theme: "light2",
+        title: {
+            text: "Temperature Variation"
+        },
+        axisX: {
+            title: "April 2017",
+            valueFormatString: "DD MMM"
+        },
+        axisY: {
+            suffix: " °C"
+        },
+        toolTip: {
+            shared: true
+        },
+        legend: {
+            cursor: "pointer",
+            horizontalAlign: "right",
+            itemclick: toggleDataSeries
+        },
+        data: data
+    });
+    chart.render();
 
-		]
-	}]
-});
-chart.render();
+    function toggleDataSeries(e) {
+        if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+            e.dataSeries.visible = false;
+        } else {
+            e.dataSeries.visible = true;
+        }
+        e.chart.render();
+    }
 
-function toggleDataSeries(e) {
-	if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-		e.dataSeries.visible = false;
-	} else {
-		e.dataSeries.visible = true;
-	}
-	e.chart.render();
 }
+function humid_AreaBuilder(data) {
+    var chart = new CanvasJS.Chart("areaContainer", {
+        exportEnabled: true,
+        animationEnabled: true,
+        theme: "light2",
+        title: {
+            text: "Temperature Variation"
+        },
+        axisX: {
+            title: "April 2017",
+            valueFormatString: "DD MMM"
+        },
+        axisY: {
+            suffix: " °C"
+        },
+        toolTip: {
+            shared: true
+        },
+        legend: {
+            cursor: "pointer",
+            horizontalAlign: "right",
+            itemclick: toggleDataSeries
+        },
+        data: data
+    });
+    chart.render();
+
+    function toggleDataSeries(e) {
+        if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+            e.dataSeries.visible = false;
+        } else {
+            e.dataSeries.visible = true;
+        }
+        e.chart.render();
+    }
 
 }

@@ -1,52 +1,52 @@
-$("#name").mouseout(function(){
+$("#name").mouseout(function () {
     var username = $("#name").val();
     $.ajax({
         type: "GET",
-        url: "/exists/username/"+username,
+        url: "/exists/username/" + username,
         dataType: "json",   //expect html to be returned
-        success: function(data){
-            if (data==true){
+        success: function (data) {
+            if (data == true) {
                 $("#name").addClass("border-danger")
             }
-            else{
+            else {
                 $("#name").removeClass("border-danger")
             }
-       },
-   });
+        },
+    });
 })
 
 
-$("#email").mouseout(function(){
-    var email=$("#email").val();
+$("#email").mouseout(function () {
+    var email = $("#email").val();
     $.ajax({
         type: "GET",
-        url: "/exists/email/"+email,
+        url: "/exists/email/" + email,
         dataType: "json",   //expect html to be returned
-        success: function(data){
-            if (data==true){
+        success: function (data) {
+            if (data == true) {
                 $("#email").addClass("border-danger")
             }
-            else{
+            else {
                 $("#email").removeClass("border-danger")
             }
-       },
-   });
+        },
+    });
 })
 
-$("#sensor").mouseout(function(){
-    var sensor=$("#sensor").val();
+$("#sensor").mouseout(function () {
+    var sensor = $("#sensor").val();
     $.ajax({
         type: "GET",
-        url: "/exists/sensor/"+sensor,
+        url: "/exists/sensor/" + sensor,
         dataType: "json",   //expect html to be returned
-        success: function(data){
+        success: function (data) {
             console.log(data)
-            if (data==true){
+            if (data == true) {
                 $("#sensor").addClass("border-danger")
             }
-            else{
+            else {
                 $("#sensor").removeClass("border-danger")
             }
-       },
-   });
+        },
+    });
 })

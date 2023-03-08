@@ -17,27 +17,28 @@ class SensorsControllers extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function showsensors($searchby,$name = null){
-        $perms_id=Auth::user()->perms_id;
-        if(!empty($name)){
-            $results=Sensors::where($searchby, 'Like', '%' . $name . '%')->simplePaginate(8);
+    public function showsensors($searchby, $name = null)
+    {
+        $perms_id = Auth::user()->perms_id;
+        if (!empty($name)) {
+            $results = Sensors::where($searchby, 'Like', '%' . $name . '%')->simplePaginate(8);
+        } else {
+            $results = DB::table("sensor")->simplePaginate(8);
         }
-        else{
-            $results=DB::table("sensor")->simplePaginate(8);
-        }
-        return view('data.showsensors',["sensors"=>$results,"perms_id"=>$perms_id]);
+        return view('data.showsensors', ["sensors" => $results, "perms_id" => $perms_id]);
     }
     public function index()
     {
-        $perms_id=Auth::user()->perms_id;
-        $results=DB::table("sensor")->simplePaginate(8);
+        $perms_id = Auth::user()->perms_id;
+        $results = DB::table("sensor")->simplePaginate(8);
         // return dd($results);
-        return view('data.sensor',["sensors"=>$results,"perms_id"=>$perms_id]);
+        return view('data.sensor', ["sensors" => $results, "perms_id" => $perms_id]);
     }
-    public function updateview(Request $request){
-        $perms_id=Auth::user()->perms_id;
-        $id=$request->route('id');
-        return view('data.update_sensors',["id"=>$id,"perms_id"=>$perms_id]);
+    public function updateview(Request $request)
+    {
+        $perms_id = Auth::user()->perms_id;
+        $id = $request->route('id');
+        return view('data.update_sensors', ["id" => $id, "perms_id" => $perms_id]);
     }
 
 
@@ -83,9 +84,9 @@ class SensorsControllers extends Controller
      */
     public function update(Request $request)
     {
-        $id=$request->route('id');
+        $id = $request->route('id');
 
-        $post=Sensors::find($id);
+        $post = Sensors::find($id);
         $post->sensor = $request->sensor;
         $post->location = $request->location;
         $post->save();

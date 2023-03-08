@@ -8,6 +8,7 @@ use App\Models\Hourly;
 use App\Models\Monthly;
 use App\Models\Sensors;
 use App\Models\Weekly;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -75,13 +76,40 @@ class ApiDataController extends Controller
         }
         return response()->json(array('data' => $endarray));
     }
-    public function line_chart(){
-        return response()->json(array('data' =>["i","exists"]));
+
+    public function avg_humid_line_chart(){
+        $date = Carbon::now();
+        $startOfDay=$date->copy()->startOfDay();
+        $endOfDay=$date->copy()->endOfDay();
+        $time = DB::table("hourly")->selectRaw('date,sensor_id,sensor,average_humid')
+            ->whereBetween('date', [$startOfDay,$endOfDay])->join('sensor', 'sensor.id', 'hourly.sensor_id')->orderBy('id', 'DESC');
+        return response()->json(array('data' =>$time->get()));
     }
-    public function area_chart(){
-        return response()->json(array('data' => ["i","exists"]));
+
+    public function avg_temp_line_chart(){
+        $date = Carbon::now();
+        $startOfDay=$date->copy()->startOfDay();
+        $endOfDay=$date->copy()->endOfDay();
+        $time = DB::table("hourly")->selectRaw('date,sensor_id,sensor,average_temp')
+            ->whereBetween('date', [$startOfDay,$endOfDay])->join('sensor', 'sensor.id', 'hourly.sensor_id')->orderBy('id', 'DESC');
+        return response()->json(array('data' =>$time->get()));
+    }
+
+    public function temp_area_chart(){
+        $startOfWeek=Carbon::now()->startOfWeek()->format('Y-m-d');
+        $endOfWeek=Carbon::now()->endOfWeek()->format('Y-m-d');
+        $time=DB::table("daily")
+        ->selectRaw("date,sensor_id,sensor,min_temp,max_temp")->whereBetween('date',[$startOfWeek,$endOfWeek])
+        ->join('sensor', 'sensor.id', 'daily.sensor_id')
+        ->orderBy('id', 'DESC');
+        return response()->json(array('data' => $time->get()));
+    }
+    public function humid_area_chart(){
+        return dd("yes");
     }
     public function column_chart(){
-        return response()->json(array('data' => ["i","exists"]));
+        $time=DB::table("sensor")->selectRaw("location,count(location) as loc_count")->groupBy("location");
+        // return dd($time->get());
+        return response()->json(array('data' => $time->get()));
     }
 }
