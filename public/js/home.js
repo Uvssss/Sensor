@@ -80,70 +80,97 @@ function column_setup(data) {
     columnBuilder(dataPoints)
 }
 function temp_area_setup(data) {
-    console.log(data)
+    // console.log(data)
     maindata = []
     enddata = []
     dataPoints = []
     for (i = 1; i < data.length; i++) {
         if (i == 1) {
-            dataPoints.push({ x: new Date(data[i - 1].date), y: [data[i - 1].min_temp,], sensor: data[i - 1].sensor })
+            dataPoints.push({ x: new Date(data[i - 1].date), y: [data[i - 1].min_temp,data[i - 1].max_temp], sensor: data[i - 1].sensor })
         }
         if (data[i - 1].sensor_id == data[i].sensor_id) {
-            dataPoints.push({ x: new Date(data[i].date), y: data[i].average_temp, sensor: data[i].sensor })
+            dataPoints.push({ x: new Date(data[i].date), y:[data[i].min_temp,data[i].max_temp], sensor: data[i].sensor })
         }
         if (data[i - 1].sensor_id != data[i].sensor_id) {
             enddata.push(dataPoints)
             dataPoints = []
-            dataPoints.push({ x: new Date(data[i].date), y: data[i].average_temp, sensor: data[i].sensor })
+            dataPoints.push({ x: new Date(data[i].date), y: [data[i].min_temp,data[i].max_temp], sensor: data[i].sensor })
         }
         if (i == (data.length - 1)) {
             enddata.push(dataPoints)
         }
     }
-    // {
-    // 	type: "rangeArea",
-    // 	showInLegend: true,
-    // 	name: "Chandigarh",
-    // 	markerSize: 0,
-    // 	yValueFormatString: "#0.## °C",
-    // 	dataPoints: [
-    // 		{ x: new Date(2017, 03, 01), y: [15, 31] },
+    // The group array is sorted by date ASC order
+    enddata.sort(function (a, b) {
+        return b.date - a.date;
+    });
+    for (i = 0; i < enddata.length; i++) {
+        temparr =
+        {
+            type: "rangeArea",
+    	    showInLegend: true,
+    	    name: enddata[i][0].sensor,
+    	    markerSize: 0,
+    	    yValueFormatString: "#0.## °C",
+    	    dataPoints:enddata[i]
+        }
+        maindata.push(temparr)
+    }
+    // deleting sensor from datapoints
+    for (i = 0; i < maindata.length; i++) {
+        datpoint = maindata[i].dataPoints;
+        for (x = 0; x < datpoint.length; x++) {
+            delete datpoint[x].sensor;
+        }
+    }
+    temp_AreaBuilder(maindata)
 
-    // 	]
-    // }
 }
 function humid_area_setup(data) {
-    console.log(data)
+    // console.log(data)
     maindata = []
     enddata = []
     dataPoints = []
     for (i = 1; i < data.length; i++) {
         if (i == 1) {
-            dataPoints.push({ x: new Date(data[i - 1].date), y: [data[i - 1].min_temp,], sensor: data[i - 1].sensor })
+            dataPoints.push({ x: new Date(data[i - 1].date), y: [data[i - 1].min_humid,data[i - 1].max_humid], sensor: data[i - 1].sensor })
         }
         if (data[i - 1].sensor_id == data[i].sensor_id) {
-            dataPoints.push({ x: new Date(data[i].date), y: data[i].average_temp, sensor: data[i].sensor })
+            dataPoints.push({ x: new Date(data[i].date), y: [data[i].min_humid,data[i].max_humid], sensor: data[i].sensor })
         }
         if (data[i - 1].sensor_id != data[i].sensor_id) {
             enddata.push(dataPoints)
             dataPoints = []
-            dataPoints.push({ x: new Date(data[i].date), y: data[i].average_temp, sensor: data[i].sensor })
+            dataPoints.push({ x: new Date(data[i].date), y: [data[i].min_humid,data[i].max_humid], sensor: data[i].sensor })
         }
         if (i == (data.length - 1)) {
             enddata.push(dataPoints)
         }
     }
-    // {
-    // 	type: "rangeArea",
-    // 	showInLegend: true,
-    // 	name: "Chandigarh",
-    // 	markerSize: 0,
-    // 	yValueFormatString: "#0.## °C",
-    // 	dataPoints: [
-    // 		{ x: new Date(2017, 03, 01), y: [15, 31] },
+    enddata.sort(function (a, b) {
+        return b.date - a.date;
+    });
+    for (i = 0; i < enddata.length; i++) {
+        temparr =
+        {
+            type: "rangeArea",
+    	    showInLegend: true,
+    	    name: enddata[i][0].sensor,
+    	    markerSize: 0,
+    	    yValueFormatString: "#0.## ",
+    	    dataPoints:enddata[i]
+        }
+        maindata.push(temparr)
+    }
+    // deleting sensor from datapoints
+    for (i = 0; i < maindata.length; i++) {
+        datpoint = maindata[i].dataPoints;
+        for (x = 0; x < datpoint.length; x++) {
+            delete datpoint[x].sensor;
+        }
+    }
+    humid_AreaBuilder(maindata)
 
-    // 	]
-    // }
 }
 function avg_humid_line_setup(data) {
     dataPoints = []
@@ -358,8 +385,8 @@ function columnBuilder(data) {
 
 }
 
-function Temp_AreaBuilder(data) {
-    var chart = new CanvasJS.Chart("areaContainer", {
+function temp_AreaBuilder(data) {
+    var chart = new CanvasJS.Chart("tempareaContainer", {
         exportEnabled: true,
         animationEnabled: true,
         theme: "light2",
@@ -378,7 +405,7 @@ function Temp_AreaBuilder(data) {
         },
         legend: {
             cursor: "pointer",
-            horizontalAlign: "right",
+            horizontalAlign: "center",
             itemclick: toggleDataSeries
         },
         data: data
@@ -396,26 +423,26 @@ function Temp_AreaBuilder(data) {
 
 }
 function humid_AreaBuilder(data) {
-    var chart = new CanvasJS.Chart("areaContainer", {
+    var chart = new CanvasJS.Chart("humidareaContainer", {
         exportEnabled: true,
         animationEnabled: true,
         theme: "light2",
         title: {
-            text: "Temperature Variation"
+            text: "Humidity Variation"
         },
         axisX: {
             title: "April 2017",
             valueFormatString: "DD MMM"
         },
         axisY: {
-            suffix: " °C"
+            suffix: " %rh"
         },
         toolTip: {
             shared: true
         },
         legend: {
             cursor: "pointer",
-            horizontalAlign: "right",
+            horizontalAlign: "center",
             itemclick: toggleDataSeries
         },
         data: data

@@ -105,7 +105,13 @@ class ApiDataController extends Controller
         return response()->json(array('data' => $time->get()));
     }
     public function humid_area_chart(){
-        return dd("yes");
+        $startOfWeek=Carbon::now()->startOfWeek()->format('Y-m-d');
+        $endOfWeek=Carbon::now()->endOfWeek()->format('Y-m-d');
+        $time=DB::table("daily")
+        ->selectRaw("date,sensor_id,sensor,min_humid,max_humid")->whereBetween('date',[$startOfWeek,$endOfWeek])
+        ->join('sensor', 'sensor.id', 'daily.sensor_id')
+        ->orderBy('id', 'DESC');
+        return response()->json(array('data' => $time->get()));
     }
     public function column_chart(){
         $time=DB::table("sensor")->selectRaw("location,count(location) as loc_count")->groupBy("location");
