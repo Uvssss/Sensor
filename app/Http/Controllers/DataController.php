@@ -13,9 +13,9 @@ use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
-
 class DataController extends Controller
 {
+
     /**
      * Displaying Views.
      *
@@ -26,7 +26,6 @@ class DataController extends Controller
         $perms_id = Auth::user()->perms_id;
         return view("guest.home", ["perms_id" => $perms_id]);
     }
-
     public function about()
     {
 

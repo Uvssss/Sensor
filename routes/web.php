@@ -68,6 +68,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //  Ajax routes
     Route::get("/home/circle-chart", [ApiDataController::class, "chart"]);
+    Route::get("/home/showgraphs", [ApiDataController::class, "GraphPagination"]);
     Route::get("/getdata/{sensor_id}/{table}/{fromTime}/{toTime}", [ApiDataController::class, "data"]);
     Route::get("/multiplegetdata/{from_Sensor}/{to_sensor}/{table}/{fromTime}/{toTime}/{column}", [ApiDataController::class, "GetDataBetween"]);
     Route::get("/getsensors", [ApiDataController::class, 'getsensors']);

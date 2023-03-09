@@ -106,15 +106,9 @@ function Graph(data) {
 
 $(document).ready(function () {
     $("#table").trigger("change");
-})
-
-$(document).ready(function () {
+    $("#sensor_id").trigger("change");
     $("#fromTime").trigger("change");
-})
-$(document).ready(function () {
     $("#toTime").trigger("change");
-})
-$(document).ready(function () {
     $("#sensor_id").trigger("change");
 })
 

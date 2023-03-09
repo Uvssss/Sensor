@@ -12,15 +12,18 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Termwind\Components\Raw;
+use Illuminate\Pagination\Paginator;
 
+use Illuminate\Support\Collection;
+
+use Illuminate\Pagination\LengthAwarePaginator;
 class ApiDataController extends Controller
 {
     /**
      * Gets data from view from query and returns data
      *
      * @return \Illuminate\Http\Response
-     */
+     */   
     public function data(Request $request)
     {
         $sensor = $request->sensor_id;

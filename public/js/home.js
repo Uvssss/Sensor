@@ -1,11 +1,6 @@
 
 $(document).ready(function () {
-    graphAjax()
-    humid_areaAjax()
-    temp_areaAjax()
-    avg_humid_lineAjax()
-    avg_temp_lineAjax()
-    ColumnAjax()
+    showgraphs()
 })
 function graphAjax() {
     $.ajax({
@@ -16,6 +11,25 @@ function graphAjax() {
             GraphSetup(data.data)
         }
     });
+}
+function showgraphs(){
+    data== [['graphContainer','columnContainer'],
+    ['humidlineContainer','templineContainer'],
+    ['humidareaContainer','tempareaContainer']
+    ];
+    for(i=0;i<data.length;i++){
+        console.log(data[i])
+        // for(x=0;x<data[i].length;x++){
+        //     console.log(data[i])
+        // }
+    }
+
+    // graphAjax()
+    // humid_areaAjax()
+    // temp_areaAjax()
+    // avg_humid_lineAjax()
+    // avg_temp_lineAjax()
+    // ColumnAjax()
 }
 
 function humid_areaAjax() {

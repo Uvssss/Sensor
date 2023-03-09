@@ -1,6 +1,5 @@
 @extends('wrapper')
 @section('content')
-
 <div class="container-fluid pt-7 pt-md-8 ">
     <div class="container center">
         <div class="card">
@@ -18,5 +17,4 @@
         </div>
     </div>
 </div>
-
 @endsection
