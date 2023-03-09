@@ -90,5 +90,5 @@
 <div class="container-fluid">
     @yield("content")
 </div>
-    </body>
-    </html>
+</body>
+</html>

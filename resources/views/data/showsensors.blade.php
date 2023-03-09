@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-md-4">
-                <input type="text" class="form-control" id="search" placeholder="Search">
+                <input type="search" class="form-control" id="search" placeholder="Search">
             </div>
             <div class="col-md-6 col-md-4">
                 <select class="custom-select" style="height:52px" id="searchby">
@@ -37,7 +37,7 @@
             </div>
         @endforeach
     </div>
-    <div class="center">
+    <div class="flex_center py-3">
         {{ $sensors->links() }}
     </div>
 </div>

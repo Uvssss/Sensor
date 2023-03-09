@@ -79,7 +79,6 @@
 
 
 <div id="chartContainer" style="height:100%; width: 100%;"></div>
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
 <script src="{{asset ('js/multiple_ajax.js')}}"></script>
 @endsection

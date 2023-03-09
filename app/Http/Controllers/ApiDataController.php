@@ -82,17 +82,33 @@ class ApiDataController extends Controller
         $startOfDay=$date->copy()->startOfDay();
         $endOfDay=$date->copy()->endOfDay();
         $time = DB::table("hourly")->selectRaw('date,sensor_id,sensor,average_humid')
-            ->whereBetween('date', [$startOfDay,$endOfDay])->join('sensor', 'sensor.id', 'hourly.sensor_id')->orderBy('id', 'DESC');
-        return response()->json(array('data' =>$time->get()));
+            ->whereBetween('date', [$startOfDay,$endOfDay])->join('sensor', 'sensor.id', 'hourly.sensor_id')->orderBy('id', 'DESC')->get();
+        if ($time->groupBy("id")->count()<2){
+            $yesterday_start=Carbon::yesterday()->copy()->startOfDay();
+            $yesterday_end=Carbon::yesterday()->copy()->endOfDay();
+            $time = DB::table("hourly")->selectRaw('date,sensor_id,sensor,average_humid')
+            ->whereBetween('date', [$yesterday_start,$yesterday_end])->join('sensor', 'sensor.id', 'hourly.sensor_id')->orderBy('id', 'DESC')->get();
+        }
+        return response()->json(array('data' =>$time));
     }
 
     public function avg_temp_line_chart(){
         $date = Carbon::now();
         $startOfDay=$date->copy()->startOfDay();
         $endOfDay=$date->copy()->endOfDay();
-        $time = DB::table("hourly")->selectRaw('date,sensor_id,sensor,average_temp')
-            ->whereBetween('date', [$startOfDay,$endOfDay])->join('sensor', 'sensor.id', 'hourly.sensor_id')->orderBy('id', 'DESC');
-        return response()->json(array('data' =>$time->get()));
+        $time = DB::table("hourly")
+            ->selectRaw('date,sensor_id,sensor,average_temp')
+            ->whereBetween('date', [$startOfDay,$endOfDay])->join('sensor', 'sensor.id', 'hourly.sensor_id')
+            ->orderBy('id', 'DESC')->get();
+        if ($time->groupBy("id")->count()<2){
+                $yesterday_start=Carbon::yesterday()->copy()->startOfDay();
+                $yesterday_end=Carbon::yesterday()->copy()->endOfDay();
+                $time = DB::table("hourly")
+                ->selectRaw('date,sensor_id,sensor,average_temp')
+                ->whereBetween('date', [$yesterday_start,$yesterday_end])->join('sensor', 'sensor.id', 'hourly.sensor_id')
+                ->orderBy('id', 'DESC')->get();
+            }
+        return response()->json(array('data' =>$time));
     }
 
     public function temp_area_chart(){
