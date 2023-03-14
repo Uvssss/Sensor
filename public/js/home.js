@@ -1,6 +1,17 @@
+let showgraphs_id=0
+let data= [['graphContainer','columnContainer'],
+    ['humidlineContainer','templineContainer'],
+    ['humidareaContainer','tempareaContainer']
+    ];
 
 $(document).ready(function () {
-    showgraphs()
+    graphAjax()
+    humid_areaAjax()
+    temp_areaAjax()
+    avg_humid_lineAjax()
+    avg_temp_lineAjax()
+    ColumnAjax()
+    showgraphs(0)
 })
 function graphAjax() {
     $.ajax({
@@ -11,25 +22,6 @@ function graphAjax() {
             GraphSetup(data.data)
         }
     });
-}
-function showgraphs(){
-    data== [['graphContainer','columnContainer'],
-    ['humidlineContainer','templineContainer'],
-    ['humidareaContainer','tempareaContainer']
-    ];
-    for(i=0;i<data.length;i++){
-        console.log(data[i])
-        // for(x=0;x<data[i].length;x++){
-        //     console.log(data[i])
-        // }
-    }
-
-    // graphAjax()
-    // humid_areaAjax()
-    // temp_areaAjax()
-    // avg_humid_lineAjax()
-    // avg_temp_lineAjax()
-    // ColumnAjax()
 }
 
 function humid_areaAjax() {
@@ -84,6 +76,42 @@ function ColumnAjax() {
     });
 }
 
+$("#next").on("click", function () {
+    showgraphs_id++
+    if (showgraphs_id>=data.length){
+        showgraphs_id=data.length-1
+    }
+    showgraphs(showgraphs_id)
+})
+$("#prev").on("click", function () {
+    showgraphs_id--
+    if (showgraphs_id<0){
+        showgraphs_id=0
+    }
+    showgraphs(showgraphs_id)
+})
+
+function showgraphs(id){
+
+    if (id==0){
+        $("#"+data[id][0])
+        $("#"+data[id][1])
+        console.log($("#"+data[id][0]))
+    }
+    if(id==1){
+
+    }
+    if(id==2){
+
+    }
+    // nvm this is more of a pain than i thought
+    // graphAjax()
+    // humid_areaAjax()
+    // temp_areaAjax()
+    // avg_humid_lineAjax()
+    // avg_temp_lineAjax()
+    // ColumnAjax()
+}
 
 function column_setup(data) {
     dataPoints = []

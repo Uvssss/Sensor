@@ -1,6 +1,6 @@
 @extends('wrapper')
 @section('content')
-<div class="container-fluid pt-7 pt-md-8">
+<div class="container-fluid ">
     <div class="container pb-5" style="text-align: center;">
         <button id="sensorformbutton" onclick="sensordataform()" class="btn btn-success">Show/Hide Manual data insertion form</button>
     </div>

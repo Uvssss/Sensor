@@ -1,6 +1,6 @@
 @extends('wrapper')
 @section('content')
-<div class="container pt-7 pt-md-8">
+<div class="container ">
     <div id="sensorform" class=" py-5">
         <div class="row justify-content-center">
     <div class="col-md-8">

@@ -60,19 +60,19 @@
                                 <a class="dropdown-item" href="/home">Home</a>
                                 <a class="dropdown-item" href="/profile">Profile</a>
                                 <a class="dropdown-item" href="/about">About</a>
-                                <hr>
+                                <hr style="background-color: black" size="5">
                                 <a class="dropdown-item" href="/showdata">Show Data</a>
                                 <a class="dropdown-item" href="/showdatamultiple">Show Data Multiple</a>
                                 <a class="dropdown-item" href="/showsensors">Show Sensors</a>
                             @if ($perms_id == 2)
-                                <hr>
+                                <hr style="background-color: black" size="5">
                                 <a class="dropdown-item" href="/insertdata">Insert Data</a>
                                 <a class="dropdown-item" href="/sensors">Sensors</a>
                             @endif
                             @if($perms_id>2)
                                 <a class="dropdown-item" href="/insertdata">Insert Data</a>
                                 <a class="dropdown-item" href="/sensors">Sensors</a>
-                                <hr>
+                                <hr style="background-color: black" size="5">
                                 <a class="dropdown-item" href="/operator">Operator</a>
                                 <a class="dropdown-item" href="/restore">Restore Users</a>
                             @endif
@@ -87,7 +87,7 @@
                 </ul>
             </div>
         </nav>
-<div class="container-fluid">
+<div class="container-fluid pt-6">
     @yield("content")
 </div>
 </body>

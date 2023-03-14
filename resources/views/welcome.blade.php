@@ -1,7 +1,7 @@
 @extends('wrapper')
 @section('content')
  <!--hero header-->
- <section class="pt-6" id="home">
+ <section class="" id="home">
     <div class="container">
         <div class="row">
             <div class="col-md-8 mx-auto my-auto text-center">

@@ -1,6 +1,6 @@
 @extends('wrapper')
 @section('content')
-<div class="container-fluid pt-7 pt-md-8 ">
+<div class="container-fluid  ">
     <div class="container center">
         <div class="card">
             <div class="card-body pt-5 text-center">

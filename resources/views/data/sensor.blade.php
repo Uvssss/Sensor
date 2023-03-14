@@ -1,6 +1,6 @@
 @extends('wrapper')
 @section('content')
-<div class="container pt-7 pt-md-8">
+<div class="container ">
     <div style="text-align:center;">
         <button class="btn btn-success" onclick="showsensorform()">Show/Hide Form</button>
     </div>

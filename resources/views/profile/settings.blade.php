@@ -1,6 +1,6 @@
 @extends('wrapper')
 @section('content')
-<div class="container pt-7">
+<div class="container">
     <div class="card">
         <div class="card-header">Update User Credentials</div>
         <div class="card-body">
