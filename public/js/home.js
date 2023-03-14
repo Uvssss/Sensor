@@ -3,7 +3,6 @@ let data= [['graphContainer','columnContainer'],
     ['humidlineContainer','templineContainer'],
     ['humidareaContainer','tempareaContainer']
     ];
-
 $(document).ready(function () {
     graphAjax()
     humid_areaAjax()
@@ -11,7 +10,6 @@ $(document).ready(function () {
     avg_humid_lineAjax()
     avg_temp_lineAjax()
     ColumnAjax()
-    showgraphs(0)
 })
 function graphAjax() {
     $.ajax({
@@ -92,25 +90,36 @@ $("#prev").on("click", function () {
 })
 
 function showgraphs(id){
-
     if (id==0){
-        $("#"+data[id][0])
-        $("#"+data[id][1])
-        console.log($("#"+data[id][0]))
+        $("#graphContainer").show()
+        $("#columnContainer").show()
+
+        $("#humidlineContainer").hide()
+        $("#templineContainer").hide()
+
+        $("#humidareaContainer").hide()
+        $("#tempareaContainer").hide()
     }
     if(id==1){
+        $("#humidlineContainer").show()
+        $("#templineContainer").show()
 
+        $("#graphContainer").hide()
+        $("#columnContainer").hide()
+
+        $("#humidareaContainer").hide()
+        $("#tempareaContainer").hide()
     }
     if(id==2){
+        $("#graphContainer").hide()
+        $("#columnContainer").hide()
 
+        $("#humidlineContainer").hide()
+        $("#templineContainer").hide()
+
+        $("#humidareaContainer").show()
+        $("#tempareaContainer").show()
     }
-    // nvm this is more of a pain than i thought
-    // graphAjax()
-    // humid_areaAjax()
-    // temp_areaAjax()
-    // avg_humid_lineAjax()
-    // avg_temp_lineAjax()
-    // ColumnAjax()
 }
 
 function column_setup(data) {
@@ -242,7 +251,7 @@ function avg_humid_line_setup(data) {
         {
             name: enddata[i][0].sensor,
             type: "spline",
-            yValueFormatString: "#0.## %rh",
+            yValueFormatString: "#0.## rh",
             showInLegend: true,
             dataPoints: enddata[i]
         }
