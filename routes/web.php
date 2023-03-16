@@ -59,6 +59,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
 
     Route::get('/home', [DataController::class, "index"]);
+    Route::get('/home/linecharts', [DataController::class, "line_charts"]);
+    Route::get('/home/areacharts', [DataController::class, "area_charts"]);
+
     Route::get('/profile', [UserController::class, "index"]);
     Route::get("/showdata", [DataController::class, "getdata"]);
     Route::get("/showdatamultiple", [DataController::class, "getmultipledata"]);
