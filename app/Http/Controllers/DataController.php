@@ -24,17 +24,17 @@ class DataController extends Controller
     public function index()
     {
         $perms_id = Auth::user()->perms_id;
-        return view("guest.home", ["perms_id" => $perms_id]);
+        return view("charts.home", ["perms_id" => $perms_id]);
     }
     public function line_charts()
     {
         $perms_id = Auth::user()->perms_id;
-        return view("guest.charts.line_charts", ["perms_id" => $perms_id]);
+        return view("charts.line_charts", ["perms_id" => $perms_id]);
     }
     public function area_charts()
     {
         $perms_id = Auth::user()->perms_id;
-        return view("guest.charts.area_chart", ["perms_id" => $perms_id]);
+        return view("charts.area_chart", ["perms_id" => $perms_id]);
     }
     public function about()
     {
