@@ -30,7 +30,7 @@
 
 <body style="background-color: #ececec">
     <nav class="navbar navbar-expand-md navbar-light bg-white fixed-top sticky-navigation">
-        <a class="navbar-brand mx-auto" href="/">
+        <a  class="navbar-brand mx-auto" href="/">
             {{ config('app.name', 'Laravel') }}
         </a>
 

@@ -67,7 +67,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get("/showdatamultiple", [DataController::class, "getmultipledata"]);
 
     // User restoration and deletion
-    Route::delete("/deleteuser", [UserController::class, 'destroy']);
+    Route::get("/deleteuser/{id}", [UserController::class, 'destroy']);
 
     //  Ajax routes
     Route::get("/home/circle-chart", [ApiDataController::class, "chart"]);
