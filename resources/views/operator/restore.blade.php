@@ -47,12 +47,18 @@
                                 <p class="card-text"><b>Created At : </b>{{$user->created_at}}</p>
                             </div>
                         </div>
-                        <div class="row ">
+                        <div class="row">
                             <div class="col">
                                 <p><b>Permission level:</b> {{$user->Status}}</p>
                             </div>
                             <div class="col">
                                 <p class="card-text"><b>Last updated : </b>{{$user->updated_at}}</p>
+                            </div>
+                            {{-- dump deleted at somewhere dunno where tho --}}
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <p class="card-text"><b>Deleted At : </b>{{$user->deleted_at}}</p>
                             </div>
                         </div>
                     </div>
