@@ -25,9 +25,9 @@
                     </div>
                 </div>
             @else
-                <div class="row">
+                <div class="">
                     @foreach ($results as $user)
-                        <div class="col-md-6 col-md-4 pt-2">
+                        <div class="pt-2">
                             <div class="card">
                                 <div class="card-body">
                                     <h5 class="card-title">User Name : {{ $user->name }}</h5>
@@ -36,17 +36,21 @@
                                             <p class="card-text">Email : {{ $user->email }}</p>
                                         </div>
                                         <div class="col-md-6 col-md-4">
-                                            <p class="card-text">Deleted At : {{ $user->deleted_at }}</p>
+                                            <p class="card-text">Permission level : {{ $user->Status }}</p>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-6 col-md-4">
+                                        <div class="col">
                                             <p class="card-text">Created At : {{ $user->created_at }}</p>
                                         </div>
-                                        <div class="col-md-6 col-md-4">
+                                        <div class="col">
                                             <p class="card-text">Last Updated : {{ $user->updated_at }}</p>
                                         </div>
+                                        <div class="col">
+                                            <p class="card-text">Deleted At : {{ $user->deleted_at }}</p>
+                                        </div>
                                     </div>
+                                    {{-- add actions --}}
                                 </div>
                             </div>
                         </div>

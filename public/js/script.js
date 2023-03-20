@@ -16,17 +16,6 @@ function changeurl(element) {
     }
 }
 // Before i forget add authentication scripts
-function CheckPassword() {
-    password = document.getElementById("password");
-    confirm_password = document.getElementById("password-confirm")
-    var psw = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-    if (password.value.match(psw) && password == confirm_password) {
-        $("#reg_submit").submit();
-    }
-    else {
-        return false;
-    }
-}
 form = 0;
 function showsensorform() {
     if (form == 0) {
