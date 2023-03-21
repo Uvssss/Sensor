@@ -128,7 +128,6 @@ function temp_AreaBuilder(data) {
             text: "Temperature Variation"
         },
         axisX: {
-            title: "April 2017",
             valueFormatString: "DD MMM"
         },
         axisY: {
@@ -165,7 +164,6 @@ function humid_AreaBuilder(data) {
             text: "Humidity Variation"
         },
         axisX: {
-            title: "April 2017",
             valueFormatString: "DD MMM"
         },
         axisY: {
