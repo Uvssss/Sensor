@@ -30,7 +30,7 @@
                         </div>
                         <div class="mb-0 form-group">
                             <div class="text-center">
-                                <button id="" onclick="CheckPassword()" class="btn btn-primary mr-3 my-2">
+                                <button id="reg_submit" onclick="CheckPassword()" class="btn btn-primary mr-3 my-2">
                                     {{ __('Update Account') }}
                                 </button>
                                 <a href="/deleteuser">
@@ -46,5 +46,4 @@
     </div>
 </div>
 <script src="{{asset ('js/checks.js')}}"></script>
-
 @endsection

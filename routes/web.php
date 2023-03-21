@@ -82,10 +82,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get("/getsensors", [ApiDataController::class, 'getsensors']);
     Route::get("/gettime/{table}/{id}", [ApiDataController::class, "gettime"]);
 
-    Route::get("/home/temp-line-chart",[ApiDataController::class,"avg_temp_line_chart"]);
-    Route::get("/home/humid-line-chart",[ApiDataController::class,"avg_humid_line_chart"]);
-    Route::get("/home/column-chart",[ApiDataController::class,"column_chart"]);
-    Route::get("/home/humid-area-chart",[ApiDataController::class,"humid_area_chart"]);
-    Route::get("/home/temp-area-chart",[ApiDataController::class,"temp_area_chart"]);
-
+    Route::get("/home/temp-line-chart", [ApiDataController::class, "avg_temp_line_chart"]);
+    Route::get("/home/humid-line-chart", [ApiDataController::class, "avg_humid_line_chart"]);
+    Route::get("/home/column-chart", [ApiDataController::class, "column_chart"]);
+    Route::get("/home/humid-area-chart", [ApiDataController::class, "humid_area_chart"]);
+    Route::get("/home/temp-area-chart", [ApiDataController::class, "temp_area_chart"]);
 });
