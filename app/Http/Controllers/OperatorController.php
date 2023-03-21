@@ -72,4 +72,10 @@ class OperatorController extends Controller
         }
         return view("operator.restore", ["results" => $users, "perms_id" => $perms_id]);
     }
+    public function delete_user($id)
+    {
+        $user = User::find($id);
+        $user->delete();
+        return back();
+    }
 }

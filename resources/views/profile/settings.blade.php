@@ -7,16 +7,16 @@
             <div class="card">
                 <div class="card-header">{{ __('Update User Credentials') }}</div>
                 <div class="card-body mr-5 ml-5" style="">
-                    <form method="" action="">
+                    <form method="POST" action="/updateuser">
                         @csrf
                         <div class="form-group">
                                 <label for="name" class=" col-form-label text-md-right">{{ __('Name') }}</label>
-                                <input id="name" type="text" class="form-control" name="name" readonly value="{{Auth::user()->name}}"  autocomplete="name" autofocus>
+                                <input id="name1" type="text" class="form-control" name="name" readonly value="{{Auth::user()->name}}"  autocomplete="name" autofocus>
                         </div>
 
                         <div class="form-group">
                                 <label for="email" class="col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-                                <input id="email" type="email" class="form-control " readonly name="email" value="{{Auth::user()->email}}"  autocomplete="email">
+                                <input id="emai1l" type="email" class="form-control " readonly name="email" value="{{Auth::user()->email}}"  autocomplete="email">
                         </div>
 
                         <div class="form-group">
@@ -30,11 +30,13 @@
                         </div>
                         <div class="mb-0 form-group">
                             <div class="text-center">
-                                <button id="" onclick="" class="btn btn-primary mr-3 my-2">
+                                <button id="" onclick="CheckPassword()" class="btn btn-primary mr-3 my-2">
                                     {{ __('Update Account') }}
                                 </button>
-                                <button id="" onclick="" class="btn btn-danger">{{ __('Delete Account') }}
-                                </button>
+                                <a href="/deleteuser">
+                                    <button id="" onclick="" class="btn btn-danger">{{ __('Delete Account') }}
+                                    </button>
+                                </a>
                             </div>
                         </div>
                     </form>
@@ -43,4 +45,6 @@
         </div>
     </div>
 </div>
+<script src="{{asset ('js/checks.js')}}"></script>
+
 @endsection

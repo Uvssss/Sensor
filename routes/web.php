@@ -22,7 +22,6 @@ use App\Http\Controllers\FormController;
 */
 // Guest view / Landing Page
 Route::get('/', [DataController::class, "welcome"]);
-Route::get('/schedule', [ScheduleController::class, "create_data"]); // testing purposes delete later
 Route::get('/about', [DataController::class, "about"]);
 // Logout
 Route::get('/logout', [LogoutController::class, 'logout']);
@@ -52,25 +51,28 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/operator', [OperatorController::class, "ShowView"]);
         Route::get('/operator/{column}/{value}', [OperatorController::class, "ShowView"]);
         Route::get('/operator/{column}/', [OperatorController::class, "ShowView"]);
+
         Route::get("/restore", [OperatorController::class, "restore"]);
         Route::get('/restore/{column}/{value}', [OperatorController::class, "restore"]);
         Route::get('/restore/{column}/', [OperatorController::class, "restore"]);
 
         Route::get("/downgradeuser/{id}", [OperatorController::class, "downgrade"]);
         Route::get("/upgradeuser/{id}", [OperatorController::class, "upgrade"]);
+
         Route::get("/restoreuser/{id}", [UserController::class, 'restore']);
+        Route::get("/deleteuser/{id}", [OperatorController::class, 'delete_user']);
     });
 
     Route::get('/home', [DataController::class, "index"]);
     Route::get('/home/linecharts', [DataController::class, "line_charts"]);
     Route::get('/home/areacharts', [DataController::class, "area_charts"]);
 
+    Route::get("/deleteuser", [UserController::class, 'destroy']);
     Route::get('/profile', [UserController::class, "index"]);
+    Route::post('/updateuser', [UserController::class, "update"]);
+
     Route::get("/showdata", [DataController::class, "getdata"]);
     Route::get("/showdatamultiple", [DataController::class, "getmultipledata"]);
-
-    // User restoration and deletion
-    Route::get("/deleteuser/{id}", [UserController::class, 'destroy']);
 
     //  Ajax routes
     Route::get("/home/circle-chart", [ApiDataController::class, "chart"]);
@@ -79,13 +81,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get("/multiplegetdata/{from_Sensor}/{to_sensor}/{table}/{fromTime}/{toTime}/{column}", [ApiDataController::class, "GetDataBetween"]);
     Route::get("/getsensors", [ApiDataController::class, 'getsensors']);
     Route::get("/gettime/{table}/{id}", [ApiDataController::class, "gettime"]);
+
     Route::get("/home/temp-line-chart",[ApiDataController::class,"avg_temp_line_chart"]);
     Route::get("/home/humid-line-chart",[ApiDataController::class,"avg_humid_line_chart"]);
     Route::get("/home/column-chart",[ApiDataController::class,"column_chart"]);
     Route::get("/home/humid-area-chart",[ApiDataController::class,"humid_area_chart"]);
     Route::get("/home/temp-area-chart",[ApiDataController::class,"temp_area_chart"]);
-    //  Posts
-
-    Route::post('/profile', [UserController::class, "update"]);
 
 });
