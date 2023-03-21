@@ -65,5 +65,5 @@
     </div>
 </div>
     <div class="text-center">{{ $results->links() }}</div>
-    <script src="{{ asset('js/sensor.js') }}"></script>
+    <script src="{{ asset('js/search.js') }}"></script>
 @endsection

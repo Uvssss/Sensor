@@ -23,3 +23,14 @@ $("#operator_value").on("keypress", function (e) {
         OperatorSearch();
     }
 })
+
+function RestoreSearch() {
+    let value = $("#restore_value").val()
+    let search = $("#restore_column").find(":selected").val();
+    window.location = "/restore/" + search + "/" + value;
+}
+$("#restore_value").on("keypress", function (e) {
+    if (e.keyCode == 13) {
+        RestoreSearch();
+    }
+})

@@ -1,14 +1,13 @@
-
 @extends('wrapper')
 @section('content')
 <div class="container-fluid">
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-md-4">
-                <input type="text" class="form-control" id="operator_value" placeholder="Search">
+                <input type="text" class="form-control" id="restore_value" placeholder="Search">
             </div>
             <div class="col-md-6 col-md-4">
-                <select class="custom-select" style="height:52px" id="operatorcolumn">
+                <select class="custom-select" style="height:52px" id="restore_column">
                     <option value="email">Search By Email</option>
                     <option value="name">Search By Username</option>
                 </select>
@@ -32,33 +31,30 @@
                                 <p><b>Username:</b> {{$user->name}}</p>
                             </div>
                             <div class="col"style="text-align:right;" >
-                                <b>
-                                    <a href="/restoreuser/{{$user->users_id}}">Restore User</a>
-                                </b>
+                                <b><a href="/restoreuser/{{$user->users_id}}">Restore User</a></b>
                             </div>
                         </div>
                     </div>
                     <div class="card-body pl-6">
                         <div class="row ">
                             <div class="col">
-                                <p class="card-text"><b>Email: </b> {{$user->email}}</p>
+                                <p class="card-text mb-0"><b>Email: </b> {{$user->email}}</p>
                             </div>
                             <div class="col">
-                                <p class="card-text"><b>Created At : </b>{{$user->created_at}}</p>
+                                <p class="card-text mb-0"><b>Created At : </b>{{$user->created_at}}</p>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
-                                <p><b>Permission level:</b> {{$user->Status}}</p>
+                                <p class="card-text mb-0"><b>Permission level:</b> {{$user->Status}}</p>
                             </div>
                             <div class="col">
-                                <p class="card-text"><b>Last updated : </b>{{$user->updated_at}}</p>
+                                <p class="card-text mb-0"><b>Last updated : </b>{{$user->updated_at}}</p>
                             </div>
-                            {{-- dump deleted at somewhere dunno where tho --}}
                         </div>
                         <div class="row">
                             <div class="col">
-                                <p class="card-text"><b>Deleted At : </b>{{$user->deleted_at}}</p>
+                                <p class="card-text mb-0"><b>Deleted At : </b>{{$user->deleted_at}}</p>
                             </div>
                         </div>
                     </div>
@@ -68,6 +64,6 @@
         @endif
     </div>
 </div>
-    <div class="text-center">{{ $results->links() }}</div>
-    <script src="{{ asset('js/sensor.js') }}"></script>
+    <div class="text-center pt-2">{{ $results->links() }}</div>
+    <script src="{{ asset('js/search.js') }}"></script>
 @endsection

@@ -13,9 +13,6 @@
                 </select>
             </div>
         </div>
-        <div class="text-center pt-2">
-            <button class="btn btn-primary" onclick="SearchByName()">Submit</button>
-        </div>
     </div>
     <div class="row">
         @foreach ($sensors as $sensor)
@@ -41,5 +38,5 @@
         {{ $sensors->links() }}
     </div>
 </div>
-<script src="{{asset ('js/sensor.js')}}"></script>
+<script src="{{asset ('js/search.js')}}"></script>
 @endsection

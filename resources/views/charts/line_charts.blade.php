@@ -8,10 +8,12 @@
     <div class="container pt-4 flex_center">
         <div class="row">
             <div class="col">
-                <button class="btn btn-info mr-2"><a href="/home" style="color: white">Location Charts</a></button>
+                <a href="/home" style="color: white">
+                <button class="btn btn-info mr-2">Location Charts</button></a>
             </div>
             <div class="col">
-                <button class="btn btn-info"><a href="/home/areacharts" style="color: white">Area Charts</a></button>
+                <a href="/home/areacharts" style="color: white">
+                <button class="btn btn-info">Area Charts</button></a>
             </div>
         </div>
     </div>

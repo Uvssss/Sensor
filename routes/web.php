@@ -53,6 +53,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/operator/{column}/{value}', [OperatorController::class, "ShowView"]);
         Route::get('/operator/{column}/', [OperatorController::class, "ShowView"]);
         Route::get("/restore", [OperatorController::class, "restore"]);
+        Route::get('/restore/{column}/{value}', [OperatorController::class, "restore"]);
+        Route::get('/restore/{column}/', [OperatorController::class, "restore"]);
+
         Route::get("/downgradeuser/{id}", [OperatorController::class, "downgrade"]);
         Route::get("/upgradeuser/{id}", [OperatorController::class, "upgrade"]);
         Route::get("/restoreuser/{id}", [UserController::class, 'restore']);

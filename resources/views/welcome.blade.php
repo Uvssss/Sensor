@@ -34,12 +34,12 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input type="name" name="name" class="form-control" placeholder="Your name">
+                                <input type="name" name="name" class="form-control" placeholder="Your name" required>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input type="email" name="email" class="form-control" placeholder="Your email address">
+                                <input type="email"   required name="email" class="form-control" placeholder="Your email address">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -54,7 +54,7 @@
                         </div>
                         <div class="col-12">
                             <div class="form-group">
-                                <textarea rows="5" name="text"  class="form-control" placeholder="What are you looking for?"></textarea>
+                                <textarea rows="5" name="text"   required class="form-control" placeholder="What are you looking for?"></textarea>
                             </div>
                         </div>
                     </div>

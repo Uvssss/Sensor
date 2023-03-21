@@ -2,7 +2,7 @@
 @section('content')
 <div class="container-fluid ">
     <div class="container pb-5" style="text-align: center;">
-        <button id="sensorformbutton" onclick="sensordataform()" class="btn btn-success">Show/Hide Manual data insertion form</button>
+        <button id="sensorformbutton" onclick="sensordataform()" class="btn btn-primary">Show/Hide Manual data insertion form</button>
     </div>
     <div class="row justify-content-center">
         <div class="col-md-8">

@@ -28,7 +28,6 @@ class OperatorController extends Controller
                 ->where("deleted_at", "=", null)->orderBy("permision_id", "DESC")->simplePaginate(4);
         }
         return view("operator.all_users", ["results" => $results, "perms_id" => $perms_id1]);
-        // return dd($results);
     }
     public function downgrade($id)
     {
@@ -50,9 +49,19 @@ class OperatorController extends Controller
         $post->save();
         return redirect("/operator");
     }
-    public function restore()
+    public function restore($column = null, $value = null)
     {
         $perms_id = Auth::user()->perms_id;
+        if (!empty($value)) {
+            $users = DB::table("users")
+            ->select("users.id as users_id","permisions.id as permision_id",
+            "permisions.Status", "users.name", "users.email","users.created_at","users.updated_at","users.deleted_at")
+            ->join('permisions', 'permisions.id', '=', 'users.perms_id')
+            ->whereRaw("deleted_at is not null")->where("users.".$column, 'Like', '%' . $value . '%')
+            ->orderByDesc("users.perms_id")
+            ->simplePaginate(4);
+        }
+        else {
         $users = DB::table("users")
             ->select('users.id', "users.id as users_id", "permisions.id", "permisions.id as permision_id",
             "permisions.Status", "users.name", "users.email","users.created_at","users.updated_at","users.deleted_at")
@@ -60,6 +69,7 @@ class OperatorController extends Controller
             ->whereRaw("deleted_at is not null")
             ->orderByDesc("users.perms_id")
             ->simplePaginate(4);
+        }
         return view("operator.restore", ["results" => $users, "perms_id" => $perms_id]);
     }
 }

@@ -2,7 +2,7 @@
 @section('content')
 <div class="container ">
     <div style="text-align:center;">
-        <button class="btn btn-success" onclick="showsensorform()">Show/Hide Form</button>
+        <button class="btn btn-primary" onclick="showsensorform()">Show/Hide Form</button>
     </div>
     <div id="sensortable" class="py-5">
         <h2 style="text-align: center">All sensors</h2>
