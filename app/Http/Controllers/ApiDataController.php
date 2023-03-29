@@ -45,8 +45,9 @@ class ApiDataController extends Controller
         $column=$request->column;
         $time = DB::table($table)->selectRaw('date,sensor,sensor_id,'.$column)
             ->whereBetween('date', [$fromTime, $toTime])
-            ->whereBetween("sensor_id",[$from_sensor,$to_Sensor])->join('sensor', 'sensor.id', '=', $table.'.sensor_id')->orderBy('id', 'DESC');
-            // return dd($time->get());
+            ->whereBetween("sensor_id",[$from_sensor,$to_Sensor])
+            ->join('sensor', 'sensor.id', '=', $table.'.sensor_id')
+            ->orderBy('id', 'DESC');
         return response()->json(array('data' => $time->get()));
     }
     public function existsSensorname($sensor){
@@ -72,7 +73,9 @@ class ApiDataController extends Controller
     public function chart(){
         $endarray=[];
         $total=DB::table("sensor")->count();
-        $locations= DB::table("sensor")->selectRaw("count(location) as loc_count,location")->groupBy("location")->get();
+        $locations= DB::table("sensor")
+        ->selectRaw("count(location) as loc_count,location")
+        ->groupBy("location")->get();
         foreach ($locations as $location){
             $percentage=$location->loc_count / $total * 100;
             $endarray[]=[$percentage,$location->location];
@@ -87,13 +90,22 @@ class ApiDataController extends Controller
         $date = Carbon::now();
         $startOfDay=$date->copy()->startOfDay();
         $endOfDay=$date->copy()->endOfDay();
-        $time = DB::table("hourly")->selectRaw('date,sensor_id,sensor,average_humid')
-            ->whereBetween('date', [$startOfDay,$endOfDay])->whereBetween('sensor.id',[$first,$last])->join('sensor', 'sensor.id', 'hourly.sensor_id')->orderBy('id', 'DESC')->get();
+        $time = DB::table("hourly")
+        ->selectRaw('date,sensor_id,sensor,average_humid')
+            ->whereBetween('date', [$startOfDay,$endOfDay])
+            ->whereBetween('sensor.id',[$first,$last])
+            ->join('sensor', 'sensor.id', 'hourly.sensor_id')
+            ->orderBy('id', 'DESC')
+            ->get();
         if ($time->groupBy("date")->count()<2){
             $yesterday_start=Carbon::yesterday()->copy()->startOfDay();
             $yesterday_end=Carbon::yesterday()->copy()->endOfDay();
-            $time = DB::table("hourly")->selectRaw('date,sensor_id,sensor,average_humid')
-            ->whereBetween('date', [$yesterday_start,$yesterday_end])->whereBetween('sensor.id',[$first,$last])->join('sensor', 'sensor.id', 'hourly.sensor_id')->orderBy('id', 'DESC')->get();
+            $time = DB::table("hourly")
+            ->selectRaw('date,sensor_id,sensor,average_humid')
+            ->whereBetween('date', [$yesterday_start,$yesterday_end])
+            ->whereBetween('sensor.id',[$first,$last])
+            ->join('sensor', 'sensor.id', 'hourly.sensor_id')
+            ->orderBy('id', 'DESC')->get();
         }
         return response()->json(array('data' =>$time));
     }
@@ -107,14 +119,17 @@ class ApiDataController extends Controller
         $endOfDay=$date->copy()->endOfDay();
         $time = DB::table("hourly")
             ->selectRaw('date,sensor_id,sensor,average_temp')
-            ->whereBetween('date', [$startOfDay,$endOfDay])->whereBetween('sensor.id',[$first,$last])->join('sensor', 'sensor.id', 'hourly.sensor_id')
+            ->whereBetween('date', [$startOfDay,$endOfDay])
+            ->whereBetween('sensor.id',[$first,$last])
+            ->join('sensor', 'sensor.id', 'hourly.sensor_id')
             ->orderBy('id', 'DESC')->get();
         if ($time->groupBy("date")->count()<2){
                 $yesterday_start=Carbon::yesterday()->copy()->startOfDay();
                 $yesterday_end=Carbon::yesterday()->copy()->endOfDay();
                 $time = DB::table("hourly")
                 ->selectRaw('date,sensor_id,sensor,average_temp')
-                ->whereBetween('date', [$yesterday_start,$yesterday_end])->whereBetween('sensor.id',[$first,$last])
+                ->whereBetween('date', [$yesterday_start,$yesterday_end])
+                ->whereBetween('sensor.id',[$first,$last])
                 ->join('sensor', 'sensor.id', 'hourly.sensor_id')
                 ->orderBy('id', 'DESC')->get();
             }
@@ -128,7 +143,9 @@ class ApiDataController extends Controller
         $startOfWeek=Carbon::now()->startOfWeek()->format('Y-m-d');
         $endOfWeek=Carbon::now()->endOfWeek()->format('Y-m-d');
         $time=DB::table("daily")
-        ->selectRaw("date,sensor_id,sensor,min_temp,max_temp")->whereBetween('date',[$startOfWeek,$endOfWeek])->whereBetween('sensor.id',[$first,$last])
+        ->selectRaw("date,sensor_id,sensor,min_temp,max_temp")
+        ->whereBetween('date',[$startOfWeek,$endOfWeek])
+        ->whereBetween('sensor.id',[$first,$last])
         ->join('sensor', 'sensor.id', 'daily.sensor_id')
         ->orderBy('id', 'DESC')->get();
         if ($time->groupBy("date")->count()<2){
@@ -136,7 +153,8 @@ class ApiDataController extends Controller
             $prev_week_end=Carbon::now()->subWeek()->endOfWeek();
             $time=DB::table("daily")
                 ->selectRaw("date,sensor_id,sensor,min_temp,max_temp")
-                ->whereBetween('date',[$prev_week_start,$prev_week_end])->whereBetween('sensor.id',[$first,$last])
+                ->whereBetween('date',[$prev_week_start,$prev_week_end])
+                ->whereBetween('sensor.id',[$first,$last])
                 ->join('sensor', 'sensor.id', 'daily.sensor_id')
                 ->orderBy('id', 'DESC')->get();
         }
@@ -149,14 +167,18 @@ class ApiDataController extends Controller
         $startOfWeek=Carbon::now()->startOfWeek()->format('Y-m-d');
         $endOfWeek=Carbon::now()->endOfWeek()->format('Y-m-d');
         $time=DB::table("daily")
-        ->selectRaw("date,sensor_id,sensor,min_humid,max_humid")->whereBetween('date',[$startOfWeek,$endOfWeek])->whereBetween('sensor.id',[$first,$last])
+        ->selectRaw("date,sensor_id,sensor,min_humid,max_humid")
+        ->whereBetween('date',[$startOfWeek,$endOfWeek])
+        ->whereBetween('sensor.id',[$first,$last])
         ->join('sensor', 'sensor.id', 'daily.sensor_id')
         ->orderBy('id', 'DESC')->get();
         if ($time->groupBy("date")->count()<2){
             $prev_week_start=Carbon::now()->subWeek()->startOfWeek()->format('Y-m-d');
             $prev_week_end=Carbon::now()->subWeek()->endOfWeek()->format('Y-m-d');
             $time=DB::table("daily")
-            ->selectRaw("date,sensor_id,sensor,min_humid,max_humid")->whereBetween('date',[$prev_week_start,$prev_week_end])->whereBetween('sensor.id',[$first,$last])
+            ->selectRaw("date,sensor_id,sensor,min_humid,max_humid")
+            ->whereBetween('date',[$prev_week_start,$prev_week_end])
+            ->whereBetween('sensor.id',[$first,$last])
             ->join('sensor', 'sensor.id', 'daily.sensor_id')
             ->orderBy('id', 'DESC')->get();
             // return dd($time);
@@ -164,8 +186,9 @@ class ApiDataController extends Controller
         return response()->json(array('data' => $time));
     }
     public function column_chart(){
-        $time=DB::table("sensor")->selectRaw("location,count(location) as loc_count")->groupBy("location");
-        // return dd($time->get());
+        $time=DB::table("sensor")
+        ->selectRaw("location,count(location) as loc_count")
+        ->groupBy("location");
         return response()->json(array('data' => $time->get()));
     }
 }

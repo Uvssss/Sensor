@@ -68,7 +68,7 @@
 
                 <div class="card-body">
 
-                    <form method="POST" action="/api/sensordata">
+                    <form method="POST" action="/sensordata">
                         @csrf
                         <div class="form-group row">
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Sensor name') }}</label>

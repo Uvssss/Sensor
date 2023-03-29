@@ -31,7 +31,6 @@ class SensorsControllers extends Controller
     {
         $perms_id = Auth::user()->perms_id;
         $results = DB::table("sensor")->simplePaginate(8);
-        // return dd($results);
         return view('data.sensor', ["sensors" => $results, "perms_id" => $perms_id]);
     }
     public function updateview(Request $request)
@@ -85,7 +84,6 @@ class SensorsControllers extends Controller
     public function update(Request $request)
     {
         $id = $request->route('id');
-
         $post = Sensors::find($id);
         $post->sensor = $request->sensor;
         $post->location = $request->location;

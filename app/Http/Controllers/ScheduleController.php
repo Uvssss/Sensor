@@ -67,7 +67,8 @@ class ScheduleController extends Controller
             ->where('sensor_id', $id)
             ->whereRaw('left(date,13) = ?', [$hour])
             ->min('humid');
-        $date = Hourly::where('date', $hour)->where("sensor_id", $id)->first();
+        $date = Hourly::where('date', $hour)
+        ->where("sensor_id", $id)->first();
         $update = [
             'max_temp' => $max_temp,
             'min_temp' => $min_temp,
@@ -88,7 +89,8 @@ class ScheduleController extends Controller
             $post->sensor_id = $id;
             $post->save();
         } else {
-            DB::table("hourly")->where("sensor_id", $id)->whereRaw('left(date,13) = ?', [$hour])->update($update);
+            DB::table("hourly")->where("sensor_id", $id)
+            ->whereRaw('left(date,13) = ?', [$hour])->update($update);
         }
     }
     public function daily($id, $date)
@@ -118,7 +120,8 @@ class ScheduleController extends Controller
             ->where('sensor_id', $id)
             ->whereRaw('left(date,10) = ?', [$daily])
             ->min('humid');
-        $date = Daily::where('date', $daily)->where("sensor_id", $id)->first();
+        $date = Daily::where('date', $daily)
+        ->where("sensor_id", $id)->first();
         $update = [
             'max_temp' => $max_temp,
             'min_temp' => $min_temp,
@@ -139,7 +142,9 @@ class ScheduleController extends Controller
             $post->sensor_id = $id;
             $post->save();
         } else {
-            DB::table("daily")->where("sensor_id", $id)->whereRaw('date = ?', [$daily])->update($update);
+            DB::table("daily")->where("sensor_id", $id)
+            ->whereRaw('date = ?', [$daily])
+            ->update($update);
         }
     }
     public function weekly($id, $date)
@@ -171,7 +176,8 @@ class ScheduleController extends Controller
             ->where('sensor_id', $id)
             ->whereRaw('left(date,10) between ? and ?', [$startOfWeek, $endOfWeek])
             ->min('humid');
-        $date = Weekly::whereRaw('? between date and end_date', [$week])->where("sensor_id", $id)->first();
+        $date = Weekly::whereRaw('? between date and end_date', [$week])
+        ->where("sensor_id", $id)->first();
         $update = [
             'max_temp' => $max_temp,
             'min_temp' => $min_temp,
@@ -193,7 +199,8 @@ class ScheduleController extends Controller
             $post->sensor_id = $id;
             $post->save();
         } else {
-            DB::table("weekly")->where("sensor_id", $id)->whereRaw('? between date and end_date ', [$week])->update($update);
+            DB::table("weekly")->where("sensor_id", $id)
+            ->whereRaw('? between date and end_date ', [$week])->update($update);
         }
     }
     public function monthly($id, $date)

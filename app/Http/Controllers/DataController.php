@@ -50,19 +50,22 @@ class DataController extends Controller
     {
         $result = Sensors::all();
         $perms_id = Auth::user()->perms_id;
-        return view("data.get_data", ["sensors" => $result, "perms_id" => $perms_id]);
+        return view("data.get_data",
+        ["sensors" => $result, "perms_id" => $perms_id]);
     }
     public function insertdata()
     {
         $result = Sensors::all();
         $perms_id = Auth::user()->perms_id;
-        return view("data.insert_data", ["sensors" => $result, "perms_id" => $perms_id]);
+        return view("data.insert_data",
+        ["sensors" => $result, "perms_id" => $perms_id]);
     }
     public function getmultipledata()
     {
         $result = Sensors::all();
         $perms_id = Auth::user()->perms_id;
-        return view("data.get_multiple_data", ["sensors" => $result, "perms_id" => $perms_id]);
+        return view("data.get_multiple_data",
+        ["sensors" => $result, "perms_id" => $perms_id]);
     }
 
     public function welcome()
