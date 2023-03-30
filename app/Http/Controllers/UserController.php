@@ -30,11 +30,9 @@ class UserController extends Controller
 
     public function update(Request $request,)
     {
-
         $id = Auth::user()->id;
         $post = User::find($id);
         $post->name = $request->name;
-        $post->email = $request->email;
         $post->password = Hash::make($request->password);
         $post->save();
         return redirect("/logout");

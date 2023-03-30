@@ -11,7 +11,7 @@
                         @csrf
                         <div class="form-group">
                                 <label for="name" class=" col-form-label text-md-right">{{ __('Name') }}</label>
-                                <input id="name1" type="text" class="form-control" name="name" readonly value="{{Auth::user()->name}}"  autocomplete="name" autofocus>
+                                <input id="name1" type="text" class="form-control" name="name"  value="{{Auth::user()->name}}"  autocomplete="name" autofocus>
                         </div>
 
                         <div class="form-group">
