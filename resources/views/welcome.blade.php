@@ -5,9 +5,9 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 mx-auto my-auto text-center">
-                <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus, recusandae.</h1>
+                <h1>Sense</h1>
                 <p class="lead mt-3 mb-5">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus, vero!
+                    “Sense” is a sensor humidity and temperature management system that will display data in graphs,
                 </p>
             </div>
         </div>
@@ -22,7 +22,7 @@
             <div class="col-md-6 mx-auto text-center">
                 <h2>Want to work with us?</h2>
                 <div class="divider bg-primary mx-auto"></div>
-                <p class="text-muted lead">
+                <p class=" lead">
                     Are you working on something great? We'd love to help make it happen.
                 </p>
             </div>

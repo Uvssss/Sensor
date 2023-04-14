@@ -16,7 +16,7 @@
                         <div class="form-group row">
                             <label for="temp" class="col-md-4 col-form-label text-md-right">{{ __('Temperature') }}</label>
                             <div class="col-md-6">
-                                <input id="temp" type="text" class="form-control @error('text') is-invalid @enderror" name="temp" required autocomplete="email">
+                                <input id="temp" type="text" class="form-control @error('text') is-invalid @enderror" name="temp" required autocomplete="">
 
                                 @error('temp')
                                     <span class="invalid-feedback" role="alert">

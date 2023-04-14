@@ -1,21 +1,3 @@
-function changeurl(element) {
-    if (element === 'sensors') {
-        window.location = "/sensors"
-    }
-    if (element === 'insertdata') {
-        window.location = "/insertdata"
-    }
-    if (element === 'getdata') {
-        window.location = "/showdata"
-    }
-    if (element === 'settings') {
-        window.location = "/profile"
-    }
-    if (element == 'showdata') {
-        window.location = "/showdata"
-    }
-}
-// Before i forget add authentication scripts
 form = 0;
 function showsensorform() {
     if (form == 0) {
@@ -31,7 +13,6 @@ function showsensorform() {
         form = 0;
     }
 };
-// use ExistsEmail/User for Register later
 datasensorform = 0;
 function sensordataform() {
     if (datasensorform == 0) {

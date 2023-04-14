@@ -37,7 +37,9 @@ function column_setup(data) {
 function GraphSetup(data) {
     endarray = []
     for (i = 0; i < data.length; i++) {
-        endarray.push({ y: parseFloat(data[i][0]).toFixed(2), label: data[i][1] })
+        endarray.push({
+            y: parseFloat(data[i][0]).toFixed(2),
+             label: data[i][1] })
     }
     // console.log(endarray)
     GraphBuilder(endarray)

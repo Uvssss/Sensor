@@ -32,15 +32,24 @@ function temp_area_setup(data) {
     dataPoints = []
     for (i = 1; i < data.length; i++) {
         if (i == 1) {
-            dataPoints.push({ x: new Date(data[i - 1].date), y: [data[i - 1].min_temp,data[i - 1].max_temp], sensor: data[i - 1].sensor })
+            dataPoints.push({
+                x: new Date(data[i - 1].date),
+                y: [data[i - 1].min_temp,data[i - 1].max_temp],
+                sensor: data[i - 1].sensor })
         }
         if (data[i - 1].sensor_id == data[i].sensor_id) {
-            dataPoints.push({ x: new Date(data[i].date), y:[data[i].min_temp,data[i].max_temp], sensor: data[i].sensor })
+            dataPoints.push({
+                x: new Date(data[i].date),
+                y:[data[i].min_temp,data[i].max_temp],
+                sensor: data[i].sensor })
         }
         if (data[i - 1].sensor_id != data[i].sensor_id) {
             enddata.push(dataPoints)
             dataPoints = []
-            dataPoints.push({ x: new Date(data[i].date), y: [data[i].min_temp,data[i].max_temp], sensor: data[i].sensor })
+            dataPoints.push({
+                x: new Date(data[i].date),
+                y: [data[i].min_temp,data[i].max_temp],
+                sensor: data[i].sensor })
         }
         if (i == (data.length - 1)) {
             enddata.push(dataPoints)
@@ -79,15 +88,24 @@ function humid_area_setup(data) {
     dataPoints = []
     for (i = 1; i < data.length; i++) {
         if (i == 1) {
-            dataPoints.push({ x: new Date(data[i - 1].date), y: [data[i - 1].min_humid,data[i - 1].max_humid], sensor: data[i - 1].sensor })
+            dataPoints.push({
+                x: new Date(data[i - 1].date),
+                y: [data[i - 1].min_humid,data[i - 1].max_humid],
+                sensor: data[i - 1].sensor })
         }
         if (data[i - 1].sensor_id == data[i].sensor_id) {
-            dataPoints.push({ x: new Date(data[i].date), y: [data[i].min_humid,data[i].max_humid], sensor: data[i].sensor })
+            dataPoints.push({
+                x: new Date(data[i].date),
+                y: [data[i].min_humid,data[i].max_humid],
+                sensor: data[i].sensor })
         }
         if (data[i - 1].sensor_id != data[i].sensor_id) {
             enddata.push(dataPoints)
             dataPoints = []
-            dataPoints.push({ x: new Date(data[i].date), y: [data[i].min_humid,data[i].max_humid], sensor: data[i].sensor })
+            dataPoints.push({
+                x: new Date(data[i].date),
+                y: [data[i].min_humid,data[i].max_humid],
+                sensor: data[i].sensor })
         }
         if (i == (data.length - 1)) {
             enddata.push(dataPoints)
