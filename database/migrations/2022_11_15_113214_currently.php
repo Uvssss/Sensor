@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('currently', function (Blueprint $table) {
 
             $table->timestamp('date');
-            $table->integer('humid');
+            $table->float('humid');
             $table->float('temp');
             $table->unsignedBigInteger("sensor_id");
             $table->foreign('sensor_id')->
