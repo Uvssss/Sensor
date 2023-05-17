@@ -30,7 +30,9 @@ class OperatorController extends Controller
                 "permisions.Status", "users.name", "users.email","users.created_at","users.updated_at")
                 ->join('permisions', 'permisions.id', '=', 'users.perms_id')
                 ->where('perms_id', '<', $perms_id1)
-                ->where("deleted_at", "=", null)->orderBy("permision_id", "DESC")->simplePaginate(4);
+                ->where("deleted_at", "=", null)->orderBy("permision_id", "DESC")
+                ->orderBy("permision_id", "DESC")
+                ->simplePaginate(4);
         }
         return view("operator.all_users", ["results" => $results, "perms_id" => $perms_id1]);
     }
