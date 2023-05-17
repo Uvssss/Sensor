@@ -150,8 +150,8 @@ class ScheduleController extends Controller
     public function weekly($id, $date)
     {
         $week = substr($date, 0,  10);
-        $startOfWeek = Carbon::now()->startOfWeek()->format('Y-m-d');
-        $endOfWeek = Carbon::now()->endOfWeek()->format('Y-m-d');
+        $startOfWeek = Carbon::createFromFormat('Y-m-d H:i:s', $date)->startOfWeek()->format('Y-m-d');
+        $endOfWeek = Carbon::createFromFormat('Y-m-d H:i:s', $date)->endOfWeek()->format('Y-m-d');
         $avg_temp = DB::table("currently")
             ->where('sensor_id', $id)
             ->whereRaw('left(date,10) between ? and ?', [$startOfWeek, $endOfWeek])
