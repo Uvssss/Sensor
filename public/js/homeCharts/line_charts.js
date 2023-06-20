@@ -147,7 +147,6 @@ function avg_humid_lineBuilder(data) {
     }
 
 }
-
 function avg_temp_lineBuilder(data) {
 
     var chart = new CanvasJS.Chart("templineContainer", {

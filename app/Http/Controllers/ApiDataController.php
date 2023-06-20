@@ -47,7 +47,8 @@ class ApiDataController extends Controller
             ->whereBetween('date', [$fromTime, $toTime])
             ->whereBetween("sensor_id",[$from_sensor,$to_Sensor])
             ->join('sensor', 'sensor.id', '=', $table.'.sensor_id')
-            ->orderBy('id', 'DESC');
+            ->orderBy('id', 'DESC')
+            ->orderBy('date', 'ASC');
         return response()->json(array('data' => $time->get()));
     }
     public function existsSensorname($sensor){
@@ -96,6 +97,7 @@ class ApiDataController extends Controller
             ->whereBetween('sensor.id',[$first,$last])
             ->join('sensor', 'sensor.id', 'hourly.sensor_id')
             ->orderBy('id', 'DESC')
+            ->orderBy('date', 'ASC') // Order by date in ascending order
             ->get();
         if ($time->groupBy("date")->count()<2){
             $yesterday_start=Carbon::yesterday()->copy()->startOfDay();
@@ -105,7 +107,9 @@ class ApiDataController extends Controller
             ->whereBetween('date', [$yesterday_start,$yesterday_end])
             ->whereBetween('sensor.id',[$first,$last])
             ->join('sensor', 'sensor.id', 'hourly.sensor_id')
-            ->orderBy('id', 'DESC')->get();
+            ->orderBy('id', 'DESC')
+            ->orderBy('date', 'ASC') // Order by date in ascending order
+            ->get();
         }
         return response()->json(array('data' =>$time));
     }
@@ -122,7 +126,9 @@ class ApiDataController extends Controller
             ->whereBetween('date', [$startOfDay,$endOfDay])
             ->whereBetween('sensor.id',[$first,$last])
             ->join('sensor', 'sensor.id', 'hourly.sensor_id')
-            ->orderBy('id', 'DESC')->get();
+            ->orderBy('id', 'DESC')
+            ->orderBy('date', 'ASC') // Order by date in ascending order
+            ->get();
         if ($time->groupBy("date")->count()<2){
                 $yesterday_start=Carbon::yesterday()->copy()->startOfDay();
                 $yesterday_end=Carbon::yesterday()->copy()->endOfDay();
@@ -131,7 +137,9 @@ class ApiDataController extends Controller
                 ->whereBetween('date', [$yesterday_start,$yesterday_end])
                 ->whereBetween('sensor.id',[$first,$last])
                 ->join('sensor', 'sensor.id', 'hourly.sensor_id')
-                ->orderBy('id', 'DESC')->get();
+                ->orderBy('id', 'DESC')
+                ->orderBy('date', 'ASC') // Order by date in ascending order
+                ->get();
             }
         return response()->json(array('data' =>$time));
     }
@@ -147,7 +155,9 @@ class ApiDataController extends Controller
         ->whereBetween('date',[$startOfWeek,$endOfWeek])
         ->whereBetween('sensor.id',[$first,$last])
         ->join('sensor', 'sensor.id', 'daily.sensor_id')
-        ->orderBy('id', 'DESC')->get();
+        ->orderBy('id', 'DESC')
+        ->orderBy('date', 'ASC') // Order by date in ascending order
+        ->get();
         if ($time->groupBy("date")->count()<2){
             $prev_week_start=Carbon::now()->subWeek()->startOfWeek();
             $prev_week_end=Carbon::now()->subWeek()->endOfWeek();
@@ -156,7 +166,9 @@ class ApiDataController extends Controller
                 ->whereBetween('date',[$prev_week_start,$prev_week_end])
                 ->whereBetween('sensor.id',[$first,$last])
                 ->join('sensor', 'sensor.id', 'daily.sensor_id')
-                ->orderBy('id', 'DESC')->get();
+                ->orderBy('id', 'DESC')
+                ->orderBy('date', 'ASC') // Order by date in ascending order
+                ->get();
         }
         return response()->json(array('data' => $time));
     }
